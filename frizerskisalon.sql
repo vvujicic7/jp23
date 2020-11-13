@@ -16,3 +16,9 @@ create table korisnik(
     ime varchar (50) not null,
     prezime varchar (50) not null
 );
+
+create table usluga (
+    sifra int not null primary key auto_increment,
+    naziv varchar (20) not null,
+    cijena decimal (15,5)
+);
