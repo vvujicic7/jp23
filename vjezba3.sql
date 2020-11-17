@@ -29,3 +29,28 @@ create table programskijezik_kategorija(
 
 alter table programskijezik_kategorija add foreign key (programskijezik) references programskijezik (id);
 alter table programskijezik_kategorija add foreign key (kategorija) references kategorija (id);
+
+select * from programskijezik;
+
+insert into programskijezik (naziv,vrsta) values 	
+        ('Java',null),
+		('Swift',null),
+	 	('PHP',null),
+		('GO',null);
+
+select * from kategorija;
+
+insert into kategorija (naziv) values 
+		   ('oop'),
+		   ('win'),
+		   ('osx'),
+		   ('linux');
+
+select * from programskijezik_kategorija;
+insert into programskijezik_kategorija (programskijezik,kategorija)
+values  (1,1);
+
+
+
+
+
