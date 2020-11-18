@@ -113,3 +113,4 @@ select sifra from osoba where sifra>1;
 insert into clan (grupa,polaznik)
 select 1,sifra from polaznik;
 
+#git...
