@@ -19,7 +19,8 @@ create table programskijezik (
 
 create table kategorija (
 	id int not null primary key auto_increment,
-	naziv varchar(50) not null
+	naziv varchar(50),
+	vrsta varchar(50) not null
 );
 
 create table programskijezik_kategorija(
@@ -30,7 +31,7 @@ create table programskijezik_kategorija(
 alter table programskijezik_kategorija add foreign key (programskijezik) references programskijezik (id);
 alter table programskijezik_kategorija add foreign key (kategorija) references kategorija (id);
 
-select * from programskijezik;
+#select * from programskijezik;
 
 insert into programskijezik (naziv,vrsta) values 	
         ('Java',null),
@@ -38,17 +39,25 @@ insert into programskijezik (naziv,vrsta) values
 	 	('PHP',null),
 		('GO',null);
 
-select * from kategorija;
-
-insert into kategorija (naziv) values 
-		   ('oop'),
-		   ('win'),
-		   ('osx'),
-		   ('linux');
-
-select * from programskijezik_kategorija;
-insert into programskijezik_kategorija (programskijezik,kategorija)
-values  (1,1);
+#select * from kategorija;
+insert into kategorija  (naziv,vrsta) values
+	(null,'oop'),
+	(null,'win'),
+	(null,'osx'),
+	(null,'linux');
+	
+#select * from programskijezik_kategorija;
+#describe programskijezik_kategorija;
+insert into programskijezik_kategorija (programskijezik,kategorija) values
+	(1,1),
+	(1,2),
+	(1,3),
+	(2,3),
+	(3,1),
+	(3,4),
+	(3,2),
+	(4,4),
+	(4,3);
 
 
 
