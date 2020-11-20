@@ -13,14 +13,12 @@ use vjezba3;
 
 create table programskijezik (
 	id int not null primary key auto_increment,
-	naziv varchar(50) not null,
-	vrsta int
+	naziv varchar(50) not null
 );
 
 create table kategorija (
 	id int not null primary key auto_increment,
-	naziv varchar(50),
-	vrsta varchar(50) not null
+	naziv varchar(50) not null
 );
 
 create table programskijezik_kategorija(
@@ -33,20 +31,20 @@ alter table programskijezik_kategorija add foreign key (kategorija) references k
 
 #select * from programskijezik;
 
-insert into programskijezik (naziv,vrsta) values 	
-        ('Java',null),
-		('Swift',null),
-	 	('PHP',null),
-		('GO',null);
+insert into programskijezik (naziv) values 	
+        ('Java'),
+		('Swift'),
+	 	('PHP'),
+		('GO');
 
 #select * from kategorija;
-insert into kategorija  (naziv,vrsta) values
-	(null,'oop'),
-	(null,'win'),
-	(null,'osx'),
-	(null,'linux');
+insert into kategorija  (naziv) values
+	('oop'),
+	('win'),
+	('osx'),
+	('linux');
 	
-#select * from programskijezik_kategorija;
+select * from programskijezik_kategorija;
 #describe programskijezik_kategorija;
 insert into programskijezik_kategorija (programskijezik,kategorija) values
 	(1,1),
