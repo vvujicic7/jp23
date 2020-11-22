@@ -15,7 +15,12 @@ create table vozilo(
 
 #describe vozilo;
 select * from vozilo;
-insert into vozilo (naziv,vrsta,cijena,datum) values ('volvo','terenac',100.00 ,'2020-10-02');
+insert into vozilo (naziv,vrsta,cijena,datum) values 
+('volvo','terenac',100.00 ,'2020-10-02'),
+('volvo2','terenac2',101.00,'2020-10-03'),
+('volvo3','terenac3',102.00,'2020-10-04'),
+('volvo4','terenac4',103.00,'2020-10-05'),
+('volvo5','terenac5',104.00,'2020-10-06');
 
 
 
