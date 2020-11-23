@@ -21,11 +21,11 @@ create table vozac(
 
 alter table vozac add foreign key (vozilo) references vozilo (id);
 
-#select * from vozilo;
+select * from vozilo;
 insert into vozilo (naziv,vrsta,datum) values ('volvo','terenac', null);
 insert into vozilo (naziv,vrsta,datum) values ('fico', 'terenac', null);
 
-#select * from vozac;
+select * from vozac;
 insert into vozac (vozilo,ime,prezime) 
 values	 (null,'ivo','ivic'),
 		(null,'mirko','mirkic'),
