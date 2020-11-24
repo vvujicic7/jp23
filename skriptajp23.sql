@@ -1,5 +1,5 @@
 # win+r, upiši cmd te zaljepi sljedeću liniju (prilagoditi putanje - diskove)
-# c:\xampp\mysql\bin\mysql -uedunova -pedunova < d:\jp23\skriptajp23.sql
+# c:\xampp\mysql\bin\mysql -uedunova -pedunova < d:\skriptajp23.sql
 drop database if exists edunovajp23;
 create database edunovajp23 CHARACTER SET utf8; 
 
@@ -113,4 +113,3 @@ select sifra from osoba where sifra>1;
 insert into clan (grupa,polaznik)
 select 1,sifra from polaznik;
 
-#git...
