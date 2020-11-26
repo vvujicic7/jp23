@@ -13,7 +13,7 @@ select  sifra, ime, ime, sifra from osoba;
 # konstansta
 select sifra,2, ime, 'Osijek' from osoba;
 
-# svakoj koloni se možđe dati zamjensko ime
+# svakoj koloni se može dati zamjensko ime
 select sifra as id, 2 as sifra, ime as grad from osoba;
 
 # izraz
