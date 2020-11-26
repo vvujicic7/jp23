@@ -1,11 +1,11 @@
 # select kreira novu tablicu
-create table nova
+
 select * from osoba;
 
 # FILTRIRANJE KOLONA
 # u select listi se može nalaziti
 # * - sve kolone
-select sifra, ime, ime, sifra, from osoba;
+#    OVO NE VALJA ?!select sifra, ime, ime, sifra, from osoba;
 
 
 # nazivi kolona odvojeni zarezom

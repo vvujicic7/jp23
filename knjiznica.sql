@@ -6,6 +6,7 @@ CREATE TABLE autor(
    sifra 			int NOT NULL PRIMARY KEY,
    ime			  varchar(50) NOT NULL,
    prezime	  varchar(50) NOT NULL,
+   grad			int,
    datumrodenja datetime) DEFAULT CHARACTER SET = utf8 COLLATE = utf8_general_ci; 
 
 CREATE TABLE izdavac(
@@ -24,10 +25,14 @@ CREATE TABLE katalog(
    naslov	  varchar(50) NOT NULL,
    izdavac  int ,
    mjesto   int )DEFAULT CHARACTER SET = utf8 COLLATE = utf8_general_ci;
+ create table grad(
+	sifra int not null primary key,
+	naziv varchar(50) )DEFAULT CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 
 alter table katalog add foreign key (autor) references autor(sifra);
 alter table katalog add foreign key (izdavac) references izdavac(sifra);
 alter table katalog add foreign key (mjesto) references mjesto(sifra);
+alter table autor add foreign key (grad) references grad(sifra);
 
 
 INSERT into mjesto (sifra, naziv, postanskiBroj, drzava) values (1,'Zagreb','10000','Hrvatska');

@@ -5,7 +5,8 @@ use mjesta;
 CREATE TABLE IF NOT EXISTS  mjesto  (
    postanskibroj  varchar(5) NOT NULL primary key,
    zupanija  int(11) NOT NULL,
-   naziv  varchar(45) NOT NULL
+   naziv  varchar(45) NOT NULL,
+   brojstanovnika varchar(50)
 ) ENGINE=InnoDB;
 
 INSERT INTO  mjesto  ( postanskibroj ,  zupanija ,  naziv ) VALUES
