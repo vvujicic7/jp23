@@ -25,6 +25,7 @@ CREATE TABLE katalog(
    naslov	  varchar(50) NOT NULL,
    izdavac  int ,
    mjesto   int )DEFAULT CHARACTER SET = utf8 COLLATE = utf8_general_ci;
+ # dodao grad zbog zadatka
  create table grad(
 	sifra int not null primary key,
 	naziv varchar(50) )DEFAULT CHARACTER SET = utf8 COLLATE = utf8_general_ci;
