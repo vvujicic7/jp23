@@ -54,4 +54,4 @@ select * from mjesto where naziv like '%z%';
 select * from autor;
 insert into autor (sifra, ime, prezime, datumRodenja) values (3222, 'VELIMIR', 'VUJIČIĆ', '1982-11-16');
 
-# DZ razmišljati što raditi za završni rad
+# DZ razmišljati što raditi za završni radd
