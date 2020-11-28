@@ -1,3 +1,4 @@
+# SELECT NA JEDNU TABLICU moja verzija
 # select kreira novu tablicu
 
 select * from osoba;
