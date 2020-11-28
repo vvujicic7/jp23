@@ -77,5 +77,5 @@ update mjesto set naziv='Djakovo' where sifra=7;
 
 delete from opcina where sifra=1;
 delete from opcina where sifra=5;
-
+# trebalo riješiti bez myisam...
 
