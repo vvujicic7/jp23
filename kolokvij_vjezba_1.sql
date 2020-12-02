@@ -106,16 +106,27 @@ insert into sestra_svekar (sestra,svekar) values
 	(3,3);
 select * from zena;
 insert into zena(treciputa,hlace,kratkamajica,jmbag,bojaociju,haljina,sestra) values
-	(null,null,'kratka',12345678912,'plava',null,1),
-	(null,null,'jakokratka',34567894556,'zuta',null,2),
-	(null,null,'kratkolika',52525252525,'crvena',null,3);
+	(null,'banana','kratka',12345678912,'plava',null,1),
+	(null,'ban','jakokratka',34567894556,'zuta',null,2),
+	(null,'ddd','kratkolika',52525252525,'crvena',null,3);
 select * from muskarac;
 insert into muskarac (bojaociju, hlace, modelnaocala, maraka, zena) values
 	('zuta',null,null,100,1),
 	('plave',null,null,200,2),
 	('crvene',null,null,300,3);
 
+select * from cura;
+update cura set gustoca=15.77;
 
-	
+select * from mladic;
+insert into mladic(suknja,kuna,drugiputa,asocijalno,ekstroventno,dukserica ,muskarac ) values
+	('p',15,null,null,1,'p',1),
+	('p',16,null,null,1,'t',2),
+	('o',17,null,null,1,'o',3);
+delete from mladic where kuna>15.78;
+
+select * from zena;
+select kratkamajica from zena where hlace like '%ana%'; 
+
 
 
