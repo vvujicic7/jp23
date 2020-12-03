@@ -92,3 +92,10 @@ select a.naslov
 from katalog a
 inner join izdavac b on a.izdavac =b.sifra 
 where b.aktivan=true
+
+# odaberite imena i prezimena autora koji su pisali knjige na ljubavnu tematiku
+
+select a.ime,a.prezime 
+from autor a
+inner join katalog b on b.autor =a.sifra 
+where naslov like '%ljubav%'
