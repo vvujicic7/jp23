@@ -85,3 +85,10 @@ select a.naslov
 from katalog a
 inner join autor b on a.autor =b.sifra 
 where datumrodenja between '1980-01-01' and '1980-12-31';
+
+# odaberite sve naslove koji su izdani od strane aktivnih izdavača
+
+select a.naslov
+from katalog a
+inner join izdavac b on a.izdavac =b.sifra 
+where b.aktivan=true
