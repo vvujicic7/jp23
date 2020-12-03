@@ -99,3 +99,12 @@ select a.ime,a.prezime
 from autor a
 inner join katalog b on b.autor =a.sifra 
 where naslov like '%ljubav%'
+
+# Baza world
+# odaberite imena gradova u Europi
+
+
+select b.Name 
+from country a
+inner join city b on b.CountryCode =a.Code 
+where a.continent='Europe'
