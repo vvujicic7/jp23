@@ -136,3 +136,7 @@ inner join zena d on d.sestra =c.sifra
 inner join muskarac e on e.zena =d.sifra 
 inner join mladic f on f.muskarac =e.sifra 
 where (d.hlace like 'a%') and c.haljina like '%ab%';
+
+select a.haljina ,a.maraka 
+from sestra a
+inner join sestra_svekar b on b.sestra =a.sifra;
