@@ -28,3 +28,51 @@ inner join smjer c on b.smjer =c.sifra
 where c.trajanje >150;
 
 # Klauzule group by i having
+select b.productLine ,sum(a.buyPrice) 
+from products a inner join productlines b on a.productLine =b.productLine
+where b.productLine ='Trains' # ovo nije dobar pristup
+
+# sum,min,max,avg...itd su agregirane funkcije i koriste se skupa s group by klauzulom
+select b.productLine ,sum(a.buyPrice), avg(a.buyPrice), min(a.buyPrice), max(a.buyPrice)
+from products a inner join productlines b on a.productLine =b.productLine
+where a.productLine like '%a%' # filtrira podatke zapisane u tablici
+group by b.productLine 
+having sum(a.buyPrice)>1000 # filtriranje agregiranih podataka
+order by 2 desc;
+
+
+# union
+select productCode , productName, '' as city from products
+union 
+select addressLine1 ,postalCode ,city from offices;
+
+# kreiranje tablice na osnovu select naredbe
+create table spojeno
+select productCode , productName, '' as city from products
+union 
+select addressLine1 ,postalCode ,city from offices;
+
+
+# unos podataka u tablicu na osnovu select
+insert into spojeno
+select productCode , productName, '' as city from products
+union 
+select addressLine1 ,postalCode ,city from offices;
+
+
+insert into spojeno 
+select '',firstName , 'Osijek' from employees;
+
+
+# odaberite sve proizvode koje je prodao Martin
+
+select distinct e.productName 
+from employees a
+inner join customers b on b.salesRepEmployeeNumber =a.employeeNumber 
+inner join orders c on c.customerNumber =b.customerNumber 
+inner join orderdetails d on d.orderNumber =c.orderNumber 
+inner join products e on e.productCode =d.productCode 
+where a.firstName like 'Martin'
+order by productName ;
+
+
