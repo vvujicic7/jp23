@@ -132,3 +132,13 @@ delete from brat where ogrlica not like 14;
 select * from cura where drugiputa is null;
 
 
+select a.novcica ,f.neprijatelj ,e.haljina 
+from zarucnica a
+inner join decko_zarucnica b on b.zarucnica =a.sifra 
+inner join decko c on b.decko =a.sifra 
+inner join cura d on d.decko =a.sifra 
+inner join neprijatelj e on e.cura =d.sifra 
+inner join brat f on f.neprijatelj =e.sifra 
+where c.vesta like '%ba%'
+order by e.haljina desc;
+
