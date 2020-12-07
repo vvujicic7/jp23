@@ -76,3 +76,33 @@ where a.firstName like 'Martin'
 order by productName ;
 
 
+# odaberite sve podređene zaposlenike od Patterson Mary
+select a.firstName ,a.lastName 
+from employees a 
+inner join employees b on b.employeeNumber =a.reportsTo 
+where b.firstName ='Mary' and b.lastName ='Patterson';
+
+# odaberite sve proizvode koji nisu niti na jednoj narudžbi
+select distinct productCode from orderdetails;
+
+select count(*) from products;
+
+select * from products where productCode not in 
+(select distinct productCode from orderdetails);
+
+# obrišite 1985 Toyota Supra
+
+delete from products where productName like '1985 Toyota Supra';
+
+# obrisati sve proizvode koji nisu niti na jednoj narudžbi
+delete from products where productLine not in 
+(select distinct productCode from orderdetails);
+
+# na koji datum narudžbe je prodan najskuplji (priceEach)proizvod?
+select b.priceEach ,a.orderDate 
+from orders a
+inner join orderdetails b on b.orderNumber =a.orderNumber 
+where b.priceEach =(select max(b2.priceEach) from orderdetails b2);
+
+# sakila
+select count(*) from film f ;
