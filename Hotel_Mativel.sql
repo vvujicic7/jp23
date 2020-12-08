@@ -39,7 +39,9 @@ create table boravak(
 create table hotelska_usluga(
 	boravak 	int not null,
 	usluga 		int not null,
-	djelatnik 	int not null
+	djelatnik 	int not null,
+	kolicina	varchar(50),
+	cijena		decimal(15,5)
 );
 
 
