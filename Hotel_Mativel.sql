@@ -40,7 +40,7 @@ create table hotelska_usluga(
 	boravak 	int not null,
 	usluga 		int not null,
 	djelatnik 	int not null,
-	kolicina	varchar(50),
+	kolicina	decimal(18,3),
 	cijena		decimal(15,5)
 );
 

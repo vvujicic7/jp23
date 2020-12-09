@@ -4,6 +4,7 @@ create database kolokvij_vjezba_3;
 
 use kolokvij_vjezba_3;
 
+
 create table svekar(
 	sifra int not null primary key auto_increment,
 	novcica decimal(16,8) not null,
