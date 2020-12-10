@@ -87,14 +87,55 @@ alter table prijatelj_brat add foreign key (brat) references brat(sifra);
 
 select * from ostavljena;
 insert into ostavljena (kuna,lipa,majica,modelnaocala,prijatelj) values
-			(null,null,null,1,null),
-			(null,null,null,2,null),
-			(null,null,null,3,null);
+			(null,9,null,1,null),
+			(null,8,null,2,null),
+			(null,10,null,3,null);
 select * from snasa;
 insert into snasa (introvertno,kuna,eura,treciputa,ostavljena) values
 					(null,1,1,null,1),
 					(null,2,2,null,2),
 					(null,3,3,null,3);
+select * from prijatelj;
+insert into prijatelj (indiferentno) values
+	(1),
+	(0),
+	(1);
+select * from brat;
+insert into brat (ogrlica,ekstroventno) values
+	(1,1),
+	(2,1),
+	(3,1);
+select * from prijatelj_brat;
+insert into prijatelj_brat (prijatelj,brat) values
+	(1,1),
+	(2,2),
+	(3,3);
+select * from svekar;
+update svekar set suknja= 'Osijek';
 
+delete from punica where kratkamajica ='AB';
 
+select * from ostavljena;
+select majica from ostavljena where lipa not like 9 or 10 or 20 or 30 or 35;
+
+# Prikažite ekstroventno iz tablice brat, vesta iz tablice punica te 
+# kuna iz tablice snasa uz uvjet da su vrijednosti kolone lipa iz tablice ostavljena 
+# različito od 91 te da su vrijednosti kolone haljina iz tablice prijatelj sadrže 
+# niz znakova ba. Podatke posložite po kuna iz tablice snasa silazno.
+
+select a.ekstroventno ,f.vesta ,e.kuna 
+from brat a
+inner join prijatelj_brat b on b.brat =a.sifra 
+inner join prijatelj c on c.sifra =b.prijatelj 
+inner join ostavljena d on d.prijatelj =c.sifra 
+inner join snasa e on e.ostavljena =d.sifra 
+inner join punica f on f.snasa = e.sifra 
+where d.lipa not like 91 and c.haljina like 'ba%'
+order by e.kuna desc;
+
+# Prikažite kolone haljina i lipa iz tablice prijatelj 
+# čiji se primarni ključ ne nalaze u tablici prijatelj_brat.
+select a.haljina ,a.lipa 
+from prijatelj a
+inner join prijatelj_brat b on b.prijatelj =a.sifra; 
 
