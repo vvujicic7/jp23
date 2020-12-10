@@ -1,7 +1,7 @@
 # win+r, upiši cmd te zaljepi sljedeću liniju (prilagoditi putanje - diskove)
 # c:\xampp\mysql\bin\mysql -uedunova -pedunova --default_character_set=utf8 < d:\skriptajp23.sql
 drop database if exists edunovajp23;
-create database edunovajp23 CHARACTER SET utf8; 
+create database edunovajp23 CHARACTER SET utf8mb4 collate utf8mb4_croatian_ci; 
 
 use edunovajp23;
 
@@ -113,5 +113,3 @@ select sifra from osoba where sifra>1;
 insert into clan (grupa,polaznik)
 select 1,sifra from polaznik;
 
-
-#
