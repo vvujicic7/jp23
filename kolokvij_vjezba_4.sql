@@ -83,9 +83,9 @@ alter table zena_mladic add foreign key (zena) references zena(sifra);
 
 select * from zena;
 insert into zena (suknja,lipa,prstena) values
-	('lijepa',null,1),
-	('divna',null,2),
-	('prelijepa',null,2);
+	('lijepa',10,1),
+	('divna',20,2),
+	('prelijepa',30,3);
 select * from mladic;
 insert into mladic (kuna,lipa,nausnica,stilfrizura,vesta) values
 	(null,null,null,null,'bijela'),
@@ -135,5 +135,5 @@ order by e.kratkamajica desc;
 # ne nalaze u tablici zena_mladic.
 select a.lipa ,a.prstena 
 from zena a
-inner join zena_mladic b on b.zena =a.sifra ;
-
+left join zena_mladic b on b.zena =a.sifra
+where b.sifra is null;
