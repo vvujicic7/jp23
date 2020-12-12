@@ -138,4 +138,4 @@ select a.prstena ,a.introvertno
 from prijatelj a
 left join prijatelj_ostavljena b on b.prijatelj =a.sifra 
 where b.sifra is null;
-
+# 28 min
