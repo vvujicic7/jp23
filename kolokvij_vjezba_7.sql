@@ -139,3 +139,5 @@ from zarucnik a
 left join zarucnik_mladic b on b.zarucnik =a.sifra 
 where b.sifra is null ;
 
+# 25min
+
