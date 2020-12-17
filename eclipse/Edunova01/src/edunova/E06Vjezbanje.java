@@ -7,8 +7,9 @@ public class E06Vjezbanje {
 	// Korisnik unosi decimalni broj
 	// program ispisuje samo cijeli dio broja
 	public static void main(String[] args) {
-		String b=JOptionPane.showInputDialog("broj");
-		
-		System.out.println(b);
+		String b=JOptionPane.showInputDialog("decimalni broj");
+		float f=Float.parseFloat(b);
+		int g=(int)f;
+		System.out.println(f/g);
 	}
 }
