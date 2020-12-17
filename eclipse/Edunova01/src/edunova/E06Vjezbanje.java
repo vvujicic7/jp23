@@ -9,7 +9,9 @@ public class E06Vjezbanje {
 	public static void main(String[] args) {
 		String b=JOptionPane.showInputDialog("decimalni broj");
 		float f=Float.parseFloat(b);
-		int g=(int)f;
-		System.out.println(f/g);
+		System.out.println(f);
+		int p=(int)f;
+		System.out.println(p);
+		
 	}
 }
