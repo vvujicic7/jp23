@@ -9,8 +9,11 @@ public class E07Vjezbanje {
 	public static void main(String[] args) {
 		
 		String b1 = JOptionPane.showInputDialog("Unesi broj1");
-		float f1 = Float.parseFloat(b1);
-		int c=(int)f1;
-		System.out.println(f1/c);
+		
+		float broj=Float.parseFloat("1.5");
+				int i = (int)broj;
+				System.out.println(broj);
+		
 	}
+	
 }
