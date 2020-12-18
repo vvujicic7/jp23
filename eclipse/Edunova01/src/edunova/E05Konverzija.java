@@ -1,6 +1,7 @@
 package edunova;
 
 public class E05Konverzija {
+	
 	public static void main(String[] args) {
 		
 		//implicitna konverzija
