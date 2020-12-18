@@ -1,11 +1,16 @@
 package edunova;
 
+import java.math.BigDecimal;
+
 public class E02PrimitivniTipovi {
 	
 	public static void main(String[] args) {
 		
-		boolean logickaVrijednost=true;  // false - zadana vrijednost
-		char znak='x'; 
+		//https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html
+		
+		
+		boolean logickaVrijednost=true; //false - zadana
+		char znak='x';
 		
 		// cijeli brojevi
 		byte b=12;
@@ -13,11 +18,13 @@ public class E02PrimitivniTipovi {
 		int i=1928;
 		long l=3773;
 		
-		// decimalni brojevi 
+		//decimalni brojevi
 		float f=12.99F;
-		double d=12.99;
+		double d = 12.99;
+	
 		
-		// BigDecimal
+		//BigDecimal
+		
 		
 		
 		
