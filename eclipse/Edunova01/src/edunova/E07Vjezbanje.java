@@ -14,6 +14,7 @@ public class E07Vjezbanje {
 				int i = (int)broj;
 				System.out.println(broj);
 		
+				
 	}
 	
 }
