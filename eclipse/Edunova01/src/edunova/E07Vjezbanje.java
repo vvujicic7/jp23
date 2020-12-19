@@ -10,10 +10,10 @@ public class E07Vjezbanje {
 		
 		String b1 = JOptionPane.showInputDialog("Unesi broj1");
 		
-		float broj=Float.parseFloat("1.5");
-				int i = (int)broj;
-				System.out.println(broj);
-		
+				double d= Double.parseDouble(b1);
+				System.out.println(d);
+				int p = (int)d;
+				System.out.println(p);
 				
 	}
 	
