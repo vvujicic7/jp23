@@ -14,7 +14,7 @@ public class E07Vjezbanje {
 				System.out.println(d);
 				int p = (int)d;
 				System.out.println(p);
-				//
+				
 	}
 	
 }
