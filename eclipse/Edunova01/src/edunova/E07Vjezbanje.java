@@ -8,12 +8,16 @@ public class E07Vjezbanje {
 	// Program ispisuje samo decimalni dio broja
 	public static void main(String[] args) {
 		
-		String b1 = JOptionPane.showInputDialog("Unesi broj1");
+		String uniokorisnik= JOptionPane.showInputDialog("Unesi decimalni broj");
 		
-				double d= Double.parseDouble(b1);
-				System.out.println(d);
-				int p = (int)d;
-				System.out.println(p);
+		double doubleNumber= Double.parseDouble(uniokorisnik);
+		
+		int intPart = (int) doubleNumber;
+		System.out.println("Double number:" + doubleNumber);
+		System.out.println("Integer part:" + intPart);
+		System.out.println("Decimal part" + (doubleNumber - intPart));
+		
+			
 				
 	}
 	
