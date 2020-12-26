@@ -51,7 +51,7 @@ public class E03UvjetnoGrananjeSwitch {
 //		double d=2.2;
 //		
 //		switch (d) {
-//		case "X" ->System.out.println("OK");
+//		case "X" ->System.out.println("OK"); g
 	}
 
 }
