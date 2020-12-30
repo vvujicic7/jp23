@@ -9,8 +9,10 @@ public class Zadatak1 {
 
 	public static void main(String[] args) {
 		
-		String b1 = JOptionPane.showInputDialog("broj");
-		int i = Integer.parseInt(b1);
-		System.out.println(i%2);
+//		String b1 = JOptionPane.showInputDialog("broj");
+//		int i = Integer.parseInt(b1);
+//		System.out.println(i%2);
+		
+		System.out.println(Integer.parseInt(JOptionPane.showInputDialog("broj"))%2);
 	}
 }
