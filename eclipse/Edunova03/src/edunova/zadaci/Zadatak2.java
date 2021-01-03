@@ -15,7 +15,7 @@ public class Zadatak2 {
 		
 		int x = input.nextInt();
 		System.out.println("Unesi drugi broj: ");
-		// nije gotovo
+		// nije gotovo 
 		
 		
 		

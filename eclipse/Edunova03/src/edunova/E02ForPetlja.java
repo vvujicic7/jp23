@@ -24,7 +24,46 @@ public class E02ForPetlja {
 		}
 			System.out.println(zbroj);
 		
+			
+		// mogućnost preskakanja koraka / nastavljanje izvođenja
+			
+			for(int i=0; i<10; i++) {
+				if(i==3 ) {
+					continue;
+				}
+				System.out.println("broj je: " + i);
+			}
 		
-	}
+			// mogućnost nasilnog prekida petlje
+			
+			for (int i=0; i<10; i++) {
+				if(i==6) {
+					break;
+				}
+				System.out.println(i);
+			}
+			
+			// ugnježđivanje petlji
+			for (int i=0; i<10; i++) {
+				for (int j=0;j<10;j++) {
+					System.out.print((i+1)*(j+1) + " ");
+				}
+				System.out.println();
+			}
+			
+			
+			// beskonačna petlja
+			//for(int i=0; i>0; i++) { // ovo nije beskonačna petlja
+	//}
 
+			for(;;) {
+				System.out.println(Math.random());
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+}
 }
