@@ -11,7 +11,7 @@ public class Zadatak2 {
 		
 		Scanner input = new Scanner(System.in);
 		
-		System.out.println("Unesi pri broj: ");
+		System.out.println("Unesi prvi broj: ");
 		
 		int x = input.nextInt();
 		System.out.println("Unesi drugi broj: ");

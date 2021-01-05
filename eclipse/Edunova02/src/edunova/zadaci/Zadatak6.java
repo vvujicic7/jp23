@@ -6,16 +6,16 @@ public class Zadatak6 {
 	
 	public static void main(String[] args) {
 		
-		String b1 = JOptionPane.showInputDialog("unosi broj");
-		String b2 = JOptionPane.showInputDialog("unosi broj");
+		String a = JOptionPane.showInputDialog("unosi broj");
+		String b = JOptionPane.showInputDialog("unosi broj");
 		
-		int b11 = Integer.parseInt(b1);
-		int b22 = Integer.parseInt(b2);
+		int c = Integer.parseInt(a);
+		int d = Integer.parseInt(b);
 		
-		if((b11*b22)%2==0) {
-			System.out.println(b11-b22);
+		if((c*d)%2==0) {
+			System.out.println(c-d);
 	}else {
-		System.out.println((int)(b11/b22));
+		System.out.println((int)(c/d));
 		}
 	}
 	
@@ -25,4 +25,4 @@ public class Zadatak6 {
 	// ispisuje razliku unesinih brojeva
 	// inače ispisuje cijeli dio kvocjenta prvog i drugog broja
 
-// prepisao od Ive, bilo kakvi unosi davaju 0 ... nije dobro
+// prepisao od Ive, bilo kakvi unosi davaju 0 ... nije dobro- DOBRO JE- promijenio nazive String-a i int-a
