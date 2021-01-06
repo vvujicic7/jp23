@@ -11,12 +11,12 @@ public class Zadatak2 {
 		
 		Scanner input = new Scanner(System.in);
 		
-		System.out.println("Unesi prvi broj: ");
+		System.out.print("Unesi prvi broj: ");
 		
-		int i = input.nextInt();
-		System.out.println("Unesi drugi broj: ");
+		int i =input.nextInt();
+		System.out.print("Unesi drugi broj: ");
 		
-		int j = input.nextInt();
+		int j =input.nextInt();
 		// nije gotovo 
 		
 		
