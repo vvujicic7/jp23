@@ -13,8 +13,10 @@ public class Zadatak2 {
 		
 		System.out.println("Unesi prvi broj: ");
 		
-		int x = input.nextInt();
+		int i = input.nextInt();
 		System.out.println("Unesi drugi broj: ");
+		
+		int j = input.nextInt();
 		// nije gotovo 
 		
 		
