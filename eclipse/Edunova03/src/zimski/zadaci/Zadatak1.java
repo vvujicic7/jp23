@@ -2,7 +2,7 @@ package zimski.zadaci;
 
 public class Zadatak1 {
 	public static void main(String[] args) {
-		// // Kreirati program koji unosi 24 broja, ispisuje njihov zbroj, najmanji i  najveći uneseni broj.
+		// Kreirati program koji unosi 24 broja, ispisuje njihov zbroj, najmanji i  najveći uneseni broj.
 		
 	java.util.Scanner ulaz = new java.util.Scanner(System.in);
 
