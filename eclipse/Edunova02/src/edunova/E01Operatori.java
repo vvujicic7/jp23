@@ -26,7 +26,7 @@ public class E01Operatori {
 		
 		// ++ --
 		
-		// uvečanje za 1
+		// uvećanje za 1
 		i=i+1; // 1. način
 		i+=1; // drugi način
 		System.out.println(i);
