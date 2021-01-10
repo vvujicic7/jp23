@@ -1,4 +1,4 @@
-package zimski.zadaci;
+package zimski.zadatci;
 
 
 public class Zadatak2 {
