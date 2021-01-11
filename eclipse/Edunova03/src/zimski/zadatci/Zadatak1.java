@@ -31,9 +31,7 @@ public class Zadatak1 {
 	
 		
 		
-	
-	
-	
+
 	
 	
 	}
