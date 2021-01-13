@@ -12,7 +12,7 @@ public class Zadatak3v2 {
 	       int prvi = broj.nextInt();  
 	       System.out.print("Unesi drugi broj : ");  
 	       int drugi = broj.nextInt();  
-	       System.out.println("Prime brojevi između " + prvi + " and " + drugi);
+	       System.out.println("Prime brojevi između " + prvi + " i " + drugi);
 	       
 	       for (int i = prvi; i <= drugi; i++) {
 		     
