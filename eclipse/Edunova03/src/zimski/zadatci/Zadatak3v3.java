@@ -2,7 +2,7 @@ package zimski.zadatci;
 
 import java.util.Scanner;  
 
-public class Zadatak3v2 {
+public class Zadatak3v3 {
 	// Kreirati program koji za dva unesena broja ispisuje sve prim/prosti/prime brojeve između njih.
 	
 	public static void main(String[] args) {
@@ -21,23 +21,10 @@ public class Zadatak3v2 {
 	               System.out.println(i);  
 	           }  
 	       }  
-	} 
+	}
 
-	   public static boolean isPrime(int p) { 
-	    
-	       if (p <= 1) { 
-		   
-	           return false;  
-	       }  
-	       for (int i = 2; i <= Math.sqrt(p); i++) 
-		   {  
-	           if (p % i == 0) 
-			   {  
-	               return false;  
-	           }  
-	       }  
-	       return true;  
-	   }  
-	}  
-       
-	
+	private static boolean isPrime(int i) {
+		// TODO Auto-generated method stub
+		return false;
+	} 
+}
