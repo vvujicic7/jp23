@@ -20,7 +20,7 @@ public class Zadatak1 {
 			}
 		}
 		
-	// nije gotovo
+	System.out.println(zbroj);
 		
 	}
 

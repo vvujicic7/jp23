@@ -1,7 +1,7 @@
 package zimski.zadatci;
 
 
-public class Zadatak3 {
+public class Zadatak3v2 {
 	// Kreirati program koji za dva unesena broja ispisuje sve prim/prosti/prime brojeve između njih.
 	
 	public static void main(String[] args) {
@@ -30,4 +30,3 @@ public class Zadatak3 {
 	}
 
 }
-// nije gotovo
