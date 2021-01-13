@@ -1,6 +1,7 @@
 package edunova;
 
 public class E02_dowhile {
+	
 	public static void main(String[] args) {
 		
 		// izvesti će se minimalno jednom
