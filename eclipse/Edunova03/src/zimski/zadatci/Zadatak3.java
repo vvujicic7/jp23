@@ -12,7 +12,7 @@ public class Zadatak3 {
 	       int prvi = broj.nextInt();  
 	       System.out.print("Unesi drugi broj : ");  
 	       int drugi = broj.nextInt();  
-	       System.out.println("Prime brojevi između " + prvi + " and " + drugi);
+	       System.out.println("Prime brojevi između " + prvi + " i " + drugi);
 	       
 	       for (int i = prvi; i <= drugi; i++) {
 		     
@@ -21,10 +21,22 @@ public class Zadatak3 {
 	               System.out.println(i);  
 	           }  
 	       }  
-	}
-
-	private static boolean isPrime(int i) {
-		// TODO Auto-generated method stub
-		return false;
 	} 
-}
+
+	   public static boolean isPrime(int p) { 
+	    
+	       if (p <= 1) { 
+		   
+	           return false;  
+	       }  
+	       for (int i = 2; i <= Math.sqrt(p); i++) 
+		   {  
+	           if (p % i == 0) 
+			   {  
+	               return false;  
+	           }  
+	       }  
+	       return true;  
+	   }  
+	}  
+       
