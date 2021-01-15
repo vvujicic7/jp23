@@ -4,15 +4,55 @@ public class E01WhilePetlja {
 	
 	public static void main(String[] args) {
 		
-		int i = 0;
+		// sve dok je istina
+		
+		int i=0;
 		while(i<10) {
 			System.out.println(i);
 			i++;
 		}
+		
+		// while radi s boolean tipom podatke
+		i=0;
+		boolean ostaniUpetlji=i<10;
+		while(ostaniUpetlji) {
+			System.out.println(i);
+			ostaniUpetlji=++i<10;
+		}
+		
+		i=0;
+		while(i<10) {
+			System.out.println(i++);
+		}
+		
+		
+		//provjerava uvjet na početku
+		//postoji mogućnost da nikada nećeš ući u while
+		
+		i=20;
+		while(i<10) {
+			System.out.println("Ovo neće ispisati");
+		}
+		
+		//beskonačna petlja
+		while(true) {
+			if(i++==20) {
+				continue;
+			}
+			if(i==21) {
+				break;
+			}
+		}
+		
+		i=0;
+		int j=0;
+		while(i<10) {
+			while(j<10) {
+				j++;
+			}
+			i++;
+		}
+		
 	}
 
 }
-
-
-//ugnježđivanje zadatak: Ispisati tablicu množenja
-//5 x 5 s while petljam
