@@ -11,24 +11,19 @@ public class Vjezba5 {
 			// for the conversion is as follows: 1mi = 1.6km
 	public static void main(String[] args) {
 		
-		double  kilometer;
 		
 		Scanner input = new Scanner(System.in);
 		
 		System.out.println("Insert number:");
 		
-		kilometer = input.nextDouble();
+		double kilometer = input.nextDouble();
 		
 		double mile = kilometer / 1.6;
 		
 		input.close();
 		
 		System.out.println(mile);
-		
-					
-		
-		
-		
+			
 		
 	}
 
