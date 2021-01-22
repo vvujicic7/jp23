@@ -19,6 +19,21 @@ public class Vjezba11 {
 		System.out.println("Enter number: ");
 		int a = input.nextInt();
 		
+		
+		int lessThan10 = a % 10; 
+		a /= 10;
+		
+		int tens = a % 10;
+		a /= 10;
+		
+		int hundreds = a % 10;
+		a /= 10;
+		
+		int sum = hundreds + tens + lessThan10;
+		
+		
+		System.out.println("The sum of all digits is: " + sum);
+		
 		// nije gotovo
 		
 	}
