@@ -31,7 +31,7 @@ public class Vjezba19 {
 		long currentHour = totalMinutes % 24;
 		
 		// Display results:
-		System.out.println("Current time is " + currentHour + ":" + currentMinute + ":" + currentSecond + "GMT");
+		System.out.println("Current time is " + currentHour + ":" + currentMinute + ":" + currentSecond + " GMT");
 	}
 	 
 }
