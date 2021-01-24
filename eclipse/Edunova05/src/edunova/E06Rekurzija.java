@@ -1,6 +1,9 @@
 package edunova;
 
 public class E06Rekurzija {
+
+	// Rekurzija je kada metoda zove samu sebe
+	// uz uvjet izlaska iz rekurzije
 	
 	public static void main(String[] args) {
 		int zbroj=0;
@@ -8,6 +11,7 @@ public class E06Rekurzija {
 			zbroj+=i;
 		}
 		System.out.println(zbroj);
+		
 		System.out.println(zbroj(100));
 	}
 	
@@ -18,5 +22,4 @@ public class E06Rekurzija {
 		}
 		return broj + zbroj(broj-1);
 	}
-
 }

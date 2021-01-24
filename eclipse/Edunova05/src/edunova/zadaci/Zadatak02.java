@@ -7,7 +7,7 @@ public class Zadatak02 {
 	// Program unosi 2 broja od korisnika
 	// Program ispisuje razliku kao rezultat izvođenja 
 	// metode koja prima dva parametra i tipa je float
-	// 65min 
+	
 	public static void main(String[] args) {
 		
 		Scanner input = new Scanner(System.in);
