@@ -20,6 +20,7 @@ public class Vjezba3_31 {
 		
 		switch (x += 5) {
 			case 1: a = 1;
+			System.out.println(x);
 		
 		switch (x +=10 ) {
 			case 2: a = 2;
@@ -29,6 +30,8 @@ public class Vjezba3_31 {
 		
 		switch (x += 34) {
 			case 4: a = 4;
+			
+	// NE VALJA!				}
 					}
 				}
 			}
