@@ -12,30 +12,38 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author Mativel
  */
 @Entity(name = "wp_document")
-public class Dokument{
+public class Dokument extends Entitet{
     
-    @Id()
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+   
     @Column(columnDefinition = "char(10)",length = 10,name = "naslov")
     private String naziv;
     private Date datum;
     private Boolean placen;
     private BigDecimal iznos;
+    
+    
+    @ManyToOne
+    private Kupac kupac;
 
-    public int getId() {
-        return id;
+    public Kupac getKupac() {
+        return kupac;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setKupac(Kupac kupac) {
+        this.kupac = kupac;
     }
+    
+    
+
+
+   
 
     public String getNaziv() {
         return naziv;

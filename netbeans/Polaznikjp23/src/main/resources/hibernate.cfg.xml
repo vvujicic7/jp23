@@ -43,6 +43,7 @@
 
 
         <!-- Ovdje navodimo mapirane klase -->
+        <mapping class="edunova.jp23.model.Kupac" />
         <mapping class="edunova.jp23.model.Dokument" />
 
     </session-factory>

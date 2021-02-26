@@ -6,6 +6,7 @@
 package edunova.jp23;
 
 import edunova.jp23.model.Dokument;
+import edunova.jp23.model.Kupac;
 import edunova.jp23.util.HibernateUtil;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -18,6 +19,7 @@ import org.hibernate.Session;
 public class Start {
     
     public static void main(String[] args) {
+       
 
         Session s= HibernateUtil.getSession();
         Dokument d=new Dokument();
@@ -27,7 +29,17 @@ public class Start {
         d.setIznos(new BigDecimal (23.99));
         
         s.beginTransaction();
+        
+        
+        Kupac k = new Kupac();
+        k.setNaziv("Edunova");
+        
+        s.save(k);
+        
+        d.setKupac(k);
+        
         s.save(d);
+        
         s.getTransaction().commit();
         //System.out.println(s.getMetamodel().getEntities().size());
 
