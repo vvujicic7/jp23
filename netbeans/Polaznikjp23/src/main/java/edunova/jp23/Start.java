@@ -6,6 +6,7 @@
 package edunova.jp23;
 
 import edunova.jp23.util.HibernateUtil;
+import edunova.jp23.util.InitialFixtures;
 import java.math.BigDecimal;
 import java.util.Date;
 import org.hibernate.Session;
@@ -18,7 +19,7 @@ public class Start {
     
     public static void main(String[] args) {
         
-        Session session = HibernateUtil.getSession();
+      // InitialFixtures.start();
   
         //System.out.println(s.getMetamodel().getEntities().size());
 
