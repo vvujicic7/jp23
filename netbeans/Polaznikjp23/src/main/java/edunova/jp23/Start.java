@@ -5,11 +5,10 @@
  */
 package edunova.jp23;
 
-import edunova.jp23.util.HibernateUtil;
+import edunova.jp23.controller.ObradaSmjer;
+import edunova.jp23.model.Smjer;
+import edunova.jp23.util.EdunovaException;
 import edunova.jp23.util.InitialFixtures;
-import java.math.BigDecimal;
-import java.util.Date;
-import org.hibernate.Session;
 
 /**
  *
@@ -19,13 +18,26 @@ public class Start {
     
     public static void main(String[] args) {
         
-      // InitialFixtures.start();
-  
-        //System.out.println(s.getMetamodel().getEntities().size());
-
-    }
-
+        Smjer s = new Smjer();
+        ObradaSmjer os=new ObradaSmjer();
+        os.setEntitet(s);
+        
+        try {
+            os.create();
+        } catch (EdunovaException e) {
+            System.out.println(e.getPoruka());
+        }
+        
+        
+        
+     // for(Smjer smjer : os.getPodaci()){
+     //     System.out.println(smjer.getNaziv());
+     // }
+       
+       
 
     }
     
+}
+
 

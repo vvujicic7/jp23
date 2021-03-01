@@ -12,7 +12,7 @@ import javax.persistence.Entity;
  * @author Mativel
  */
 @Entity
-public class Polaznik extends Osoba {
+public class Polaznik extends Osoba{
     
     private String brojUgovora;
 
@@ -25,4 +25,6 @@ public class Polaznik extends Osoba {
     }
     
     
+    
 }
+

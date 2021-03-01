@@ -16,7 +16,7 @@ import javax.persistence.MappedSuperclass;
  */
 @MappedSuperclass
 public abstract class Entitet {
-       @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -27,5 +27,6 @@ public abstract class Entitet {
     public void setId(Long id) {
         this.id = id;
     }
+    
     
 }

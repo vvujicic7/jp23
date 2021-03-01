@@ -5,6 +5,7 @@
  */
 package edunova.jp23.util;
 
+import com.github.javafaker.Faker;
 import edunova.jp23.model.Grupa;
 import edunova.jp23.model.Polaznik;
 import edunova.jp23.model.Predavac;
@@ -17,7 +18,7 @@ import org.hibernate.Session;
 
 /**
  *
- * @author Korisnik
+ * @author Mativel
  */
 public class InitialFixtures {
     
@@ -28,7 +29,7 @@ public class InitialFixtures {
         // Domaća zadaća: optimizirati kod (metode,...)
         
         Smjer java = new Smjer();
-        java.setNaziv("Java programiranje");
+        java.setNaziv("Računalni operater");
         java.setCijena(new BigDecimal(5900.09));
         java.setTrajanje(130);
         java.setVerificiran(Boolean.TRUE);
@@ -36,31 +37,33 @@ public class InitialFixtures {
         s.save(java);
         
          Smjer php = new Smjer();
-        php.setNaziv("PHP programiranje");
+        php.setNaziv("Web dizajn");
         php.setCijena(new BigDecimal(4900.09));
         php.setTrajanje(130);
         php.setVerificiran(Boolean.FALSE);
         
         s.save(php);
         
+        Faker faker = new Faker();
+        
         List<Polaznik> polaznici=new ArrayList<>();
         Polaznik p;
         for(int i=0;i<100;i++){
             p=new Polaznik();
-            p.setIme("Polaznik");
-            p.setPrezime(String.valueOf(i+1));
+            p.setIme(faker.name().firstName());
+            p.setPrezime(faker.name().lastName());
             s.save(p);
             polaznici.add(p);
         }
         
         Predavac predavac = new Predavac();
-        predavac.setIme("Predavač");
-        predavac.setPrezime("Grupe");
+        predavac.setIme(faker.name().firstName());
+        predavac.setPrezime(faker.name().lastName());
         
         s.save(predavac);
         
         Grupa jp23 = new Grupa();
-        jp23.setNaziv("JP23");
+        jp23.setNaziv("RP");
         jp23.setSmjer(java);
         jp23.setPredavac(predavac);
         
@@ -73,7 +76,7 @@ public class InitialFixtures {
         
         
          Grupa pp22 = new Grupa();
-        pp22.setNaziv("PP22");
+        pp22.setNaziv("WD");
         pp22.setSmjer(php);
         pp22.setPredavac(predavac);
         

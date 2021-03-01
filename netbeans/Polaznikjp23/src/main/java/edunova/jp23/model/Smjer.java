@@ -53,4 +53,7 @@ public class Smjer extends Entitet{
     }
     
     
+    
+    
 }
+

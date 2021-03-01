@@ -27,7 +27,7 @@ public class Grupa extends Entitet{
     private Date datumPocetka;
     private Integer brojPolaznika;
     @ManyToMany
-    private List<Polaznik> polaznici = new ArrayList<>();
+    private List<Polaznik> polaznici=new ArrayList<>();
 
     public String getNaziv() {
         return naziv;
@@ -76,6 +76,7 @@ public class Grupa extends Entitet{
     public void setPolaznici(List<Polaznik> polaznici) {
         this.polaznici = polaznici;
     }
+    
     
     
 }
