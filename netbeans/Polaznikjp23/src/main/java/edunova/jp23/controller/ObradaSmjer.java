@@ -7,6 +7,7 @@ package edunova.jp23.controller;
 
 import edunova.jp23.model.Smjer;
 import edunova.jp23.util.EdunovaException;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -30,9 +31,8 @@ public class ObradaSmjer extends Obrada<Smjer>{
 
     @Override
     protected void kontrolaCreate() throws EdunovaException {
-       if(entitet.getNaziv()==null || entitet.getNaziv().isEmpty()){
-           throw new EdunovaException("Naziv mora biti postavljen");
-       }
+       kontrolaNaziv();
+       kontrolaCijena();
     }
 
     @Override
@@ -45,4 +45,30 @@ public class ObradaSmjer extends Obrada<Smjer>{
        
     }
     
+    private void kontrolaNaziv() throws EdunovaException{
+       kontrolaNazivPostavljen();
+       kontrolaNazivDuzina();
+    }
+    
+    private void kontrolaNazivPostavljen() throws EdunovaException{
+        if(entitet.getNaziv()==null 
+               || entitet.getNaziv().isEmpty()){
+           throw new EdunovaException("Naziv mora biti postavljen");
+       }
+    }
+
+    private void kontrolaNazivDuzina()throws EdunovaException {
+        if(entitet.getNaziv().length()>50){
+            throw new EdunovaException("Naziv predugačak");
+        }
+    }
+    
+    private void kontrolaCijena() throws EdunovaException{
+        if(entitet.getCijena()==null 
+               || entitet.getCijena().compareTo(BigDecimal.ZERO)<=0){
+           throw new EdunovaException("Cijen mora biti postavljena i veća od 0");
+       }
+    }
+    
 }
+

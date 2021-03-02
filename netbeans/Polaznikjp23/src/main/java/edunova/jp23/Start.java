@@ -9,6 +9,7 @@ import edunova.jp23.controller.ObradaSmjer;
 import edunova.jp23.model.Smjer;
 import edunova.jp23.util.EdunovaException;
 import edunova.jp23.util.InitialFixtures;
+import java.math.BigDecimal;
 
 /**
  *
@@ -19,6 +20,8 @@ public class Start {
     public static void main(String[] args) {
         
         Smjer s = new Smjer();
+        s.setNaziv("Dobar naziv");
+        s.setCijena(BigDecimal.ZERO);
         ObradaSmjer os=new ObradaSmjer();
         os.setEntitet(s);
         
@@ -39,5 +42,4 @@ public class Start {
     }
     
 }
-
 

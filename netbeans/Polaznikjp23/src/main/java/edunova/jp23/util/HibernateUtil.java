@@ -14,12 +14,12 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 /**
  *
- * @author Korisnik
+ * @author Mativel
  */
 // singleton pattern
 public class HibernateUtil {
     
-     private static StandardServiceRegistry registry;
+    private static StandardServiceRegistry registry;
     private static Session session;
     // factory principle
     public static Session getSession() {
@@ -59,6 +59,7 @@ public class HibernateUtil {
     }
     
 }
+
 
     
     

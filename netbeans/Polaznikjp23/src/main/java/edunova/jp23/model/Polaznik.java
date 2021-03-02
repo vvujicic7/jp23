@@ -27,4 +27,3 @@ public class Polaznik extends Osoba{
     
     
 }
-
