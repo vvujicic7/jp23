@@ -69,3 +69,4 @@ public abstract class ObradaOsoba<T extends Osoba> extends Obrada<T>{
     
     
 }
+

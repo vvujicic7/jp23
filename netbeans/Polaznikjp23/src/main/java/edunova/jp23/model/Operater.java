@@ -7,24 +7,22 @@ package edunova.jp23.model;
 
 import javax.persistence.Entity;
 
-/**
- *
- * @author Mativel
- */
 @Entity
-public class Polaznik extends Osoba{
+public class Operater extends Osoba{
     
-    private String brojUgovora;
+    private String lozinka;
 
-    public String getBrojUgovora() {
-        return brojUgovora;
+    public String getLozinka() {
+        return lozinka;
     }
 
-    public void setBrojUgovora(String brojUgovora) {
-        this.brojUgovora = brojUgovora;
+    public void setLozinka(String lozinka) {
+        this.lozinka = lozinka;
     }
     
-    
+    public String getImePrezime(){
+        return getIme() + " " + getPrezime();
+    }
     
 }
 

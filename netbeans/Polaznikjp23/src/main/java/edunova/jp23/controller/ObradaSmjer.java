@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  *
- * @author Korisnik
+ * @author Mativel
  */
 public class ObradaSmjer extends Obrada<Smjer>{
 

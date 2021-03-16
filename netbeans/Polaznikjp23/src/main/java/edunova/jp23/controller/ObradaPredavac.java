@@ -38,4 +38,3 @@ public class ObradaPredavac extends ObradaOsoba<Predavac>{
     }
     
 }
-
