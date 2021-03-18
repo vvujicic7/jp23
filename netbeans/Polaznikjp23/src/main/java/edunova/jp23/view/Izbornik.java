@@ -27,7 +27,8 @@ public class Izbornik extends javax.swing.JFrame {
 
     private class Vrijeme extends Thread {
 
-        private SimpleDateFormat df = new SimpleDateFormat("dd. MM. YYYY. HH:mm:ss");
+        private SimpleDateFormat df = 
+                new SimpleDateFormat("dd. MMMM YYYY. HH:mm:ss");
         
         
         @Override
@@ -74,6 +75,11 @@ public class Izbornik extends javax.swing.JFrame {
         Programi.setText("Programi");
 
         jMenuItem1.setText("Smjerovi");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         Programi.add(jMenuItem1);
 
         jMenuItem2.setText("Polaznici");
@@ -94,11 +100,6 @@ public class Izbornik extends javax.swing.JFrame {
         Onama.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 OnamaMouseClicked(evt);
-            }
-        });
-        Onama.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OnamaActionPerformed(evt);
             }
         });
         jMenuBar1.add(Onama);
@@ -124,10 +125,6 @@ public class Izbornik extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void OnamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OnamaActionPerformed
-        
-    }//GEN-LAST:event_OnamaActionPerformed
-
     private void OnamaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OnamaMouseClicked
         Date d = new Date();
         SimpleDateFormat df = new SimpleDateFormat("YYYY");
@@ -135,6 +132,10 @@ public class Izbornik extends javax.swing.JFrame {
                 "© " + Aplikacija.NASLOV_APP + 
                         " 2020 - " + df.format(d));
     }//GEN-LAST:event_OnamaMouseClicked
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        new SmjerForma().setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 
 

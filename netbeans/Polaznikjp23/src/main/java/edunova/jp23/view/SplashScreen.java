@@ -23,8 +23,8 @@ public class SplashScreen extends javax.swing.JFrame {
         Ucitanje load = new Ucitanje();
         load.start();
     }
-    
-        private class Ucitanje extends Thread {
+
+    private class Ucitanje extends Thread {
 
         @Override
         public void run() {
@@ -32,8 +32,8 @@ public class SplashScreen extends javax.swing.JFrame {
             if (s.getMetamodel().getEntities().size() > 0) {
                 new Autorizacija().setVisible(true);
                 dispose();
-            }else{
-                JOptionPane.showMessageDialog(rootPane,"Problem s bazom podataka");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Problem s bazom podataka");
             }
         }
 
@@ -51,6 +51,7 @@ public class SplashScreen extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
 
         jLabel1.setText("Učitavam");
@@ -73,8 +74,8 @@ public class SplashScreen extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -6,10 +6,14 @@
 package edunova.jp23.model;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Operater extends Osoba{
     
+    @NotNull(message = "lozinka ne prazna")
+    @NotEmpty(message = "lozinka ne prazna")
     private String lozinka;
 
     public String getLozinka() {
@@ -25,4 +29,3 @@ public class Operater extends Osoba{
     }
     
 }
-

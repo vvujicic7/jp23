@@ -17,7 +17,7 @@ import org.hibernate.Session;
 
 /**
  *
- * @author Mativel
+ * @author Korisnik
  */
 public abstract class Obrada<T> {
     
@@ -104,5 +104,3 @@ public abstract class Obrada<T> {
     
     
 }
-
-
