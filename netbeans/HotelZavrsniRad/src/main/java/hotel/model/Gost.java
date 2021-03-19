@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Mativel
  */
-public class Gost {
+public class Gost extends Osoba {
     
     private String ime;
     private String prezime;

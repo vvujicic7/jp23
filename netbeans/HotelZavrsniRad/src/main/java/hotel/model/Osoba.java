@@ -9,11 +9,10 @@ package hotel.model;
  *
  * @author Mativel
  */
-public class Djelatnik extends Osoba{
+public abstract class Osoba {
     
     private String ime;
     private String prezime;
-    private char oib;
 
     public String getIme() {
         return ime;
@@ -29,14 +28,6 @@ public class Djelatnik extends Osoba{
 
     public void setPrezime(String prezime) {
         this.prezime = prezime;
-    }
-
-    public char getOib() {
-        return oib;
-    }
-
-    public void setOib(char oib) {
-        this.oib = oib;
     }
     
     
