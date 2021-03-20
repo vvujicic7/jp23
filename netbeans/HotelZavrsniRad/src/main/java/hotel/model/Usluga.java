@@ -6,12 +6,14 @@
 package hotel.model;
 
 import java.math.BigDecimal;
+import javax.persistence.Entity;
 
 /**
  *
  * @author Mativel
  */
-public class Usluga {
+@Entity
+public class Usluga extends Entitet {
     
     private String vrsta;
     private String naziv;

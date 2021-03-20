@@ -6,11 +6,13 @@
 package hotel.model;
 
 import java.util.Date;
+import javax.persistence.Entity;
 
 /**
  *
  * @author Mativel
  */
+@Entity
 public class Gost extends Osoba {
     
     private String ime;

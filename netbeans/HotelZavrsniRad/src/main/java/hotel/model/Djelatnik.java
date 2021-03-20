@@ -5,10 +5,13 @@
  */
 package hotel.model;
 
+import javax.persistence.Entity;
+
 /**
  *
  * @author Mativel
  */
+@Entity
 public class Djelatnik extends Osoba{
     
     private String ime;

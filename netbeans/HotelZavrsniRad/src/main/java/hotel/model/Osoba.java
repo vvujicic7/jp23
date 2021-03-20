@@ -5,11 +5,14 @@
  */
 package hotel.model;
 
+import javax.persistence.MappedSuperclass;
+
 /**
  *
  * @author Mativel
  */
-public abstract class Osoba {
+@MappedSuperclass
+public abstract class Osoba extends Entitet{
     
     private String ime;
     private String prezime;

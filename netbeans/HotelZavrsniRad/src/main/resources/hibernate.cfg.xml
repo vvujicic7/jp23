@@ -42,6 +42,10 @@
         <property name="hibernate.dbcp.maxWaitMillis">-1</property>
         
         <!-- Ovdje navodimo mapirane klase -->
+        
+        
+        <mapping class="hotel.model.Gost" /> 
+        
         <mapping class="hotel.model.Boravak" /> 
         
     </session-factory>

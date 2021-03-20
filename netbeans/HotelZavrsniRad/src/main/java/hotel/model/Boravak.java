@@ -6,17 +6,21 @@
 package hotel.model;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author Mativel
  */
-public class Boravak extends Gost{
-    
+@Entity
+public class Boravak extends Entitet{
+
+    @ManyToOne
     private Integer gost;
     private Date datum_dolaska;
     private Date datum_odlaska;
-
+    
     public Integer getGost() {
         return gost;
     }

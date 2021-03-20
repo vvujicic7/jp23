@@ -6,15 +6,21 @@
 package hotel.model;
 
 import java.math.BigDecimal;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author Mativel
  */
-public class HotelskaUsluga extends Usluga {
+@Entity
+public class HotelskaUsluga extends Entitet {
 
+    @ManyToOne
     private Integer boravak;
+    @ManyToOne
     private Integer usluga;
+    @ManyToOne
     private Integer djelatnik;
     private BigDecimal kolicina;
     private BigDecimal cijena;
