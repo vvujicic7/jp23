@@ -7,14 +7,15 @@ package hotel.model;
 
 import java.math.BigDecimal;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 /**
  *
  * @author Mativel
  */
-@Entity
-public class HotelskaUsluga extends Entitet {
+
+public class HotelskaUsluga {
 
     @ManyToOne
     private Integer boravak;

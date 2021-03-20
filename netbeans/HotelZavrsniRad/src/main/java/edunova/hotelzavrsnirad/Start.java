@@ -29,14 +29,7 @@ public class Start {
         
         s.save(usluga);
         
-            HotelskaUsluga h = new HotelskaUsluga();
-        h.setBoravak(Integer.BYTES);
-        h.setDjelatnik(Integer.BYTES);
-        h.setUsluga(Integer.SIZE);
-        h.setCijena(BigDecimal.TEN);
-        h.setKolicina(BigDecimal.ONE);
-        
-        s.save(h);
+       
         
         s.getTransaction().commit();
                 
