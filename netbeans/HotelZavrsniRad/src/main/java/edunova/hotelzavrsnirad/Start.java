@@ -5,6 +5,10 @@
  */
 package edunova.hotelzavrsnirad;
 
+import hotel.util.HibernateUtil;
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+
 /**
  *
  * @author Mativel
@@ -12,6 +16,8 @@ package edunova.hotelzavrsnirad;
 public class Start {
     
     public static void main(String[] args) {
-        System.out.println("Početak");
+        Session s = HibernateUtil.getSession();
+        
+        System.out.println(s.getMetamodel().getEntities().size());
     }
 }
