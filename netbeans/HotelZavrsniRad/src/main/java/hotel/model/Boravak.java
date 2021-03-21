@@ -17,15 +17,15 @@ import javax.persistence.ManyToOne;
 public class Boravak extends Entitet{
 
     @ManyToOne
-    private Integer gost;
+    private Gost gost;
     private Date datum_dolaska;
     private Date datum_odlaska;
     
-    public Integer getGost() {
+    public Gost getGost() {
         return gost;
     }
 
-    public void setGost(Integer gost) {
+    public void setGost(Gost gost) {
         this.gost = gost;
     }
 

@@ -5,12 +5,17 @@
  */
 package edunova.hotelzavrsnirad;
 
+import hotel.model.Boravak;
+import hotel.model.Djelatnik;
+import hotel.model.Gost;
 import hotel.util.HibernateUtil;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import java.math.BigDecimal;
 import hotel.model.HotelskaUsluga;
 import hotel.model.Usluga;
+import java.time.Instant;
+import java.util.Date;
 /**
  *
  * @author Mativel
@@ -29,7 +34,18 @@ public class Start {
         
         s.save(usluga);
         
+       Djelatnik djelatnik = new Djelatnik();
+       djelatnik.setIme("Ivo");
+       djelatnik.setOib("63791759793");
+       djelatnik.setPrezime("Javic");
        
+       s.save(djelatnik);
+       
+       Boravak boravak = new Boravak();
+       boravak.setDatum_dolaska(Date.from(Instant.MIN));
+       boravak.setDatum_odlaska(Date.from(Instant.MIN));
+        Gost gost = null;
+       boravak.setGost(gost);
         
         s.getTransaction().commit();
                 

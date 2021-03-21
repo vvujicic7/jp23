@@ -5,6 +5,7 @@
  */
 package hotel.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,39 +15,41 @@ import javax.persistence.ManyToOne;
  *
  * @author Mativel
  */
+@Entity
+public class HotelskaUsluga implements Serializable {
 
-public class HotelskaUsluga {
-
+    
     @ManyToOne
-    private Integer boravak;
+    private Boravak boravak;
     @ManyToOne
-    private Integer usluga;
+    private Usluga usluga;
     @ManyToOne
-    private Integer djelatnik;
+    private Djelatnik djelatnik;
     private BigDecimal kolicina;
+    @Id
     private BigDecimal cijena;
 
-    public Integer getBoravak() {
+    public Boravak getBoravak() {
         return boravak;
     }
 
-    public void setBoravak(Integer boravak) {
+    public void setBoravak(Boravak boravak) {
         this.boravak = boravak;
     }
 
-    public Integer getUsluga() {
+    public Usluga getUsluga() {
         return usluga;
     }
 
-    public void setUsluga(Integer usluga) {
+    public void setUsluga(Usluga usluga) {
         this.usluga = usluga;
     }
 
-    public Integer getDjelatnik() {
+    public Djelatnik getDjelatnik() {
         return djelatnik;
     }
 
-    public void setDjelatnik(Integer djelatnik) {
+    public void setDjelatnik(Djelatnik djelatnik) {
         this.djelatnik = djelatnik;
     }
 

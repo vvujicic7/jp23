@@ -16,7 +16,7 @@ public class Djelatnik extends Osoba{
     
     private String ime;
     private String prezime;
-    private char oib;
+    private String oib;
 
     public String getIme() {
         return ime;
@@ -34,11 +34,11 @@ public class Djelatnik extends Osoba{
         this.prezime = prezime;
     }
 
-    public char getOib() {
+    public String getOib() {
         return oib;
     }
 
-    public void setOib(char oib) {
+    public void setOib(String oib) {
         this.oib = oib;
     }
     
