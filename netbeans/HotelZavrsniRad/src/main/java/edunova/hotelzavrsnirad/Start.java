@@ -21,13 +21,14 @@ import java.util.Date;
  * @author Mativel
  */
 public class Start {
+
     
     public static void main(String[] args) {
         Session s = HibernateUtil.getSession();
         s.beginTransaction();
         
         Usluga usluga = new Usluga();
-        usluga.setCijena(BigDecimal.TEN);
+        usluga.setCijena(new BigDecimal(23.99));
         usluga.setNaziv("Apartman");
         usluga.setOpis("Nocenje s doruckom u apartmanu");
         usluga.setVrsta("Nocenje");
@@ -42,11 +43,12 @@ public class Start {
        s.save(djelatnik);
        
        Boravak boravak = new Boravak();
-       boravak.setDatum_dolaska(Date.from(Instant.MIN));
-       boravak.setDatum_odlaska(Date.from(Instant.MIN));
+       boravak.setDatum_dolaska(new Date());
+       boravak.setDatum_odlaska(new Date());
         Gost gost = null;
        boravak.setGost(gost);
         
+       s.save(boravak);
         s.getTransaction().commit();
                 
              //   System.out.println(s.getMetamodel().getEntities().size());

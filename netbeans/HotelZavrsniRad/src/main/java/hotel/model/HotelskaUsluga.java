@@ -18,7 +18,8 @@ import javax.persistence.ManyToOne;
 @Entity
 public class HotelskaUsluga implements Serializable {
 
-    
+    @Id
+    private int Id;
     @ManyToOne
     private Boravak boravak;
     @ManyToOne
@@ -26,8 +27,8 @@ public class HotelskaUsluga implements Serializable {
     @ManyToOne
     private Djelatnik djelatnik;
     private BigDecimal kolicina;
-    @Id
     private BigDecimal cijena;
+    
 
     public Boravak getBoravak() {
         return boravak;
