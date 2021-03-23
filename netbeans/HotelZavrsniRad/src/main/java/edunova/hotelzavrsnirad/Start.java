@@ -32,10 +32,18 @@ public class Start {
         Usluga usluga = new Usluga();
         usluga.setCijena(new BigDecimal(23.99));
         usluga.setNaziv("Apartman");
-        usluga.setOpis("Nocenje s doruckom u apartmanu");
-        usluga.setVrsta("Nocenje");
+        usluga.setOpis("Noćenje s doručkom u apartmanu");
+        usluga.setVrsta("Smještaj");
         
         s.save(usluga);
+        
+        Usluga minibar = new Usluga();
+        minibar.setCijena(new BigDecimal(50.00));
+        minibar.setNaziv("Minibar");
+        minibar.setOpis("Mineralna voda");
+        minibar.setVrsta("Hrana i piće");
+        
+        s.save(minibar);
         
        Djelatnik djelatnik = new Djelatnik();
        djelatnik.setIme("Ivo");
@@ -56,6 +64,7 @@ public class Start {
        gost.setPrezime("Smith");
        gost.setEmail("john.smithzavrsni@gmail.com");
        
+       
        s.save(gost);
        
        Faker faker = new Faker();
@@ -67,6 +76,7 @@ public class Start {
         g.setPrezime(faker.name().lastName());
         g.setDrzavljanstvo(faker.nation().nationality());
         g.setDatum_rodjenja(faker.date().birthday());
+        g.setEmail(faker.internet().emailAddress());
         
         gosti.add(g);
            
