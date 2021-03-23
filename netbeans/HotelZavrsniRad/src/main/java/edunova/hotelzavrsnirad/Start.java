@@ -17,6 +17,7 @@ import hotel.model.Usluga;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.validation.constraints.Email;
 /**
  *
  * @author Mativel
@@ -60,19 +61,25 @@ public class Start {
        Faker faker = new Faker();
         List<Gost> gosti = new ArrayList<>();
         Gost g;
-        for(int i=0; i>50; i++ );
+        for(int i=0; i<50; i++) {
         g = new Gost();
         g.setIme(faker.name().firstName());
         g.setPrezime(faker.name().lastName());
-        gosti.add(g);
+        g.setDrzavljanstvo(faker.nation().nationality());
+        g.setDatum_rodjenja(faker.date().birthday());
         
+        gosti.add(g);
+           
         s.save(g);
-      
+        }
+        
         s.getTransaction().commit();
                 
              //   System.out.println(s.getMetamodel().getEntities().size());
 
         
         
+    
     }
+
 }
