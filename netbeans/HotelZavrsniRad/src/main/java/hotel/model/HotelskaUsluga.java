@@ -8,6 +8,7 @@ package hotel.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -18,8 +19,9 @@ import javax.persistence.ManyToOne;
 @Entity
 public class HotelskaUsluga implements Serializable {
 
-    @Id
-    private int Id;
+    @Id 
+    @GeneratedValue
+    private int id;
     @ManyToOne
     private Boravak boravak;
     @ManyToOne

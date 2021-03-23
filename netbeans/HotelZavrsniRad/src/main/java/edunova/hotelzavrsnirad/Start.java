@@ -5,6 +5,7 @@
  */
 package edunova.hotelzavrsnirad;
 
+import com.github.javafaker.Faker;
 import hotel.model.Boravak;
 import hotel.model.Djelatnik;
 import hotel.model.Gost;
@@ -12,10 +13,10 @@ import hotel.util.HibernateUtil;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import java.math.BigDecimal;
-import hotel.model.HotelskaUsluga;
 import hotel.model.Usluga;
-import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 /**
  *
  * @author Mativel
@@ -45,10 +46,28 @@ public class Start {
        Boravak boravak = new Boravak();
        boravak.setDatum_dolaska(new Date());
        boravak.setDatum_odlaska(new Date());
-        Gost gost = null;
-       boravak.setGost(gost);
+       
         
        s.save(boravak);
+       
+       Gost gost = new Gost();
+       gost.setIme("John");
+       gost.setPrezime("Smith");
+       gost.setEmail("john.smithzavrsni@gmail.com");
+       
+       s.save(gost);
+       
+       Faker faker = new Faker();
+        List<Gost> gosti = new ArrayList<>();
+        Gost g;
+        for(int i=0; i>50; i++ );
+        g = new Gost();
+        g.setIme(faker.name().firstName());
+        g.setPrezime(faker.name().lastName());
+        gosti.add(g);
+        
+        s.save(g);
+      
         s.getTransaction().commit();
                 
              //   System.out.println(s.getMetamodel().getEntities().size());
