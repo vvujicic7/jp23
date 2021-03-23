@@ -4,10 +4,13 @@
   <NonVisualComponents>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="Programi">
+        <Menu class="javax.swing.JMenu" name="jmProgrami">
           <Properties>
             <Property name="text" type="java.lang.String" value="Programi"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmProgramiActionPerformed"/>
+          </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
@@ -31,6 +34,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Grupe"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem4ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
               <Properties>
@@ -39,12 +45,12 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="Onama">
+        <Menu class="javax.swing.JMenu" name="jmOnama">
           <Properties>
             <Property name="text" type="java.lang.String" value="O nama"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="OnamaMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jmOnamaMouseClicked"/>
           </Events>
         </Menu>
       </SubComponents>
@@ -74,7 +80,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="Vrijeme" pref="390" max="32767" attributes="0"/>
+              <Component id="jToolBar1" pref="390" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -83,13 +89,13 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="253" max="32767" attributes="0"/>
-              <Component id="Vrijeme" min="-2" pref="25" max="-2" attributes="0"/>
+              <Component id="jToolBar1" min="-2" pref="25" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JToolBar" name="Vrijeme">
+    <Container class="javax.swing.JToolBar" name="jToolBar1">
       <Properties>
         <Property name="rollover" type="boolean" value="true"/>
       </Properties>
