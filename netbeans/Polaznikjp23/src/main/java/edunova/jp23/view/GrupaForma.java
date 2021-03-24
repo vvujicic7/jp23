@@ -5,6 +5,7 @@
  */
 package edunova.jp23.view;
 
+import com.github.lgooddatepicker.components.DatePickerSettings;
 import edunova.jp23.controller.ObradaGrupa;
 import edunova.jp23.controller.ObradaPredavac;
 import edunova.jp23.controller.ObradaSmjer;
@@ -12,6 +13,8 @@ import edunova.jp23.model.Grupa;
 import edunova.jp23.model.Polaznik;
 import edunova.jp23.model.Predavac;
 import edunova.jp23.model.Smjer;
+import java.time.ZoneId;
+import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
@@ -32,6 +35,7 @@ public class GrupaForma extends javax.swing.JFrame {
         ucitajEntitete();
         ucitajSmjerove();
         ucitajPredavacee();
+        prilagodiDpDatumPocetka();
     }
 
     /**
@@ -53,6 +57,13 @@ public class GrupaForma extends javax.swing.JFrame {
         cmbPredavaci = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstPolazniciNaGrupi = new javax.swing.JList<>();
+        dpDatumPocetka = new com.github.lgooddatepicker.components.DatePicker();
+        jLabel3 = new javax.swing.JLabel();
+        slBrojPolaznika = new javax.swing.JSlider();
+        jLabel5 = new javax.swing.JLabel();
+        lblPolaznika = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        lstPolazniciUBazi = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -72,6 +83,21 @@ public class GrupaForma extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(lstPolazniciNaGrupi);
 
+        jLabel3.setText("Datum početka");
+
+        slBrojPolaznika.setMaximum(20);
+        slBrojPolaznika.setMinimum(1);
+        slBrojPolaznika.setValue(12);
+        slBrojPolaznika.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                slBrojPolaznikaStateChanged(evt);
+            }
+        });
+
+        jLabel5.setText("Maksimalno polaznika: ");
+
+        jScrollPane3.setViewportView(lstPolazniciUBazi);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,16 +105,40 @@ public class GrupaForma extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(cmbSmjerovi, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNaziv)
-                    .addComponent(cmbPredavaci, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE))
-                .addContainerGap(340, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel4)
+                                .addComponent(cmbSmjerovi, 0, 241, Short.MAX_VALUE)
+                                .addComponent(txtNaziv)
+                                .addComponent(cmbPredavaci, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel1))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(dpDatumPocetka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblPolaznika)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(slBrojPolaznika, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(128, 128, 128))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,19 +149,34 @@ public class GrupaForma extends javax.swing.JFrame {
                         .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
-                        .addComponent(jLabel1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dpDatumPocetka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbSmjerovi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbPredavaci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)))
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbSmjerovi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(lblPolaznika))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmbPredavaci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(slBrojPolaznika, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
+                        .addGap(34, 34, 34)))
                 .addContainerGap())
         );
 
@@ -152,11 +217,28 @@ public class GrupaForma extends javax.swing.JFrame {
             }
         }
         
+        if(g.getDatumPocetka()!=null) {
+        dpDatumPocetka.setDate(g.getDatumPocetka().toInstant()
+        .atZone(ZoneId.systemDefault()).toLocalDate());
+        }else{
+            dpDatumPocetka.setDate(null);
+        }
+        
+        if(g.getBrojPolaznika()!=null) {
+            slBrojPolaznika.setValue(g.getBrojPolaznika());
+        }else{
+            slBrojPolaznika.setValue(0);
+        }
+        
         
         DefaultListModel<Polaznik> m = new DefaultListModel<>();
         m.addAll(g.getPolaznici());
         lstPolazniciNaGrupi.setModel(m);
     }//GEN-LAST:event_lstEntitetiValueChanged
+
+    private void slBrojPolaznikaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_slBrojPolaznikaStateChanged
+      lblPolaznika.setText(String.valueOf(slBrojPolaznika.getValue()));
+    }//GEN-LAST:event_slBrojPolaznikaStateChanged
 
     private void ucitajEntitete() {
         DefaultListModel<Grupa> m = new DefaultListModel<>();
@@ -215,13 +297,29 @@ public class GrupaForma extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Predavac> cmbPredavaci;
     private javax.swing.JComboBox<Smjer> cmbSmjerovi;
+    private com.github.lgooddatepicker.components.DatePicker dpDatumPocetka;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblPolaznika;
     private javax.swing.JList<Grupa> lstEntiteti;
     private javax.swing.JList<Polaznik> lstPolazniciNaGrupi;
+    private javax.swing.JList<Polaznik> lstPolazniciUBazi;
+    private javax.swing.JSlider slBrojPolaznika;
     private javax.swing.JTextField txtNaziv;
     // End of variables declaration//GEN-END:variables
+
+    private void prilagodiDpDatumPocetka() {
+        
+        DatePickerSettings dps= new DatePickerSettings(
+                new Locale("hr","HR"));
+        dps.setFormatForDatesCommonEra("dd.MM.yyyy");
+        dpDatumPocetka.setSettings(dps);
+        
+    }
 }

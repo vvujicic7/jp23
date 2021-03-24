@@ -5,10 +5,15 @@
  */
 package edunova.jp23.util;
 
+import com.github.javafaker.Faker;
+import edunova.jp23.controller.ObradaPolaznik;
+import edunova.jp23.model.Polaznik;
 import edunova.jp23.model.Smjer;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -18,7 +23,9 @@ import java.util.Set;
  */
 public class Test {
     
-    public static void main(String[] args) {
+}
+        
+        
         
        /*
         Set<String> set = new HashSet<>();
@@ -55,16 +62,4 @@ public class Test {
          }
         */
        
-        Smjer s = new Smjer();
-        s.setId(1L);
-        s.setNaziv("Java");
-        
-        Smjer z = new Smjer();
-        z.setId(1L);
-        z.setNaziv("Java");
-        
-        System.out.println(s.hashCode());
-        System.out.println(z.hashCode());
-    }
-    
-}
+     

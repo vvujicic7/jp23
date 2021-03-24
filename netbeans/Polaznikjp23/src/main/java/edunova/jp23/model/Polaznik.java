@@ -7,6 +7,7 @@ package edunova.jp23.model;
 
 import javax.persistence.Entity;
 
+
 /**
  *
  * @author Mativel
