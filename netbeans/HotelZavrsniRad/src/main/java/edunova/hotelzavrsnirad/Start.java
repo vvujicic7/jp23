@@ -32,18 +32,26 @@ public class Start {
         Usluga usluga = new Usluga();
         usluga.setCijena(new BigDecimal(23.99));
         usluga.setNaziv("Apartman");
-        usluga.setOpis("Noćenje s doručkom u apartmanu");
+        usluga.setOpis("Noćenje s doručkom");
         usluga.setVrsta("Smještaj");
         
         s.save(usluga);
         
         Usluga minibar = new Usluga();
-        minibar.setCijena(new BigDecimal(50.00));
+        minibar.setCijena(new BigDecimal(50.44));
         minibar.setNaziv("Minibar");
         minibar.setOpis("Mineralna voda");
         minibar.setVrsta("Hrana i piće");
         
         s.save(minibar);
+        
+        Usluga izlet = new Usluga();
+        izlet.setCijena(new BigDecimal(125.55));
+        izlet.setNaziv("Izlet");
+        izlet.setOpis("Panorama grada");
+        izlet.setVrsta("Dodatne usluge");
+        
+        s.save(izlet);
         
        Djelatnik djelatnik = new Djelatnik();
        djelatnik.setIme("Ivo");
