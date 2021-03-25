@@ -6,8 +6,6 @@
 package hotel.model;
 
 import javax.persistence.Entity;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -32,6 +30,8 @@ public class Djelatnik extends Osoba{
         this.lozinka = lozinka;
     }
     
-    
+    public String getImePrezime(){
+        return getIme() + " " + getPrezime();
+    }
     
 }

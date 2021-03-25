@@ -6,6 +6,8 @@
 package hotel.model;
 
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.Email;
+
 
 /**
  *
@@ -17,6 +19,16 @@ public abstract class Osoba extends Entitet{
     private String ime;
     private String prezime;
     private String Oib;
+    @Email(message = "email nije ispravan")
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getOib() {
         return Oib;

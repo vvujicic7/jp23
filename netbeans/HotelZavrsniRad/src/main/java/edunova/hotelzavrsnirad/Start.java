@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.validation.constraints.Email;
+import org.mindrot.jbcrypt.BCrypt;
 /**
  *
  * @author Mativel
@@ -55,10 +56,12 @@ public class Start {
         s.save(izlet);
         
        Djelatnik djelatnik = new Djelatnik();
-       djelatnik.setIme("Ivo");
+       djelatnik.setIme("Velimir");
        djelatnik.setOib("63791759793");
-       djelatnik.setPrezime("Javic");
-       djelatnik.setLozinka("1234");
+       djelatnik.setPrezime("Vujicic");
+       djelatnik.setEmail("velimir.vujicic@hotmail.com");
+       djelatnik.setLozinka("edunova");
+       djelatnik.setLozinka(BCrypt.hashpw("edunova", BCrypt.gensalt()));
        s.save(djelatnik);
        
        Boravak boravak = new Boravak();

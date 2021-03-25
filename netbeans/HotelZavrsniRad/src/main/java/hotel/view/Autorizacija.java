@@ -140,30 +140,43 @@ public class Autorizacija extends javax.swing.JFrame {
 
 private void prijaviSe() {
         
-    try{
-            if(txtEmail.getText().isEmpty()){
-                obradiGresku(txtEmail, "Obavezno ime!");
-                return;
-            }
-            if(pasLozinka.getPassword().length==0){
-                obradiGresku(pasLozinka, "Obavezno šifra!");
-                return;
-            }
-            ObradaDjelatnik oo = new ObradaDjelatnik();
-            Djelatnik o = oo.autoriziraj(txtEmail.getText(), pasLozinka.getPassword());
-            if(o==null){
-                obradiGresku(pasLozinka, "Ime i šifra ne odgovaraju");
-                return;
-            }
-            Aplikacija.djelatnik=o;
-            new Izbornik().setVisible(true);
-            dispose();
-        }catch(NoResultException e){
-            obradiGresku(txtEmail, "Nepostojeći djelatnik!");
+        
+        
+        if(txtEmail.getText().isEmpty()){
+            obradiGresku(txtEmail, "Obavezno email");
+         
+            return;
         }
         
-}
+        try {
+            InternetAddress email=new InternetAddress(txtEmail.getText());
+            email.validate();
+        } catch (AddressException e) {
+            obradiGresku(txtEmail, "Email nije ispravan");
+           
+            return;
+        }
         
+      
+        if(pasLozinka.getPassword().length==0){
+            obradiGresku(pasLozinka, "Obavezno lozinka");
+          
+            return;
+        }
+        
+        ObradaDjelatnik oo = new ObradaDjelatnik();
+        Djelatnik o = oo.autoriziraj(txtEmail.getText(), pasLozinka.getPassword());
+        
+        if(o==null){
+            obradiGresku(pasLozinka, "Email i lozinka ne odgovaraju");
+            return;
+        }
+        
+                Aplikacija.djelatnik=o;
+        new Izbornik().setVisible(true);
+        dispose();
+        
+    }
     
     private void obradiGresku(JComponent komponenta, String poruka){
         komponenta.requestFocus();

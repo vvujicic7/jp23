@@ -18,16 +18,16 @@ public class ObradaDjelatnik extends ObradaOsoba<Djelatnik>{
 
     /**
      * Autorizacija operatera na bazi
-     * @param email email operatera kojeg želimo autorizirati
+     * @param email
      * @param lozinka plain lozinka kao char[] koju je unio korisnik na formi
      * @return Instancu klase Operater ako operater s danim emailom postoji i lozinka
      * odgovara. Vraća null ukoliko operater ne postoji u bazi ili lozinka ne odgovara
      */
-    public Djelatnik autoriziraj(String ime, char[] lozinka){
+    public Djelatnik autoriziraj(String email, char[] lozinka){
        
         Djelatnik djelatnik = (Djelatnik)session
-                .createQuery("from Djelatnik o where o.ime=:ime")
-                .setParameter("ime", ime)
+                .createQuery("from Djelatnik o where o.email=:email")
+                .setParameter("email", email)
                 .getSingleResult();
         if(djelatnik==null){
             return null;
@@ -36,10 +36,12 @@ public class ObradaDjelatnik extends ObradaOsoba<Djelatnik>{
     }
     
     
+    @Override
     public List<Djelatnik> getPodaci() {
         return session.createQuery("from Djelatnik").list();
     }
 
+    @Override
     protected void kontrolaDelete() throws EdunovaException {
     
     }
