@@ -25,8 +25,17 @@ public class HotelskaUsluga extends Entitet {
     private Djelatnik djelatnik;
     private BigDecimal kolicina;
     private BigDecimal cijena;
-    
+    private String naziv;
 
+    public String getNaziv() {
+        return naziv;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+    }
+    
+    
     public Boravak getBoravak() {
         return boravak;
     }
@@ -66,6 +75,10 @@ public class HotelskaUsluga extends Entitet {
     public void setCijena(BigDecimal cijena) {
         this.cijena = cijena;
     }
+
+    
+
+    
     
     
 }

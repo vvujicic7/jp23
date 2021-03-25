@@ -6,7 +6,13 @@
 package hotel.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -16,9 +22,23 @@ import javax.persistence.Entity;
 public class Usluga extends Entitet {
     
     private String vrsta;
+    @NotNull(message = "Obavezno postaviti naziv (naziv je null)")
+    @NotEmpty(message = "Naziv ne može biti prazan")
+    @Size(min=5, max=50, message = "Naziv mora biti između 5 i 50 znakova")
     private String naziv;
     private String opis;
     private BigDecimal cijena;
+    
+    @OneToMany(mappedBy = "usluga")
+    private List<HotelskaUsluga> hotelskeUsluge = new ArrayList<>();
+
+    public List<HotelskaUsluga> getHotelskeUsluge() {
+        return hotelskeUsluge;
+    }
+
+    public void setHotelskeUsluge(List<HotelskaUsluga> hotelskeUsluge) {
+        this.hotelskeUsluge = hotelskeUsluge;
+    }
 
     public String getVrsta() {
         return vrsta;
@@ -51,6 +71,7 @@ public class Usluga extends Entitet {
     public void setCijena(BigDecimal cijena) {
         this.cijena = cijena;
     }
-    
+
+        
     
 }
