@@ -5,10 +5,16 @@
  */
 package hotel.view;
 
+import hotel.model.Djelatnik;
+
 /**
  *
  * @author Mativel
  */
 public class Aplikacija {
+    
+    public static final String NASLOV_APP="Edunova APP";
+    
+    public static Djelatnik djelatnik;
     
 }

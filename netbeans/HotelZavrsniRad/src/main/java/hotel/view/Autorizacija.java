@@ -5,6 +5,14 @@
  */
 package hotel.view;
 
+import hotel.controller.ObradaDjelatnik;
+import hotel.model.Djelatnik;
+import java.awt.event.KeyEvent;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.swing.JComponent;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Mativel
@@ -16,6 +24,9 @@ public class Autorizacija extends javax.swing.JFrame {
      */
     public Autorizacija() {
         initComponents();
+        setTitle(Aplikacija.NASLOV_APP);
+        txtEmail.setText("velimir.vujicic@hotmail.com");
+        pasLozinka.setText("edunova");
     }
 
     /**
@@ -38,11 +49,28 @@ public class Autorizacija extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AutorizacijaHotel.png"))); // NOI18N
 
+        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtEmailKeyReleased(evt);
+            }
+        });
+
         lblEmail.setText("Email");
 
         lblLozinka.setText("Lozinka");
 
+        pasLozinka.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pasLozinkaKeyReleased(evt);
+            }
+        });
+
         btnPrijava.setText("Prijava");
+        btnPrijava.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrijavaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,40 +108,25 @@ public class Autorizacija extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Autorizacija.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Autorizacija.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Autorizacija.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Autorizacija.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void txtEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyReleased
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER
+                && !txtEmail.getText().isEmpty()) {
+            pasLozinka.requestFocus();
         }
-        //</editor-fold>
+    }//GEN-LAST:event_txtEmailKeyReleased
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Autorizacija().setVisible(true);
-            }
-        });
-    }
+    private void pasLozinkaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pasLozinkaKeyReleased
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER &&
+                pasLozinka.getPassword().length>0) {
+            prijaviSe();
+        }
+    }//GEN-LAST:event_pasLozinkaKeyReleased
+
+    private void btnPrijavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrijavaActionPerformed
+        prijaviSe();
+    }//GEN-LAST:event_btnPrijavaActionPerformed
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPrijava;
@@ -123,4 +136,56 @@ public class Autorizacija extends javax.swing.JFrame {
     private javax.swing.JPasswordField pasLozinka;
     private javax.swing.JTextField txtEmail;
     // End of variables declaration//GEN-END:variables
+
+private void prijaviSe() {
+        
+        // u view radim kontrole
+        
+        if(txtEmail.getText().isEmpty()){
+            obradiGresku(txtEmail, "Obavezno email");
+         //   JOptionPane.showMessageDialog(rootPane, "Obavezno email");
+         //   txtEmail.requestFocus();
+            return;
+        }
+        
+        try {
+            InternetAddress email=new InternetAddress(txtEmail.getText());
+            email.validate();
+        } catch (AddressException e) {
+            obradiGresku(txtEmail, "Email nije ispravan");
+            //JOptionPane.showMessageDialog(rootPane, "Email nije ispravan");
+           // txtEmail.requestFocus();
+            return;
+        }
+        
+      
+        if(pasLozinka.getPassword().length==0){
+            obradiGresku(pasLozinka, "Obavezno lozinka");
+           // JOptionPane.showMessageDialog(rootPane, "Obavezno lozinka");
+          //  pswLozinka.requestFocus();
+            return;
+        }
+        
+        // znam kako je postavljen email i loznika
+        ObradaDjelatnik oo = new ObradaDjelatnik();
+        Djelatnik o = oo.autoriziraj(txtEmail.getText(), pasLozinka.getPassword());
+        
+        if(o==null){
+            obradiGresku(pasLozinka, "Email i lozinka ne odgovaraju");
+            return;
+        }
+        // imamo problem primjene objekta pod ingerencijom Hibernate
+        // jer automatski sprema u bazu -  it will be saved automatically.
+        // https://stackoverflow.com/questions/30955910/if-i-modify-a-hibernate-entity-after-doing-a-save-when-i-commit-would-the-chan
+        //o.setLozinka(null);
+        Aplikacija.djelatnik=o;
+        new Izbornik().setVisible(true);
+        dispose();
+        
+    }
+    
+    private void obradiGresku(JComponent komponenta, String poruka){
+        komponenta.requestFocus();
+        JOptionPane.showMessageDialog(rootPane, poruka);
+    }
 }

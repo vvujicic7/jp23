@@ -14,6 +14,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import java.math.BigDecimal;
 import hotel.model.Usluga;
+import hotel.view.Autorizacija;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -92,6 +93,8 @@ public class Start {
         }
         
         s.getTransaction().commit();
+        
+        new Autorizacija().setVisible(true);
                 
              //   System.out.println(s.getMetamodel().getEntities().size());
 

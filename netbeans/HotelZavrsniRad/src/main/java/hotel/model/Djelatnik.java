@@ -6,6 +6,8 @@
 package hotel.model;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -17,7 +19,11 @@ public class Djelatnik extends Osoba{
     private String ime;
     private String prezime;
     private String oib;
+    @NotNull(message = "lozinka ne prazna")
+    @NotEmpty(message = "lozinka ne prazna")
+    private String lozinka;
 
+    
     public String getIme() {
         return ime;
     }
@@ -40,6 +46,16 @@ public class Djelatnik extends Osoba{
 
     public void setOib(String oib) {
         this.oib = oib;
+    }
+
+    public String getLozinka() {
+        return lozinka;
+    }
+    public void setLozinka(String lozinka) {
+        this.lozinka = lozinka;
+    }
+    public String getImePrezime(){
+        return getIme() + " " + getPrezime();
     }
     
     

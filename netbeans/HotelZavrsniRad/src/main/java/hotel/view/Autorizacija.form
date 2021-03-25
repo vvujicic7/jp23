@@ -66,6 +66,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtEmail">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtEmailKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblEmail">
       <Properties>
@@ -78,11 +81,17 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="pasLozinka">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="pasLozinkaKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnPrijava">
       <Properties>
         <Property name="text" type="java.lang.String" value="Prijava"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrijavaActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
