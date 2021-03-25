@@ -58,7 +58,7 @@ public class Start {
        djelatnik.setIme("Ivo");
        djelatnik.setOib("63791759793");
        djelatnik.setPrezime("Javic");
-       
+       djelatnik.setLozinka("1234");
        s.save(djelatnik);
        
        Boravak boravak = new Boravak();

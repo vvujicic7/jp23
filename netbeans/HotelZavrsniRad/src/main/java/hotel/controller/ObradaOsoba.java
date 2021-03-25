@@ -26,6 +26,7 @@ public abstract class ObradaOsoba<T extends Osoba> extends Obrada<T>{
     private void kontrolaOIB() throws EdunovaException{
         if(!oibValjan(entitet.getOib())){
             throw new EdunovaException("OIB nije formalno ispravan");
+        } else {
         }
     }
     
@@ -69,4 +70,4 @@ public abstract class ObradaOsoba<T extends Osoba> extends Obrada<T>{
     
 }
     
-}
+

@@ -23,11 +23,11 @@ public class ObradaDjelatnik extends ObradaOsoba<Djelatnik>{
      * @return Instancu klase Operater ako operater s danim emailom postoji i lozinka
      * odgovara. Vraća null ukoliko operater ne postoji u bazi ili lozinka ne odgovara
      */
-    public Djelatnik autoriziraj(String email, char[] lozinka){
+    public Djelatnik autoriziraj(String ime, char[] lozinka){
        
         Djelatnik djelatnik = (Djelatnik)session
-                .createQuery("from Djelatnik o where o.email=:email")
-                .setParameter("email", email)
+                .createQuery("from Djelatnik o where o.ime=:ime")
+                .setParameter("ime", ime)
                 .getSingleResult();
         if(djelatnik==null){
             return null;

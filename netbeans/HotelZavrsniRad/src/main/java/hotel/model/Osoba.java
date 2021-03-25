@@ -16,6 +16,15 @@ public abstract class Osoba extends Entitet{
     
     private String ime;
     private String prezime;
+    private String Oib;
+
+    public String getOib() {
+        return Oib;
+    }
+
+    public void setOib(String Oib) {
+        this.Oib = Oib;
+    }
 
     public String getIme() {
         return ime;

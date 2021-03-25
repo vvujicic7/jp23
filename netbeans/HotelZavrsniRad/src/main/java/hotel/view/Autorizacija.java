@@ -10,6 +10,7 @@ import hotel.model.Djelatnik;
 import java.awt.event.KeyEvent;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.persistence.NoResultException;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
@@ -139,50 +140,30 @@ public class Autorizacija extends javax.swing.JFrame {
 
 private void prijaviSe() {
         
-        // u view radim kontrole
-        
-        if(txtEmail.getText().isEmpty()){
-            obradiGresku(txtEmail, "Obavezno email");
-         //   JOptionPane.showMessageDialog(rootPane, "Obavezno email");
-         //   txtEmail.requestFocus();
-            return;
+    try{
+            if(txtEmail.getText().isEmpty()){
+                obradiGresku(txtEmail, "Obavezno ime!");
+                return;
+            }
+            if(pasLozinka.getPassword().length==0){
+                obradiGresku(pasLozinka, "Obavezno šifra!");
+                return;
+            }
+            ObradaDjelatnik oo = new ObradaDjelatnik();
+            Djelatnik o = oo.autoriziraj(txtEmail.getText(), pasLozinka.getPassword());
+            if(o==null){
+                obradiGresku(pasLozinka, "Ime i šifra ne odgovaraju");
+                return;
+            }
+            Aplikacija.djelatnik=o;
+            new Izbornik().setVisible(true);
+            dispose();
+        }catch(NoResultException e){
+            obradiGresku(txtEmail, "Nepostojeći djelatnik!");
         }
         
-        try {
-            InternetAddress email=new InternetAddress(txtEmail.getText());
-            email.validate();
-        } catch (AddressException e) {
-            obradiGresku(txtEmail, "Email nije ispravan");
-            //JOptionPane.showMessageDialog(rootPane, "Email nije ispravan");
-           // txtEmail.requestFocus();
-            return;
-        }
+}
         
-      
-        if(pasLozinka.getPassword().length==0){
-            obradiGresku(pasLozinka, "Obavezno lozinka");
-           // JOptionPane.showMessageDialog(rootPane, "Obavezno lozinka");
-          //  pswLozinka.requestFocus();
-            return;
-        }
-        
-        // znam kako je postavljen email i loznika
-        ObradaDjelatnik oo = new ObradaDjelatnik();
-        Djelatnik o = oo.autoriziraj(txtEmail.getText(), pasLozinka.getPassword());
-        
-        if(o==null){
-            obradiGresku(pasLozinka, "Email i lozinka ne odgovaraju");
-            return;
-        }
-        // imamo problem primjene objekta pod ingerencijom Hibernate
-        // jer automatski sprema u bazu -  it will be saved automatically.
-        // https://stackoverflow.com/questions/30955910/if-i-modify-a-hibernate-entity-after-doing-a-save-when-i-commit-would-the-chan
-        //o.setLozinka(null);
-        Aplikacija.djelatnik=o;
-        new Izbornik().setVisible(true);
-        dispose();
-        
-    }
     
     private void obradiGresku(JComponent komponenta, String poruka){
         komponenta.requestFocus();
