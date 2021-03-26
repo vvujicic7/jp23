@@ -23,7 +23,32 @@ import java.util.Set;
  */
 public class Test {
     
+    public static void main(String[] args) {
+        
+       Faker faker = new Faker();
+        ObradaPolaznik s = new ObradaPolaznik();
+        Polaznik p;
+        for(int i=0;i<1;i++){
+            p=new Polaznik();
+            p.setIme(faker.name().firstName());
+            p.setPrezime(faker.name().lastName());
+            p.setOib(EdunovaUtil.getOIB());
+            p.setEmail(faker.internet().emailAddress());
+            System.out.println(i + ": " + p.getOib());
+            
+            s.setEntitet(p);
+            try {
+                s.create();
+            } catch (EdunovaException e) {
+                System.out.println(e.getPoruka());
+            }
+
+        }
+    }
+    
 }
+
+
         
         
         
