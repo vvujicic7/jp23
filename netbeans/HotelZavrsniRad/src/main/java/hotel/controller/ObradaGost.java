@@ -21,8 +21,20 @@ public class ObradaGost extends ObradaOsoba<Gost>{
     }
 
     @Override
+    protected void kontrolaCreate() throws EdunovaException {
+            
+    }
+    
+    @Override
+    protected void kontrolaUpdate() throws EdunovaException {
+        
+    }
+    
+    @Override
     protected void kontrolaDelete() throws EdunovaException {
         
     }
     
+    
+
 }
