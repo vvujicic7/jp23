@@ -92,6 +92,11 @@ public class Izbornik extends javax.swing.JFrame {
         jmProgrami.add(jMenuItem2);
 
         jMenuItem3.setText("Usluge");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jmProgrami.add(jMenuItem3);
 
         jMenuItem4.setText("Djelatnici");
@@ -129,7 +134,7 @@ public class Izbornik extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmProgramiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmProgramiActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jmProgramiActionPerformed
 
     private void jmOnamaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmOnamaMouseClicked
@@ -139,6 +144,10 @@ public class Izbornik extends javax.swing.JFrame {
                 "© " + Aplikacija.Velimir + 
                         " 2020 - " + df.format(d));
     }//GEN-LAST:event_jmOnamaMouseClicked
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        new UslugaForma().setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     
 

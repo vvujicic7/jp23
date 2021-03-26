@@ -5,17 +5,29 @@
  */
 package hotel.view;
 
+import hotel.controller.ObradaUsluga;
+import hotel.model.Usluga;
+import hotel.util.EdunovaException;
+import java.math.BigDecimal;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Mativel
  */
 public class UslugaForma extends javax.swing.JFrame {
+    
+    private ObradaUsluga obrada;
 
     /**
      * Creates new form UslugaForma
      */
     public UslugaForma() {
         initComponents();
+        obrada = new ObradaUsluga();
+        setTitle(Aplikacija.Velimir + " Usluge");
+        ucitaj();
     }
 
     /**
@@ -28,7 +40,7 @@ public class UslugaForma extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        lstUsluge = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         txtNaziv = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -43,7 +55,13 @@ public class UslugaForma extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jScrollPane1.setViewportView(jList1);
+        lstUsluge.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstUsluge.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstUslugeValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(lstUsluge);
 
         jLabel1.setText("Naziv");
 
@@ -54,10 +72,25 @@ public class UslugaForma extends javax.swing.JFrame {
         jLabel4.setText("Cijena");
 
         btnDodaj.setText("Dodaj");
+        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajActionPerformed(evt);
+            }
+        });
 
         btnPromjeni.setText("Promjeni");
+        btnPromjeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromjeniActionPerformed(evt);
+            }
+        });
 
         btnObrisi.setText("Obriši");
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,40 +150,85 @@ public class UslugaForma extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UslugaForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UslugaForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UslugaForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UslugaForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void lstUslugeValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstUslugeValueChanged
+        if (evt.getValueIsAdjusting()) {
+            return;
         }
-        //</editor-fold>
+       
+        if (lstUsluge.getSelectedValue() == null) {
+            return;
+        }
+        
+         obrada.setEntitet(lstUsluge.getSelectedValue());
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new UslugaForma().setVisible(true);
-            }
-        });
-    }
+
+        // ovo se može zamijeniti tkz. Binding
+        txtNaziv.setText(obrada.getEntitet().getNaziv());
+        if (obrada.getEntitet().getVrsta()!= null) {
+            txtVrsta.setText(obrada.getEntitet().getVrsta().toString());
+        } else {
+            txtVrsta.setText("");
+        }
+        try {
+            txtCijena.setText(obrada.getEntitet().getCijena().toString());
+        } catch (Exception e) {
+            txtCijena.setText("");
+        }
+
+        try {
+            txtOpis.setText(obrada.getEntitet().getOpis().toString());
+        } catch (Exception e) {
+            txtOpis.setText("");
+        }
+    }//GEN-LAST:event_lstUslugeValueChanged
+
+    private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
+        obrada.setEntitet(new Usluga());
+        postaviVrijednostiNaEntitet();
+
+        try {
+            obrada.create();
+            pocisti();
+            ucitaj(); //nije optimizirano. Bolje bi bilo samo taj novi dodati u listu
+        } catch (EdunovaException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnDodajActionPerformed
+
+    private void btnPromjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniActionPerformed
+        if (obrada.getEntitet()==null || 
+                obrada.getEntitet().getId() == null) {
+            JOptionPane.showMessageDialog(rootPane, "Prvo odaberite stavku");
+            return;
+        }
+        postaviVrijednostiNaEntitet();
+
+        try {
+            obrada.update();
+            pocisti();
+            ucitaj();
+        } catch (EdunovaException e) {
+            JOptionPane.showMessageDialog(rootPane, e.getPoruka());
+        }
+    }//GEN-LAST:event_btnPromjeniActionPerformed
+
+    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+        if (obrada.getEntitet()==null || 
+                obrada.getEntitet().getId() == null) {
+            JOptionPane.showMessageDialog(rootPane, "Prvo odaberite stavku");
+            return;
+        }
+
+        try {
+            obrada.delete();
+            pocisti();
+            ucitaj();
+        } catch (EdunovaException e) {
+            JOptionPane.showMessageDialog(rootPane, e.getPoruka());
+        }
+    }//GEN-LAST:event_btnObrisiActionPerformed
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
@@ -160,11 +238,40 @@ public class UslugaForma extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<Usluga> lstUsluge;
     private javax.swing.JTextField txtCijena;
     private javax.swing.JTextField txtNaziv;
     private javax.swing.JTextField txtOpis;
     private javax.swing.JTextField txtVrsta;
     // End of variables declaration//GEN-END:variables
+
+    private void ucitaj() {
+        DefaultListModel<Usluga> m = new DefaultListModel<>();
+
+        m.addAll(obrada.getPodaci());
+
+        lstUsluge.setModel(m);
+    }
+
+    private void postaviVrijednostiNaEntitet() {
+        var entitet=obrada.getEntitet();
+        
+        entitet.setNaziv(txtNaziv.getText());
+
+            try {
+            entitet.setCijena(new BigDecimal(txtCijena.getText()));
+        } catch (Exception e) {
+            entitet.setCijena(BigDecimal.ZERO);
+        }
+
+    }
+
+    private void pocisti() {
+        txtNaziv.setText("");
+        txtCijena.setText("");
+        txtOpis.setText("");
+        txtVrsta.setText("");
+    
+    }
 }
