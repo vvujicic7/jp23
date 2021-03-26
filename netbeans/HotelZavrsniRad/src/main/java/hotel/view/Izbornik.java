@@ -131,6 +131,7 @@ public class Izbornik extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmProgramiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmProgramiActionPerformed

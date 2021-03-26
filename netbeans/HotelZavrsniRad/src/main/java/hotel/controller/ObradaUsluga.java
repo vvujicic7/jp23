@@ -32,13 +32,15 @@ public class ObradaUsluga extends Obrada<Usluga> {
         List<Usluga> lista = session.createQuery("from Usluga").list();
             session.setCacheMode(CacheMode.IGNORE);
                 return lista;
-        
     }
 
     @Override
     protected void kontrolaCreate() throws EdunovaException {
         kontrolaNaziv();
+        kontrolaVrsta();
+        kontrolaOpis();
         kontrolaCijena();
+        
     }
 
     @Override
@@ -74,8 +76,27 @@ public class ObradaUsluga extends Obrada<Usluga> {
     private void kontrolaCijena() throws EdunovaException {
         if(entitet.getCijena()==null 
                || entitet.getCijena().compareTo(BigDecimal.ZERO)<=0){
-           throw new EdunovaException("Cijen mora biti postavljena i veća od 0");
+           throw new EdunovaException("Cijena mora biti postavljena i veća od 0");
        }
     }
 
+    private void kontrolaVrsta() throws EdunovaException {
+        if(entitet.getVrsta()==null 
+               || entitet.getVrsta().isEmpty()){
+           throw new EdunovaException("Vrsta mora biti unesena");
+       }
     }
+
+    private void kontrolaOpis() throws EdunovaException {
+        if(entitet.getOpis()==null
+                || entitet.getOpis().isEmpty()){
+            throw new EdunovaException("Opis mora biti unesen");
+        }
+    }
+
+    
+
+    
+    }
+
+    

@@ -21,11 +21,12 @@ import javax.validation.constraints.Size;
 @Entity
 public class Usluga extends Entitet {
     
-    private String vrsta;
+    
     @NotNull(message = "Obavezno postaviti naziv (naziv je null)")
     @NotEmpty(message = "Naziv ne može biti prazan")
-    @Size(min=5, max=50, message = "Naziv mora biti između 5 i 50 znakova")
+    @Size(min=3, max=20, message = "Naziv mora biti između 3 i 20 znakova")
     private String naziv;
+    private String vrsta;
     private String opis;
     private BigDecimal cijena;
     
@@ -71,7 +72,15 @@ public class Usluga extends Entitet {
     public void setCijena(BigDecimal cijena) {
         this.cijena = cijena;
     }
-
-        
+    
+    @Override
+    public String toString() {
+        if(getNaziv()==null || getNaziv().trim().isEmpty()){
+            return "[Naziv nije definiran]";
+        }
+        return getNaziv();
+    }
+    
+           
     
 }

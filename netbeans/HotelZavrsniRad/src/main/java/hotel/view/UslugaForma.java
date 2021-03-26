@@ -53,7 +53,7 @@ public class UslugaForma extends javax.swing.JFrame {
         btnPromjeni = new javax.swing.JButton();
         btnObrisi = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lstUsluge.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lstUsluge.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -148,6 +148,7 @@ public class UslugaForma extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void lstUslugeValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstUslugeValueChanged
@@ -264,14 +265,22 @@ public class UslugaForma extends javax.swing.JFrame {
         } catch (Exception e) {
             entitet.setCijena(BigDecimal.ZERO);
         }
-
+            try {
+            entitet.setVrsta(new String(txtVrsta.getText()));
+        } catch (Exception e) {
+            entitet.setVrsta(new String());
+        }
+            try {
+            entitet.setOpis(new String(txtOpis.getText()));
+        } catch (Exception e) {
+            entitet.setOpis(new String());
+        }
     }
 
     private void pocisti() {
         txtNaziv.setText("");
-        txtCijena.setText("");
-        txtOpis.setText("");
         txtVrsta.setText("");
-    
+        txtOpis.setText("");
+        txtCijena.setText("");
     }
 }
