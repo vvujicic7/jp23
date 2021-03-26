@@ -5,6 +5,10 @@
  */
 package hotel.view;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Mativel
@@ -16,6 +20,29 @@ public class Izbornik extends javax.swing.JFrame {
      */
     public Izbornik() {
         initComponents();
+        setTitle(Aplikacija.NASLOV_APP + " " + 
+                Aplikacija.djelatnik.getImePrezime());
+        new Vrijeme().start();
+    }
+
+    private class Vrijeme extends Thread {
+
+        private SimpleDateFormat df = 
+                new SimpleDateFormat("dd. MMMM YYYY. HH:mm:ss");
+        
+        
+        @Override
+        public void run() {
+            while (true) {
+                lblVrijeme.setText(df.format(new Date()));
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                }
+                
+            }
+        }
+        
     }
 
     /**
@@ -106,7 +133,11 @@ public class Izbornik extends javax.swing.JFrame {
     }//GEN-LAST:event_jmProgramiActionPerformed
 
     private void jmOnamaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmOnamaMouseClicked
-        // TODO add your handling code here:
+        Date d = new Date();
+        SimpleDateFormat df = new SimpleDateFormat("YYYY");
+        JOptionPane.showMessageDialog(rootPane, 
+                "© " + Aplikacija.Velimir + 
+                        " 2020 - " + df.format(d));
     }//GEN-LAST:event_jmOnamaMouseClicked
 
     

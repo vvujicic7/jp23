@@ -25,7 +25,7 @@ public class Autorizacija extends javax.swing.JFrame {
      */
     public Autorizacija() {
         initComponents();
-        setTitle(Aplikacija.NASLOV_APP);
+        setTitle(Aplikacija.Velimir);
         txtEmail.setText("velimir.vujicic@hotmail.com");
         pasLozinka.setText("edunova");
     }
@@ -46,7 +46,8 @@ public class Autorizacija extends javax.swing.JFrame {
         pasLozinka = new javax.swing.JPasswordField();
         btnPrijava = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Velimir");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AutorizacijaHotel.png"))); // NOI18N
 
@@ -107,6 +108,7 @@ public class Autorizacija extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyReleased

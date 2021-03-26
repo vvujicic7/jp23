@@ -16,5 +16,6 @@ public class Aplikacija {
     public static final String NASLOV_APP="Edunova APP";
     
     public static Djelatnik djelatnik;
+    static String Velimir="Velimir APP";
     
 }
