@@ -50,9 +50,9 @@ public class GostForma extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtOib = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        drDatumRodjenja = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtDrzavljanstvo = new javax.swing.JTextField();
+        drDatumRodjenja = new com.github.lgooddatepicker.components.DatePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -84,20 +84,23 @@ public class GostForma extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
-                    .addComponent(txtIme)
-                    .addComponent(jLabel2)
-                    .addComponent(txtPrezime)
-                    .addComponent(jLabel3)
-                    .addComponent(txtEmail)
-                    .addComponent(jLabel4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtOib)
-                    .addComponent(jLabel5)
-                    .addComponent(drDatumRodjenja)
-                    .addComponent(jLabel6)
-                    .addComponent(txtDrzavljanstvo, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
-                .addContainerGap(383, Short.MAX_VALUE))
+                    .addComponent(txtDrzavljanstvo)
+                    .addComponent(txtPrezime)
+                    .addComponent(txtEmail)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(txtIme)
+                            .addComponent(drDatumRodjenja, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(354, 354, 354))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,6 +149,8 @@ public class GostForma extends javax.swing.JFrame {
         }
         
          obrada.setEntitet(lstGosti.getSelectedValue());
+         
+         Gost g = obrada.getEntitet();
 
 
         // ovo se može zamijeniti tkz. Binding
@@ -166,12 +171,19 @@ public class GostForma extends javax.swing.JFrame {
         } catch (Exception e) {
             txtOib.setText("");
         }
+        
+        if(g.getDatum_rodjenja()!=null) {
+        drDatumRodjenja.setDate(g.getDatum_rodjenja().toInstant()
+        .atZone(ZoneId.systemDefault()).toLocalDate());
+        }else{
+            drDatumRodjenja.setDate(null);
+        }
     }//GEN-LAST:event_lstGostiValueChanged
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField drDatumRodjenja;
+    private com.github.lgooddatepicker.components.DatePicker drDatumRodjenja;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -187,5 +199,11 @@ public class GostForma extends javax.swing.JFrame {
     private javax.swing.JTextField txtPrezime;
     // End of variables declaration//GEN-END:variables
 
-    
+    private void ucitaj() {
+        DefaultListModel<Gost> m = new DefaultListModel<>();
+
+        m.addAll(obrada.getPodaci());
+
+        lstGosti.setModel(m);
+    }
 }

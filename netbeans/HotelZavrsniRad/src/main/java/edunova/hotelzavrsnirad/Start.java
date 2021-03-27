@@ -90,7 +90,7 @@ public class Start {
         g.setDrzavljanstvo(faker.nation().nationality());
         g.setDatum_rodjenja(faker.date().birthday());
         g.setEmail(faker.internet().emailAddress());
-        
+    
         gosti.add(g);
            
         s.save(g);

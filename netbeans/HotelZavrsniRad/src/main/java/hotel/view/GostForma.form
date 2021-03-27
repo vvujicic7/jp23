@@ -27,21 +27,26 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="209" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtIme" max="32767" attributes="0"/>
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtPrezime" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="txtOib" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                  <Component id="drDatumRodjenja" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtDrzavljanstvo" alignment="0" pref="131" max="32767" attributes="0"/>
+                  <Component id="txtDrzavljanstvo" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtPrezime" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtIme" alignment="0" max="32767" attributes="0"/>
+                          <Component id="drDatumRodjenja" alignment="0" pref="160" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="383" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="354" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -140,14 +145,14 @@
         <Property name="text" type="java.lang.String" value="Datum ro&#x111;enja"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="drDatumRodjenja">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
         <Property name="text" type="java.lang.String" value="Dr&#x17e;avljanstvo"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtDrzavljanstvo">
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.DatePicker" name="drDatumRodjenja">
     </Component>
   </SubComponents>
 </Form>
