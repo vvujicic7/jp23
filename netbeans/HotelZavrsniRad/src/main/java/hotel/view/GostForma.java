@@ -7,7 +7,10 @@ package hotel.view;
 
 import hotel.controller.ObradaGost;
 import hotel.model.Gost;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
@@ -27,7 +30,7 @@ public class GostForma extends javax.swing.JFrame {
         initComponents();
         obrada = new ObradaGost();
         setTitle(Aplikacija.Velimir + " Gosti");
-        
+        ucitaj();
     }
 
     /**
@@ -89,18 +92,18 @@ public class GostForma extends javax.swing.JFrame {
                     .addComponent(txtDrzavljanstvo)
                     .addComponent(txtPrezime)
                     .addComponent(txtEmail)
+                    .addComponent(txtIme)
+                    .addComponent(drDatumRodjenja, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(txtIme)
-                            .addComponent(drDatumRodjenja, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
+                            .addComponent(jLabel6))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(354, 354, 354))
+                .addGap(334, 334, 334))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,6 +140,7 @@ public class GostForma extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void lstGostiValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstGostiValueChanged
@@ -164,6 +168,11 @@ public class GostForma extends javax.swing.JFrame {
             txtEmail.setText(obrada.getEntitet().getEmail().toString());
         } catch (Exception e) {
             txtEmail.setText("");
+        }
+        try {
+            txtDrzavljanstvo.setText(obrada.getEntitet().getDrzavljanstvo().toString());
+        } catch (Exception e) {
+            txtDrzavljanstvo.setText("");
         }
 
         try {
@@ -206,4 +215,47 @@ public class GostForma extends javax.swing.JFrame {
 
         lstGosti.setModel(m);
     }
-}
+    
+    private void postaviVrijednostiNaEntitet() {
+        var entitet=obrada.getEntitet();
+        
+        try {
+            entitet.setIme(new String(txtIme.getText()));
+        } catch (Exception e) {
+            entitet.setIme(new String());
+        }
+        try {
+            entitet.setPrezime(new String(txtPrezime.getText()));
+        } catch (Exception e) {
+            entitet.setPrezime(new String());
+        }
+        try {
+            entitet.setEmail(new String(txtEmail.getText()));
+        } catch (Exception e) {
+            entitet.setEmail(new String());
+        }
+        try {
+            entitet.setOib(new String(txtOib.getText()));
+        } catch (Exception e) {
+            entitet.setOib(new String());
+        }
+        try {
+            entitet.setDrzavljanstvo(new String(txtDrzavljanstvo.getText()));
+        } catch (Exception e) {
+            entitet.setDrzavljanstvo(new String());
+        }
+        try {
+            entitet.setDatum_rodjenja(new Date(drDatumRodjenja.getDateStringOrEmptyString()));
+        } catch (Exception e) {
+            entitet.setDatum_rodjenja(new Date());
+        }
+    }
+        private void pocisti() {
+        txtIme.setText("");
+        txtPrezime.setText("");
+        txtEmail.setText("");
+        txtOib.setText("");
+        drDatumRodjenja.setDate(LocalDate.MIN);
+ 
+        }
+ }

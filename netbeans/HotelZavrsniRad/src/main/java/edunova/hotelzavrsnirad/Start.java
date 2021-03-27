@@ -15,6 +15,7 @@ import org.hibernate.Session;
 import java.math.BigDecimal;
 import hotel.model.Usluga;
 import hotel.view.Autorizacija;
+import hotel.view.GostForma;
 import hotel.view.SplashScreen;
 import java.util.ArrayList;
 import java.util.Date;
@@ -76,6 +77,9 @@ public class Start {
        gost.setIme("John");
        gost.setPrezime("Smith");
        gost.setEmail("john.smithzavrsni@gmail.com");
+       gost.setDrzavljanstvo("English");
+       gost.setOib("13455788525");
+       //gost.setDatum_rodjenja('1980-05-25');
        
        
        s.save(gost);
@@ -100,6 +104,7 @@ public class Start {
         
         new SplashScreen().setVisible(true);
         new Autorizacija().setVisible(true);
+        
                
              //   System.out.println(s.getMetamodel().getEntities().size());
 

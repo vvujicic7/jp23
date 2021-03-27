@@ -76,6 +76,16 @@ public class Gost extends Osoba {
         this.drzavljanstvo = drzavljanstvo;
     }
     
+    @Override
+    public String toString() {
+        if(getIme()==null || getIme().trim().isEmpty()){
+            return "[Naziv nije definiran]";
+        }
+        return getIme();
+    }
+
+    
+    
     
     
 }

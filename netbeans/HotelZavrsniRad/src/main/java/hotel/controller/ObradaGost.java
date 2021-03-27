@@ -34,6 +34,7 @@ public class ObradaGost extends Obrada<Gost>{
     @Override
     protected void kontrolaCreate() throws EdunovaException {
             
+            
     }
     
     @Override
@@ -46,9 +47,7 @@ public class ObradaGost extends Obrada<Gost>{
         
     }
 
-    public void setOsoba(String selectedValue) {
-        
-    }
+    
     
     
 
