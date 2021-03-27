@@ -8,16 +8,27 @@ package hotel.controller;
 import hotel.model.Gost;
 import hotel.util.EdunovaException;
 import java.util.List;
+import org.hibernate.CacheMode;
 
 /**
  *
  * @author Mativel
  */
-public class ObradaGost extends ObradaOsoba<Gost>{
+public class ObradaGost extends Obrada<Gost>{
+    
+    public ObradaGost() {
+        super();
+    }
+    
+    public ObradaGost(Gost g) {
+        super(g);
+    }
 
     @Override
     public List<Gost> getPodaci() {
-        return session.createQuery("from Gost").list();
+        List<Gost> lista = session.createQuery("from Gost").list();
+            session.setCacheMode(CacheMode.IGNORE);
+                return lista;
     }
 
     @Override
@@ -32,6 +43,10 @@ public class ObradaGost extends ObradaOsoba<Gost>{
     
     @Override
     protected void kontrolaDelete() throws EdunovaException {
+        
+    }
+
+    public void setOsoba(String selectedValue) {
         
     }
     

@@ -97,9 +97,7 @@ public abstract class Obrada<T> {
     public void setEntitet(T entitet) {
         this.entitet = entitet;
     }
-
-    
-    
+        
     
     
 }

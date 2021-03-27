@@ -5,8 +5,11 @@
  */
 package hotel.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -20,6 +23,18 @@ public class Gost extends Osoba {
     private String email;
     private Date datum_rodjenja;
     private String drzavljanstvo;
+    
+    @OneToMany(mappedBy = "gost")
+    private List<Boravak> boravci = new ArrayList<>();
+
+    public List<Boravak> getBoravak() {
+        return boravci;
+    }
+
+    public void setBoravci(List<Boravak> boravci) {
+        this.boravci = boravci;
+    }
+    
 
     public String getIme() {
         return ime;

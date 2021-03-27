@@ -18,6 +18,7 @@ import javax.swing.DefaultListModel;
 public class GostForma extends javax.swing.JFrame {
     
     private ObradaGost obrada;
+    
 
     /**
      * Creates new form GostForma
@@ -39,7 +40,7 @@ public class GostForma extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        lstEntiteti = new javax.swing.JList<>();
+        lstGosti = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         txtIme = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -55,13 +56,13 @@ public class GostForma extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        lstEntiteti.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        lstEntiteti.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        lstGosti.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstGosti.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                lstEntitetiValueChanged(evt);
+                lstGostiValueChanged(evt);
             }
         });
-        jScrollPane1.setViewportView(lstEntiteti);
+        jScrollPane1.setViewportView(lstGosti);
 
         jLabel1.setText("Ime");
 
@@ -135,9 +136,37 @@ public class GostForma extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lstEntitetiValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstEntitetiValueChanged
+    private void lstGostiValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstGostiValueChanged
+        if (evt.getValueIsAdjusting()) {
+            return;
+        }
+       
+        if (lstGosti.getSelectedValue() == null) {
+            return;
+        }
         
-    }//GEN-LAST:event_lstEntitetiValueChanged
+         obrada.setEntitet(lstGosti.getSelectedValue());
+
+
+        // ovo se može zamijeniti tkz. Binding
+        txtIme.setText(obrada.getEntitet().getIme());
+        if (obrada.getEntitet().getPrezime()!= null) {
+            txtPrezime.setText(obrada.getEntitet().getPrezime().toString());
+        } else {
+            txtPrezime.setText("");
+        }
+        try {
+            txtEmail.setText(obrada.getEntitet().getEmail().toString());
+        } catch (Exception e) {
+            txtEmail.setText("");
+        }
+
+        try {
+            txtOib.setText(obrada.getEntitet().getOib().toString());
+        } catch (Exception e) {
+            txtOib.setText("");
+        }
+    }//GEN-LAST:event_lstGostiValueChanged
 
     
 
@@ -150,7 +179,7 @@ public class GostForma extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> lstEntiteti;
+    private javax.swing.JList<Gost> lstGosti;
     private javax.swing.JTextField txtDrzavljanstvo;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtIme;
