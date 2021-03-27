@@ -18,7 +18,7 @@ public abstract class Osoba extends Entitet{
     
     private String ime;
     private String prezime;
-    private String Oib;
+    private String oib;
     @Email(message = "email nije ispravan")
     private String email;
 
@@ -31,11 +31,11 @@ public abstract class Osoba extends Entitet{
     }
 
     public String getOib() {
-        return Oib;
+        return oib;
     }
 
-    public void setOib(String Oib) {
-        this.Oib = Oib;
+    public void setOib(String oib) {
+        this.oib = oib;
     }
 
     public String getIme() {
