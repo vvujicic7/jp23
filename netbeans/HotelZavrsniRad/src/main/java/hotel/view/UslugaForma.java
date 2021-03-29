@@ -9,6 +9,7 @@ import hotel.controller.ObradaUsluga;
 import hotel.model.Usluga;
 import hotel.util.EdunovaException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -171,7 +172,7 @@ public class UslugaForma extends javax.swing.JFrame {
             txtVrsta.setText("");
         }
         try {
-            txtCijena.setText(obrada.getEntitet().getCijena().toString());
+            txtCijena.setText(obrada.getEntitet().getCijena().setScale(2, RoundingMode.HALF_UP).toString());
         } catch (Exception e) {
             txtCijena.setText("");
         }

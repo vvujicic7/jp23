@@ -78,10 +78,10 @@ public class Gost extends Osoba {
     
     @Override
     public String toString() {
-        if(getIme()==null || getIme().trim().isEmpty()){
+        if(getIme()==null || getIme().trim().isEmpty() || getPrezime()==null || getPrezime().trim().isEmpty()){
             return "[Naziv nije definiran]";
         }
-        return getIme();
+        return getIme()+" " + getPrezime();
     }
 
     
