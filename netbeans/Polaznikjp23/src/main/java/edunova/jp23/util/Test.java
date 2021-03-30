@@ -28,7 +28,7 @@ public class Test {
        Faker faker = new Faker();
         ObradaPolaznik s = new ObradaPolaznik();
         Polaznik p;
-        for(int i=0;i<1;i++){
+        for(int i=0;i<10000;i++){
             p=new Polaznik();
             p.setIme(faker.name().firstName());
             p.setPrezime(faker.name().lastName());
