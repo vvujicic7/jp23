@@ -15,7 +15,9 @@ import edunova.jp23.model.Polaznik;
 import edunova.jp23.model.Predavac;
 import edunova.jp23.model.Smjer;
 import edunova.jp23.util.EdunovaException;
+import java.awt.Event;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
@@ -36,6 +38,7 @@ public class GrupaForma extends javax.swing.JFrame {
     public GrupaForma() {
         initComponents();
         obrada = new ObradaGrupa();
+        obradaPolaznik=new ObradaPolaznik();
         setTitle(Aplikacija.NASLOV_APP + " Grupe");
         ucitajEntitete();
         ucitajSmjerove();
@@ -304,7 +307,7 @@ public class GrupaForma extends javax.swing.JFrame {
         }
         
         if(g.getDatumPocetka()!=null) {
-        dpDatumPocetka.setDate(g.getDatumPocetka().toInstant()
+            dpDatumPocetka.setDate(g.getDatumPocetka().toInstant()
         .atZone(ZoneId.systemDefault()).toLocalDate());
         }else{
             dpDatumPocetka.setDate(null);
@@ -317,6 +320,7 @@ public class GrupaForma extends javax.swing.JFrame {
         }
         
         
+        
         DefaultListModel<Polaznik> m = new DefaultListModel<>();
         m.addAll(g.getPolaznici());
         lstPolazniciNaGrupi.setModel(m);
@@ -327,9 +331,13 @@ public class GrupaForma extends javax.swing.JFrame {
     }//GEN-LAST:event_slBrojPolaznikaStateChanged
 
     private void btnTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziActionPerformed
+        
         DefaultListModel<Polaznik> m = new DefaultListModel<>();
         m.addAll(obradaPolaznik.getPodaci(txtUvjet.getText()));
         lstPolazniciUSkoli.setModel(m);
+        
+        
+        
     }//GEN-LAST:event_btnTraziActionPerformed
 
     private void btnDodajUGrupuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajUGrupuActionPerformed
@@ -425,6 +433,7 @@ public class GrupaForma extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBrisanjeActionPerformed
 
+    
     private void ucitajEntitete() {
         DefaultListModel<Grupa> m = new DefaultListModel<>();
 
@@ -516,7 +525,7 @@ public class GrupaForma extends javax.swing.JFrame {
     }
 
     private void postaviVrijednostiNaEntitet() {
-        var g = obrada.getEntitet();
+       var g = obrada.getEntitet();
        g.setNaziv(txtNaziv.getText());
        g.setPredavac((Predavac) cmbPredavaci.getSelectedItem());
        g.setSmjer((Smjer) cmbSmjerovi.getSelectedItem());
@@ -528,9 +537,22 @@ public class GrupaForma extends javax.swing.JFrame {
                    .atZone(ZoneId.systemDefault()).toInstant())
            );
        }
+       
+       DefaultListModel<Polaznik> m;
+        try {
+            m=(DefaultListModel<Polaznik>) lstPolazniciNaGrupi.getModel();
+            g.setPolaznici(new ArrayList<>());
+            for(int i=0;i<m.getSize();i++){
+                g.getPolaznici().add(m.get(i));
+            }
+        } catch (Exception e) {
+           
+        }
+       
+       
     }
 
     private void pocisti() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
