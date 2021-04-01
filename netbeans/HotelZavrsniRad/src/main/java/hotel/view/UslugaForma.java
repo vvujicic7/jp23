@@ -164,7 +164,6 @@ public class UslugaForma extends javax.swing.JFrame {
          obrada.setEntitet(lstUsluge.getSelectedValue());
 
 
-        // ovo se može zamijeniti tkz. Binding
         txtNaziv.setText(obrada.getEntitet().getNaziv());
         if (obrada.getEntitet().getVrsta()!= null) {
             txtVrsta.setText(obrada.getEntitet().getVrsta().toString());
