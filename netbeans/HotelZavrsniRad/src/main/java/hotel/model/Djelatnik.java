@@ -5,7 +5,10 @@
  */
 package hotel.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -19,6 +22,17 @@ public class Djelatnik extends Osoba{
    // @NotNull
     //@NotEmpty
     private String lozinka;
+    
+    @OneToMany(mappedBy = "djelatnik")
+    private List<HotelskaUsluga> hotelskeusluge = new ArrayList<>();
+
+    public List<HotelskaUsluga> getHotelskeusluge() {
+        return hotelskeusluge;
+    }
+
+    public void setHotelskeusluge(List<HotelskaUsluga> hotelskeusluge) {
+        this.hotelskeusluge = hotelskeusluge;
+    }
 
 
     
@@ -32,6 +46,13 @@ public class Djelatnik extends Osoba{
     
     public String getImePrezime(){
         return getIme() + " " + getPrezime();
+    }
+    @Override
+    public String toString() {
+        if(getIme()==null || getIme().trim().isEmpty() || getPrezime()==null || getPrezime().trim().isEmpty()){
+            return "[Naziv nije definiran]";
+        }
+        return getIme()+" " + getPrezime();
     }
     
 }

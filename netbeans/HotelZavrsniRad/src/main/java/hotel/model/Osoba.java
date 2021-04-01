@@ -5,7 +5,10 @@
  */
 package hotel.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 
 
@@ -16,11 +19,24 @@ import javax.validation.constraints.Email;
 @MappedSuperclass
 public abstract class Osoba extends Entitet{
     
+    
+    
     private String ime;
     private String prezime;
     private String oib;
     @Email(message = "email nije ispravan")
     private String email;
+    
+    @OneToMany(mappedBy = "djelatnik")
+    private List<HotelskaUsluga> hotelskeusluge = new ArrayList<>();
+
+    public List<HotelskaUsluga> getHotelskeusluge() {
+        return hotelskeusluge;
+    }
+
+    public void setHotelskeusluge(List<HotelskaUsluga> hotelskeusluge) {
+        this.hotelskeusluge = hotelskeusluge;
+    }
 
     public String getEmail() {
         return email;
@@ -54,5 +70,11 @@ public abstract class Osoba extends Entitet{
         this.prezime = prezime;
     }
     
-    
+    @Override
+    public String toString() {
+        if(getIme()==null || getIme().trim().isEmpty() || getPrezime()==null || getPrezime().trim().isEmpty()){
+            return "[Naziv nije definiran]";
+        }
+        return getIme()+" " + getPrezime();
+    }
 }

@@ -13,6 +13,8 @@ import hotel.util.EdunovaException;
  */
 public abstract class ObradaOsoba<T extends Osoba> extends Obrada<T>{
     
+    
+    
     @Override
     protected void kontrolaCreate() throws EdunovaException {
        kontrolaOIB();

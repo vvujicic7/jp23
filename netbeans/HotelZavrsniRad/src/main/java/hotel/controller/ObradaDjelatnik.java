@@ -8,6 +8,7 @@ package hotel.controller;
 import hotel.model.Djelatnik;
 import hotel.util.EdunovaException;
 import java.util.List;
+import org.hibernate.CacheMode;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -15,6 +16,14 @@ import org.mindrot.jbcrypt.BCrypt;
  * @author Mativel
  */
 public class ObradaDjelatnik extends ObradaOsoba<Djelatnik>{
+    
+    public ObradaDjelatnik() {
+        super();
+    }
+    
+    public ObradaDjelatnik(Djelatnik d) {
+        super();
+    }
 
     /**
      * Autorizacija operatera na bazi
@@ -35,15 +44,32 @@ public class ObradaDjelatnik extends ObradaOsoba<Djelatnik>{
         return BCrypt.checkpw(new String(lozinka),djelatnik.getLozinka()) ? djelatnik : null;
     }
     
-    
-    @Override
-    public List<Djelatnik> getPodaci() {
-        return session.createQuery("from Djelatnik").list();
-    }
 
     @Override
-    protected void kontrolaDelete() throws EdunovaException {
+    public List<Djelatnik> getPodaci() {
+        
+        List<Djelatnik> lista = session.createQuery("from Djelatnik").list();
+            session.setCacheMode(CacheMode.IGNORE);
+                return lista;
+    }
     
+    
+    
+
+    @Override
+    protected void kontrolaCreate() throws EdunovaException {
+            
+            
+    }
+    
+    @Override
+    protected void kontrolaUpdate() throws EdunovaException {
+        
+    }
+    
+    @Override
+    protected void kontrolaDelete() throws EdunovaException {
+        
     }
     
 }
