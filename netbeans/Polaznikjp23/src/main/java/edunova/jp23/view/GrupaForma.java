@@ -6,16 +6,18 @@
 package edunova.jp23.view;
 
 import com.github.lgooddatepicker.components.DatePickerSettings;
+import edunova.jp23.controller.ObradaClan;
 import edunova.jp23.controller.ObradaGrupa;
 import edunova.jp23.controller.ObradaPolaznik;
 import edunova.jp23.controller.ObradaPredavac;
 import edunova.jp23.controller.ObradaSmjer;
+import edunova.jp23.model.Clan;
 import edunova.jp23.model.Grupa;
+import edunova.jp23.model.Mjesto;
 import edunova.jp23.model.Polaznik;
 import edunova.jp23.model.Predavac;
 import edunova.jp23.model.Smjer;
 import edunova.jp23.util.EdunovaException;
-import java.awt.Event;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,9 +31,13 @@ import javax.swing.JOptionPane;
  * @author Mativel
  */
 public class GrupaForma extends javax.swing.JFrame {
+ //   implements MjestoTrazitelj{
 
     private ObradaGrupa obrada;
     private ObradaPolaznik obradaPolaznik;
+    private ObradaClan obradaClan;
+    private Mjesto odabranoMjesto;
+    
     /**
      * Creates new form GrupaForma
      */
@@ -39,11 +45,12 @@ public class GrupaForma extends javax.swing.JFrame {
         initComponents();
         obrada = new ObradaGrupa();
         obradaPolaznik=new ObradaPolaznik();
+        obradaClan=new ObradaClan();
         setTitle(Aplikacija.NASLOV_APP + " Grupe");
         ucitajEntitete();
         ucitajSmjerove();
         ucitajPredavacee();
-        prilagodiDpDatumPocetka();
+        prilagodiDpDatumPocetka();;
     }
 
     /**
@@ -79,6 +86,10 @@ public class GrupaForma extends javax.swing.JFrame {
         btnDodaj = new javax.swing.JButton();
         btnPromjena = new javax.swing.JButton();
         btnBrisanje = new javax.swing.JButton();
+        dpDatumUpisa = new com.github.lgooddatepicker.components.DatePicker();
+        btnSpremiClana = new javax.swing.JButton();
+        lblMjesto = new javax.swing.JLabel();
+        btnTraziMjesto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -96,6 +107,11 @@ public class GrupaForma extends javax.swing.JFrame {
 
         jLabel4.setText("Predavač");
 
+        lstPolazniciNaGrupi.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstPolazniciNaGrupiValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(lstPolazniciNaGrupi);
 
         jLabel3.setText("Datum početka");
@@ -148,10 +164,26 @@ public class GrupaForma extends javax.swing.JFrame {
             }
         });
 
-        btnBrisanje.setText("Obrisi");
+        btnBrisanje.setText("Brisanje");
         btnBrisanje.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBrisanjeActionPerformed(evt);
+            }
+        });
+
+        btnSpremiClana.setText("Spremi Člana");
+        btnSpremiClana.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSpremiClanaActionPerformed(evt);
+            }
+        });
+
+        lblMjesto.setText("Odabrano Mjesto");
+
+        btnTraziMjesto.setText("Traži Mjesto");
+        btnTraziMjesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTraziMjestoActionPerformed(evt);
             }
         });
 
@@ -166,51 +198,59 @@ public class GrupaForma extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel4)
-                                .addComponent(cmbSmjerovi, 0, 241, Short.MAX_VALUE)
-                                .addComponent(txtNaziv)
-                                .addComponent(cmbPredavaci, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel1))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
+                                .addComponent(cmbSmjerovi, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cmbPredavaci, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnDodajUGrupu)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lblPolaznika))
-                                    .addComponent(btnObrisiIzGrupe)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(51, 51, 51)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(dpDatumPocetka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(33, 33, 33)
-                                        .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnTrazi)))
-                                .addGap(92, 92, 92)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnBrisanje)
-                                    .addComponent(btnDodaj)
-                                    .addComponent(btnPromjena))))
-                        .addGap(16, 16, 16))
-                    .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addComponent(btnObrisiIzGrupe))))
+                        .addGap(136, 136, 136)
+                        .addComponent(lblPolaznika)
+                        .addGap(381, 381, 381))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(slBrojPolaznika, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(128, 128, 128))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(dpDatumUpisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSpremiClana))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGap(94, 94, 94)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(slBrojPolaznika, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(jLabel5)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btnPromjena))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(dpDatumPocetka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btnDodaj))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btnTrazi))
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(203, 203, 203)
+                                        .addComponent(btnBrisanje))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblMjesto)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnTraziMjesto)))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,50 +260,69 @@ public class GrupaForma extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dpDatumPocetka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDodaj))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
                         .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmbSmjerovi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(lblPolaznika)
-                            .addComponent(btnPromjena))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmbPredavaci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(slBrojPolaznika, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnTrazi)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBrisanje)))
+                                    .addComponent(jLabel1)
+                                    .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(80, 80, 80))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(dpDatumPocetka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnDodaj))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(14, 14, 14)
+                                        .addComponent(jLabel5)
+                                        .addGap(21, 21, 21))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnPromjena)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel2)
+                                        .addComponent(cmbSmjerovi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(slBrojPolaznika, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(6, 6, 6)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblMjesto)
+                                    .addComponent(btnTraziMjesto))
+                                .addGap(25, 25, 25)
+                                .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblPolaznika)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(cmbPredavaci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel4)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnBrisanje)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                                .addComponent(btnTrazi)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
-                                .addGap(34, 34, 34))
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
+                                .addGap(12, 12, 12)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(dpDatumUpisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnSpremiClana)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(61, 61, 61)
+                                .addGap(55, 55, 55)
                                 .addComponent(btnDodajUGrupu)
-                                .addGap(40, 40, 40)
+                                .addGap(38, 38, 38)
                                 .addComponent(btnObrisiIzGrupe)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
@@ -321,7 +380,7 @@ public class GrupaForma extends javax.swing.JFrame {
         
         
         
-        DefaultListModel<Polaznik> m = new DefaultListModel<>();
+        DefaultListModel<Clan> m = new DefaultListModel<>();
         m.addAll(g.getPolaznici());
         lstPolazniciNaGrupi.setModel(m);
     }//GEN-LAST:event_lstEntitetiValueChanged
@@ -341,9 +400,9 @@ public class GrupaForma extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTraziActionPerformed
 
     private void btnDodajUGrupuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajUGrupuActionPerformed
-        DefaultListModel<Polaznik> m;
+        DefaultListModel<Clan> m;
         try {
-            m=(DefaultListModel<Polaznik>) lstPolazniciNaGrupi.getModel();
+            m=(DefaultListModel<Clan>) lstPolazniciNaGrupi.getModel();
             m.get(0).toString();
         } catch (Exception e) {
             m= new DefaultListModel<>();
@@ -353,13 +412,17 @@ public class GrupaForma extends javax.swing.JFrame {
        for(Polaznik p : lstPolazniciUSkoli.getSelectedValuesList()){
            postoji=false;
            for(int i=0;i<m.size();i++){
-               if(p.getId().equals(m.get(i).getId())){
+               if(p.getId().equals(m.get(i).getPolaznik().getId())){
                    postoji=true;
                    break;
                }
            }
            if(!postoji){
-               m.addElement(p);
+               Clan c = new Clan();
+               c.setGrupa(lstEntiteti.getSelectedValue());
+               c.setPolaznik(p);
+               c.setDatumUpisa(new Date()); // pozvati forma koja nudi odabir datuma
+               m.addElement(c);
            }
        }
         
@@ -367,15 +430,15 @@ public class GrupaForma extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDodajUGrupuActionPerformed
 
     private void btnObrisiIzGrupeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiIzGrupeActionPerformed
-        DefaultListModel<Polaznik> m;
+        DefaultListModel<Clan> m;
         try {
-            m=(DefaultListModel<Polaznik>) lstPolazniciNaGrupi.getModel();
+            m=(DefaultListModel<Clan>) lstPolazniciNaGrupi.getModel();
             m.get(0).toString();
         } catch (Exception e) {
            return;
         }
         
-        for(Polaznik p : lstPolazniciNaGrupi.getSelectedValuesList()){
+        for(Clan p : lstPolazniciNaGrupi.getSelectedValuesList()){
           
            for(int i=0;i<m.size();i++){
                if(p.getId().equals(m.get(i).getId())){
@@ -432,6 +495,51 @@ public class GrupaForma extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, e.getPoruka());
         }
     }//GEN-LAST:event_btnBrisanjeActionPerformed
+
+    private void btnSpremiClanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpremiClanaActionPerformed
+        if (lstPolazniciNaGrupi.getSelectedValue() == null) {
+            return;
+        }
+         Clan c = lstPolazniciNaGrupi.getSelectedValue();
+         
+          if(dpDatumUpisa.getDate()!=null){
+           c.setDatumUpisa(
+                   Date.from(dpDatumUpisa.getDate()
+                           .atStartOfDay()
+                   .atZone(ZoneId.systemDefault()).toInstant())
+           );
+       }
+          
+          try {
+              obradaClan.setEntitet(c);
+            obradaClan.update();
+        } catch (EdunovaException e) {
+              System.out.println(e.getPoruka());
+        }
+    }//GEN-LAST:event_btnSpremiClanaActionPerformed
+
+    private void btnTraziMjestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziMjestoActionPerformed
+       // new MjestoForma(this).setVisible(true);
+    }//GEN-LAST:event_btnTraziMjestoActionPerformed
+
+    private void lstPolazniciNaGrupiValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPolazniciNaGrupiValueChanged
+        if (evt.getValueIsAdjusting()) {
+            return;
+        }
+
+        if (lstPolazniciNaGrupi.getSelectedValue() == null) {
+            return;
+        }
+        
+        Clan c = lstPolazniciNaGrupi.getSelectedValue();
+        
+         if(c.getDatumUpisa()!=null){
+            dpDatumUpisa.setDate(c.getDatumUpisa().toInstant()
+        .atZone(ZoneId.systemDefault()).toLocalDate());
+       }else{
+           dpDatumUpisa.setDate(null);
+       }
+    }//GEN-LAST:event_lstPolazniciNaGrupiValueChanged
 
     
     private void ucitajEntitete() {
@@ -494,10 +602,13 @@ public class GrupaForma extends javax.swing.JFrame {
     private javax.swing.JButton btnDodajUGrupu;
     private javax.swing.JButton btnObrisiIzGrupe;
     private javax.swing.JButton btnPromjena;
+    private javax.swing.JButton btnSpremiClana;
     private javax.swing.JButton btnTrazi;
+    private javax.swing.JButton btnTraziMjesto;
     private javax.swing.JComboBox<Predavac> cmbPredavaci;
     private javax.swing.JComboBox<Smjer> cmbSmjerovi;
     private com.github.lgooddatepicker.components.DatePicker dpDatumPocetka;
+    private com.github.lgooddatepicker.components.DatePicker dpDatumUpisa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -506,9 +617,10 @@ public class GrupaForma extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblMjesto;
     private javax.swing.JLabel lblPolaznika;
     private javax.swing.JList<Grupa> lstEntiteti;
-    private javax.swing.JList<Polaznik> lstPolazniciNaGrupi;
+    private javax.swing.JList<Clan> lstPolazniciNaGrupi;
     private javax.swing.JList<Polaznik> lstPolazniciUSkoli;
     private javax.swing.JSlider slBrojPolaznika;
     private javax.swing.JTextField txtNaziv;
@@ -538,9 +650,9 @@ public class GrupaForma extends javax.swing.JFrame {
            );
        }
        
-       DefaultListModel<Polaznik> m;
+       DefaultListModel<Clan> m;
         try {
-            m=(DefaultListModel<Polaznik>) lstPolazniciNaGrupi.getModel();
+            m=(DefaultListModel<Clan>) lstPolazniciNaGrupi.getModel();
             g.setPolaznici(new ArrayList<>());
             for(int i=0;i<m.getSize();i++){
                 g.getPolaznici().add(m.get(i));
@@ -548,11 +660,19 @@ public class GrupaForma extends javax.swing.JFrame {
         } catch (Exception e) {
            
         }
+        
+        g.setMjesto(odabranoMjesto);
        
        
     }
 
     private void pocisti() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+ //   @Override
+    public void postaviOdabranoMjesto(Mjesto m) {
+        odabranoMjesto=m;
+        lblMjesto.setText(m.getNaziv());
+        
     }
 }

@@ -48,5 +48,7 @@
         <mapping class="edunova.jp23.model.Predavac" /> 
         <mapping class="edunova.jp23.model.Grupa" /> 
         <mapping class="edunova.jp23.model.Operater" /> 
+        <mapping class="edunova.jp23.model.Mjesto" /> 
+        <mapping class="edunova.jp23.model.Clan" /> 
     </session-factory>
 </hibernate-configuration>

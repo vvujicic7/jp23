@@ -5,8 +5,11 @@
  */
 package edunova.jp23.controller;
 
+import edunova.jp23.model.Entitet;
 import edunova.jp23.util.EdunovaException;
 import edunova.jp23.util.HibernateUtil;
+import edunova.jp23.view.Aplikacija;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
@@ -17,9 +20,9 @@ import org.hibernate.Session;
 
 /**
  *
- * @author Korisnik
+ * @author Mativel
  */
-public abstract class Obrada<T> {
+public abstract class Obrada<T extends Entitet> {
     
     protected T entitet;
     protected Session session;
@@ -43,6 +46,8 @@ public abstract class Obrada<T> {
     public T create() throws EdunovaException{
         kontrola();
         kontrolaCreate();
+        entitet.setOperaterUnosa(Aplikacija.operater);
+        entitet.setDatumUnosa(new Date());
         save();
         return this.entitet;
     }
@@ -50,6 +55,8 @@ public abstract class Obrada<T> {
     public T update() throws EdunovaException{
         kontrola();
         kontrolaUpdate();
+        entitet.setOperaterPromjene(Aplikacija.operater);
+        entitet.setDatumPromjene(new Date());
         save();
         return this.entitet;
     }
@@ -68,7 +75,7 @@ public abstract class Obrada<T> {
         session.getTransaction().commit();
     }
     
-    private void kontrola() throws EdunovaException{
+    protected void kontrola() throws EdunovaException{
         //https://howtodoinjava.com/hibernate/hibernate-validator-java-bean-validation/
          Set<ConstraintViolation<T>> constraintViolations 
                  = validator.validate(this.entitet);
@@ -104,3 +111,4 @@ public abstract class Obrada<T> {
     
     
 }
+

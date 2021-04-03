@@ -11,6 +11,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -26,8 +27,18 @@ public class Grupa extends Entitet{
     private Predavac predavac;
     private Date datumPocetka;
     private Integer brojPolaznika;
-    @ManyToMany
-    private List<Polaznik> polaznici=new ArrayList<>();
+   
+    
+    @ManyToOne
+    private Mjesto mjesto;
+
+    public Mjesto getMjesto() {
+        return mjesto;
+    }
+
+    public void setMjesto(Mjesto mjesto) {
+        this.mjesto = mjesto;
+    }
 
     public String getNaziv() {
         return naziv;
@@ -69,11 +80,14 @@ public class Grupa extends Entitet{
         this.brojPolaznika = brojPolaznika;
     }
 
-    public List<Polaznik> getPolaznici() {
+   @OneToMany(mappedBy = "grupa")
+    private List<Clan> polaznici = new ArrayList<>();
+
+    public List<Clan> getPolaznici() {
         return polaznici;
     }
 
-    public void setPolaznici(List<Polaznik> polaznici) {
+    public void setPolaznici(List<Clan> polaznici) {
         this.polaznici = polaznici;
     }
 

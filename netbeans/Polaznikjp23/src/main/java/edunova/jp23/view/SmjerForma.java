@@ -6,6 +6,7 @@
 package edunova.jp23.view;
 
 import edunova.jp23.controller.ObradaSmjer;
+import edunova.jp23.model.Mjesto;
 import edunova.jp23.model.Smjer;
 import edunova.jp23.util.EdunovaException;
 import java.math.BigDecimal;
@@ -21,7 +22,10 @@ import javax.swing.ListModel;
  */
 public class SmjerForma extends javax.swing.JFrame {
 
+ //   implements MjestoTrazitelj{
+
     private ObradaSmjer obrada;
+    private Mjesto odabranoMjesto;
     
     /**
      * Creates new form SmjerForma
@@ -54,6 +58,8 @@ public class SmjerForma extends javax.swing.JFrame {
         btnDodaj = new javax.swing.JButton();
         btnPromjeni = new javax.swing.JButton();
         btnObrisi = new javax.swing.JButton();
+        lblMjesto = new javax.swing.JLabel();
+        btnTraziMjesto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -94,37 +100,54 @@ public class SmjerForma extends javax.swing.JFrame {
             }
         });
 
+        lblMjesto.setText("Odabrano Mjesto");
+
+        btnTraziMjesto.setText("Traži Mjesto");
+        btnTraziMjesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTraziMjestoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(chbVerificiran)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnDodaj)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPromjeni)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnObrisi))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtCijena, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
-                        .addComponent(txtTrajanje, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtNaziv, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addGap(25, 25, 25))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(chbVerificiran)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtCijena, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                                .addComponent(txtTrajanje, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtNaziv, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnDodaj)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnPromjeni)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnObrisi)))
+                        .addGap(25, 25, 25))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblMjesto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnTraziMjesto)
+                        .addGap(36, 36, 36))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -138,13 +161,16 @@ public class SmjerForma extends javax.swing.JFrame {
                         .addComponent(txtCijena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(chbVerificiran)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblMjesto)
+                            .addComponent(btnTraziMjesto))
+                        .addGap(11, 11, 11)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnDodaj)
                             .addComponent(btnPromjeni)
-                            .addComponent(btnObrisi)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnObrisi))))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -230,16 +256,26 @@ public class SmjerForma extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnObrisiActionPerformed
 
+    private void btnTraziMjestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziMjestoActionPerformed
+        new MjestoForma(this).setVisible(true);
+    }//GEN-LAST:event_btnTraziMjestoActionPerformed
+
+    public void postaviOdabranoMjesto(Mjesto m){
+        odabranoMjesto=m;
+        lblMjesto.setText(m.getNaziv());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnPromjeni;
+    private javax.swing.JButton btnTraziMjesto;
     private javax.swing.JCheckBox chbVerificiran;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblMjesto;
     private javax.swing.JList<Smjer> lstSmjerovi;
     private javax.swing.JTextField txtCijena;
     private javax.swing.JTextField txtNaziv;

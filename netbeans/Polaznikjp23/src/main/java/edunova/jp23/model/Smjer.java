@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -31,6 +32,18 @@ public class Smjer extends Entitet{
     
     @OneToMany(mappedBy = "smjer")
     private List<Grupa> grupe = new ArrayList<>();
+    
+    
+    @ManyToOne
+    private Mjesto mjesto;
+
+    public Mjesto getMjesto() {
+        return mjesto;
+    }
+
+    public void setMjesto(Mjesto mjesto) {
+        this.mjesto = mjesto;
+    }
 
     public List<Grupa> getGrupe() {
         return grupe;
