@@ -31,7 +31,7 @@ import javax.swing.JOptionPane;
  * @author Mativel
  */
 public class GrupaForma extends javax.swing.JFrame {
- //   implements MjestoTrazitelj{
+    implements MjestoTrazitelj{
 
     private ObradaGrupa obrada;
     private ObradaPolaznik obradaPolaznik;
@@ -519,7 +519,7 @@ public class GrupaForma extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSpremiClanaActionPerformed
 
     private void btnTraziMjestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziMjestoActionPerformed
-       // new MjestoForma(this).setVisible(true);
+        new MjestoForma((MjestoTrazitelj) this).setVisible(true);
     }//GEN-LAST:event_btnTraziMjestoActionPerformed
 
     private void lstPolazniciNaGrupiValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPolazniciNaGrupiValueChanged
@@ -669,7 +669,6 @@ public class GrupaForma extends javax.swing.JFrame {
     private void pocisti() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
- //   @Override
     public void postaviOdabranoMjesto(Mjesto m) {
         odabranoMjesto=m;
         lblMjesto.setText(m.getNaziv());

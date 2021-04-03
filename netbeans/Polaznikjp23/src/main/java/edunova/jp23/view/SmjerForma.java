@@ -22,7 +22,7 @@ import javax.swing.ListModel;
  */
 public class SmjerForma extends javax.swing.JFrame {
 
- //   implements MjestoTrazitelj{
+    implements MjestoTrazitelj{
 
     private ObradaSmjer obrada;
     private Mjesto odabranoMjesto;
