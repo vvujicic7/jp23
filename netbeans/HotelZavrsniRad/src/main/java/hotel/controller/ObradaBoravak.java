@@ -5,11 +5,18 @@
  */
 package hotel.controller;
 
+import hotel.model.Boravak;
+import java.util.Collection;
+
 /**
  *
  * @author Mativel
  */
 public class ObradaBoravak {
+
+    public Collection<? extends Boravak> getPodaci() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }
