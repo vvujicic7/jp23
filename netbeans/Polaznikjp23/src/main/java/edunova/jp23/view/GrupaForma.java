@@ -30,7 +30,7 @@ import javax.swing.JOptionPane;
  *
  * @author Mativel
  */
-public class GrupaForma extends javax.swing.JFrame {
+public class GrupaForma extends javax.swing.JFrame 
     implements MjestoTrazitelj{
 
     private ObradaGrupa obrada;

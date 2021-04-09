@@ -80,7 +80,7 @@ public class Grupa extends Entitet{
         this.brojPolaznika = brojPolaznika;
     }
 
-   @OneToMany(mappedBy = "grupa")
+    @OneToMany(mappedBy = "grupa")
     private List<Clan> polaznici = new ArrayList<>();
 
     public List<Clan> getPolaznici() {

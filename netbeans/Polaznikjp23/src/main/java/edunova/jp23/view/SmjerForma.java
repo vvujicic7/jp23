@@ -20,7 +20,7 @@ import javax.swing.ListModel;
  *
  * @author Mativel
  */
-public class SmjerForma extends javax.swing.JFrame {
+public class SmjerForma extends javax.swing.JFrame 
 
     implements MjestoTrazitelj{
 
