@@ -6,17 +6,50 @@
 package hotel.controller;
 
 import hotel.model.Boravak;
+import hotel.util.EdunovaException;
 import java.util.Collection;
+import java.util.List;
+import org.hibernate.CacheMode;
 
 /**
  *
  * @author Mativel
  */
-public class ObradaBoravak {
-
-    public Collection<? extends Boravak> getPodaci() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+public class ObradaBoravak extends Obrada<Boravak> {
+    
+    public ObradaBoravak() {
+        super();
     }
     
-    
+    public ObradaBoravak(Boravak b) {
+        super(b);
+    }
+
+    @Override
+    public List<Boravak> getPodaci() {
+        List<Boravak> lista = session.createQuery("from Boravak").list();
+            session.setCacheMode(CacheMode.IGNORE);
+                return lista;
+    }
+
+    @Override
+    protected void kontrolaCreate() throws EdunovaException {
+        
+    }
+
+    @Override
+    protected void kontrolaUpdate() throws EdunovaException {
+        
+    }
+
+    @Override
+    protected void kontrolaDelete() throws EdunovaException {
+        
+    }
 }
+
+        
+    
+    
+    
+

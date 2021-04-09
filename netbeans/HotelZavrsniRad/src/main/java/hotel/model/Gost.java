@@ -84,7 +84,7 @@ public class Gost extends Osoba {
         return getIme()+" " + getPrezime();
     }
 
-    
+       
     
     
     

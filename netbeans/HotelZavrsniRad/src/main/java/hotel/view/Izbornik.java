@@ -86,6 +86,11 @@ public class Izbornik extends javax.swing.JFrame {
         });
 
         jMenuItem1.setText("Boravci");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jmProgrami.add(jMenuItem1);
 
         jMenuItem2.setText("Gosti");
@@ -167,6 +172,10 @@ public class Izbornik extends javax.swing.JFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         new DjelatnikForma().setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        new BoravakForma(). setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     
 
