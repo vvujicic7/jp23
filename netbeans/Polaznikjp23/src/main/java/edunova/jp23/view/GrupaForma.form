@@ -94,6 +94,8 @@
                                       <Component id="lblMjesto" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="btnTraziMjesto" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="btnJsonExport" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -156,6 +158,7 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblMjesto" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="btnTraziMjesto" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnJsonExport" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                               <Component id="txtUvjet" min="-2" max="-2" attributes="0"/>
@@ -404,6 +407,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTraziMjestoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnJsonExport">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="JSON"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnJsonExportActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
