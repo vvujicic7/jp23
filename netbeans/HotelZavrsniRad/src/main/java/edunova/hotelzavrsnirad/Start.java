@@ -30,7 +30,7 @@ public class Start {
 
     
     public static void main(String[] args) {
-        Session s = HibernateUtil.getSession();
+    /*    Session s = HibernateUtil.getSession();
         s.beginTransaction();
         
         Usluga usluga = new Usluga();
@@ -101,9 +101,9 @@ public class Start {
         }
         
         s.getTransaction().commit();
-        
+      */  
         new SplashScreen().setVisible(true);
-        new Autorizacija().setVisible(true);
+        //new Autorizacija().setVisible(true);
         
                
              //   System.out.println(s.getMetamodel().getEntities().size());
