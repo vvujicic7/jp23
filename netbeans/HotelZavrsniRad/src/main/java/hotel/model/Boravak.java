@@ -5,6 +5,7 @@
  */
 package hotel.model;
 
+import java.time.ZoneId;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -24,6 +25,7 @@ public class Boravak extends Entitet{
     private Usluga usluga;
     @ManyToOne 
     private Djelatnik djelatnik;
+    
 
     
     public Djelatnik getDjelatnik() {
@@ -58,17 +60,13 @@ public class Boravak extends Entitet{
         this.datum_dolaska = datum_dolaska;
     }
 
-    public Date getDatum_odlaska() {
-        return datum_odlaska;
+    
+
+    
+    
     }
-
-    public void setDatum_odlaska(Date datum_odlaska) {
-        this.datum_odlaska = datum_odlaska;
-    }
-
-    
-
     
     
     
-      }
+    
+      
