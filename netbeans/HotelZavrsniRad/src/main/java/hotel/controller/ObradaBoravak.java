@@ -6,6 +6,7 @@
 package hotel.controller;
 
 import hotel.model.Boravak;
+import hotel.model.Gost;
 import hotel.util.EdunovaException;
 import java.util.Collection;
 import java.util.List;
@@ -46,6 +47,11 @@ public class ObradaBoravak extends Obrada<Boravak> {
     protected void kontrolaDelete() throws EdunovaException {
         
     }
+
+    public void setGost(Gost selectedValue) {
+    }
+
+    
 }
 
         

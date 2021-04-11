@@ -6,7 +6,12 @@
 package hotel.view;
 
 import hotel.controller.ObradaBoravak;
+import hotel.controller.ObradaDjelatnik;
+import hotel.controller.ObradaGost;
+import hotel.controller.ObradaUsluga;
 import hotel.model.Boravak;
+import hotel.model.Djelatnik;
+import hotel.model.Gost;
 import hotel.model.Usluga;
 import java.time.ZoneId;
 import javax.swing.DefaultComboBoxModel;
@@ -27,7 +32,10 @@ public class BoravakForma extends javax.swing.JFrame {
         initComponents();
         obrada = new ObradaBoravak();
         setTitle(Aplikacija.Velimir + " Boravci");
+        ucitaj();
         ucitajUsluge();
+        ucitajGosti();
+        ucitajDjelatnici();
     }
 
     /**
@@ -40,7 +48,7 @@ public class BoravakForma extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        lstGosti = new javax.swing.JList<>();
+        lstBoravci = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         ddDatumDolaska = new com.github.lgooddatepicker.components.DatePicker();
         jLabel2 = new javax.swing.JLabel();
@@ -49,15 +57,19 @@ public class BoravakForma extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtNaziv = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        cmbGosti = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        cmbDjelatnici = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        lstGosti.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        lstBoravci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                lstGostiValueChanged(evt);
+                lstBoravciValueChanged(evt);
             }
         });
-        jScrollPane1.setViewportView(lstGosti);
+        jScrollPane1.setViewportView(lstBoravci);
 
         jLabel1.setText("Datum dolaska");
 
@@ -67,6 +79,10 @@ public class BoravakForma extends javax.swing.JFrame {
 
         jLabel4.setText("Naziv");
 
+        jLabel5.setText("Gost");
+
+        jLabel6.setText("Djelatnik");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,28 +91,40 @@ public class BoravakForma extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cmbUsluge, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(ddDatumDolaska, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(75, 75, 75)))
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(ddDatumDolaska, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(75, 75, 75)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(doDatumOdlaska, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtNaziv)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel4)))
+                        .addGap(301, 301, 301))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(doDatumOdlaska, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtNaziv)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)))
-                .addGap(301, 301, 301))
+                            .addComponent(cmbGosti, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmbDjelatnici, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(281, 281, 281))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(cmbUsluge, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addGap(293, 293, 293))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,6 +147,14 @@ public class BoravakForma extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmbUsluge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbGosti, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbDjelatnici, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE))
                 .addContainerGap())
@@ -128,37 +164,44 @@ public class BoravakForma extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lstGostiValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstGostiValueChanged
+    private void lstBoravciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstBoravciValueChanged
         if (evt.getValueIsAdjusting()) {
             return;
         }
 
-        if (lstGosti.getSelectedValue() == null) {
+        if (lstBoravci.getSelectedValue() == null) {
             return;
         }
 
-        obrada.setEntitet(lstGosti.getSelectedValue());
+        obrada.setEntitet(lstBoravci.getSelectedValue());
         
         var g= obrada.getEntitet();
+        
         // nema potrebe za sljedećom linijom, piše se kao iznad
         //Grupa g = obrada.getEntitet();
         
-        txtNaziv.setText(g.getNaziv());
+       // txtNaziv.setText(g.getIme());
         
         
         //Ukoliko nemate dvije identične instance
         // ovo neće proći
-        cmbUsluge.setSelectedItem(g.getUsluga());
+       cmbUsluge.setSelectedItem(g.getUsluga());
+       cmbGosti.setSelectedItem(g.getGost());
+       cmbDjelatnici.setSelectedItem(g.getDjelatnik());
+       
+       
         
         
         //cmbPredavaci.setSelectedItem(g.getPredavac());
        
         
-    }//GEN-LAST:event_lstGostiValueChanged
+    }//GEN-LAST:event_lstBoravciValueChanged
 
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<Djelatnik> cmbDjelatnici;
+    private javax.swing.JComboBox<Gost> cmbGosti;
     private javax.swing.JComboBox<Usluga> cmbUsluge;
     private com.github.lgooddatepicker.components.DatePicker ddDatumDolaska;
     private com.github.lgooddatepicker.components.DatePicker doDatumOdlaska;
@@ -166,23 +209,58 @@ public class BoravakForma extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<Boravak> lstGosti;
+    private javax.swing.JList<Boravak> lstBoravci;
     private javax.swing.JTextField txtNaziv;
     // End of variables declaration//GEN-END:variables
 
-       
+       private void ucitaj() {
+            DefaultListModel<Boravak> m = new DefaultListModel<>();
+
+        m.addAll(obrada.getPodaci());
+
+        lstBoravci.setModel(m);
+    }
+    
     
     private void ucitajUsluge() { 
         
         DefaultComboBoxModel<Usluga> m =
                  new DefaultComboBoxModel<>();
          
-       // m.addAll(new ObradaBoravak().getPodaci()); ?????
+       m.addAll(new ObradaUsluga().getPodaci()); 
         
 
         cmbUsluge.setModel(m);
         cmbUsluge.setSelectedIndex(0);
     }
+
+    private void ucitajGosti() {
+        DefaultComboBoxModel<Gost> m =
+                 new DefaultComboBoxModel<>();
+         
+       m.addAll(new ObradaGost().getPodaci()); 
+        
+
+        cmbGosti.setModel(m);
+        cmbGosti.setSelectedIndex(0);
+    }
+
+    private void ucitajDjelatnici() {
+        DefaultComboBoxModel<Djelatnik> m =
+                 new DefaultComboBoxModel<>();
+         
+       m.addAll(new ObradaDjelatnik().getPodaci()); 
+        
+
+        cmbDjelatnici.setModel(m);
+        cmbDjelatnici.setSelectedIndex(0);
+    }
+    }
+
+
     
-}
+    
+

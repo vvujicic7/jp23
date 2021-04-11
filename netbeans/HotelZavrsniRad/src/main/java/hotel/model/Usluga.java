@@ -32,9 +32,7 @@ public class Usluga extends Entitet {
     
     @OneToMany(mappedBy = "usluga")
     private List<HotelskaUsluga> hotelskeUsluge = new ArrayList<>();
-    @OneToMany
-    private List<Usluga> usluge = new ArrayList<>();
-
+    
     public List<HotelskaUsluga> getHotelskeUsluge() {
         return hotelskeUsluge;
     }

@@ -18,10 +18,21 @@ public class Boravak extends Entitet{
 
     @ManyToOne
     private Gost gost;
-    @ManyToOne
-    private Usluga usluga;
     private Date datum_dolaska;
     private Date datum_odlaska;
+    @ManyToOne
+    private Usluga usluga;
+    @ManyToOne 
+    private Djelatnik djelatnik;
+
+    
+    public Djelatnik getDjelatnik() {
+        return djelatnik;
+    }
+
+    public void setDjelatnik(Djelatnik djelatnik) {
+        this.djelatnik = djelatnik;
+    }
 
     public Usluga getUsluga() {
         return usluga;
@@ -30,7 +41,7 @@ public class Boravak extends Entitet{
     public void setUsluga(Usluga usluga) {
         this.usluga = usluga;
     }
-    
+   
     public Gost getGost() {
         return gost;
     }
@@ -55,12 +66,9 @@ public class Boravak extends Entitet{
         this.datum_odlaska = datum_odlaska;
     }
 
-    public String getNaziv() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
-   
-        
-          
+
     
-    }
+    
+    
+      }
