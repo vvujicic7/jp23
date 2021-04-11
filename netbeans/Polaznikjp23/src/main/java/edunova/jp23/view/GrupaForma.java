@@ -371,7 +371,7 @@ public class GrupaForma extends javax.swing.JFrame
         
         //Ukoliko nemate dvije identične instance
         // ovo neće proći
-        cmbSmjerovi.setSelectedItem(g.getSmjer());
+       cmbSmjerovi.setSelectedItem(g.getSmjer());
         
         
         //cmbPredavaci.setSelectedItem(g.getPredavac());
