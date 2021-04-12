@@ -231,7 +231,7 @@ public class GrupaForma extends javax.swing.JFrame
                                     .addComponent(btnDodajUGrupu)
                                     .addComponent(jLabel4)
                                     .addComponent(btnObrisiIzGrupe))))
-                        .addGap(136, 136, 136)
+                        .addGap(130, 130, 130)
                         .addComponent(lblPolaznika)
                         .addGap(381, 381, 381))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
