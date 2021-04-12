@@ -7,12 +7,14 @@ package hotel.view;
 
 import hotel.controller.ObradaGost;
 import hotel.model.Gost;
+import hotel.util.EdunovaException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -56,6 +58,9 @@ public class GostForma extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtDrzavljanstvo = new javax.swing.JTextField();
         drDatumRodjenja = new com.github.lgooddatepicker.components.DatePicker();
+        btnDodaj = new javax.swing.JButton();
+        btnPromjeni = new javax.swing.JButton();
+        btnObrisi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -79,6 +84,27 @@ public class GostForma extends javax.swing.JFrame {
 
         jLabel6.setText("Državljanstvo");
 
+        btnDodaj.setText("Dodaj");
+        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajActionPerformed(evt);
+            }
+        });
+
+        btnPromjeni.setText("Promjeni");
+        btnPromjeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromjeniActionPerformed(evt);
+            }
+        });
+
+        btnObrisi.setText("Obriši");
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -88,28 +114,40 @@ public class GostForma extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtOib)
-                    .addComponent(txtDrzavljanstvo)
-                    .addComponent(txtPrezime)
-                    .addComponent(txtEmail)
-                    .addComponent(txtIme)
-                    .addComponent(drDatumRodjenja, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(334, 334, 334))
+                            .addComponent(txtOib)
+                            .addComponent(txtDrzavljanstvo)
+                            .addComponent(txtPrezime)
+                            .addComponent(txtEmail)
+                            .addComponent(txtIme)
+                            .addComponent(drDatumRodjenja, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(334, 334, 334))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnDodaj)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPromjeni)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnObrisi)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -134,9 +172,12 @@ public class GostForma extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtDrzavljanstvo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 181, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDodaj)
+                            .addComponent(btnPromjeni)
+                            .addComponent(btnObrisi))
+                        .addGap(62, 62, 62))))
         );
 
         pack();
@@ -189,9 +230,58 @@ public class GostForma extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lstGostiValueChanged
 
+    private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
+        obrada.setEntitet(new Gost());
+        postaviVrijednostiNaEntitet();
+
+        try {
+            obrada.create();
+            pocisti();
+            ucitaj(); //nije optimizirano. Bolje bi bilo samo taj novi dodati u listu
+        } catch (EdunovaException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnDodajActionPerformed
+
+    private void btnPromjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniActionPerformed
+        if (obrada.getEntitet()==null || 
+                obrada.getEntitet().getId() == null) {
+            JOptionPane.showMessageDialog(rootPane, "Odaberite stavku");
+            return;
+        }
+        postaviVrijednostiNaEntitet();
+
+        try {
+            obrada.update();
+            pocisti();
+            ucitaj();
+        } catch (EdunovaException e) {
+            JOptionPane.showMessageDialog(rootPane, e.getPoruka());
+        }
+    }//GEN-LAST:event_btnPromjeniActionPerformed
+
+    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+        if (obrada.getEntitet()==null || 
+                obrada.getEntitet().getId() == null) {
+            JOptionPane.showMessageDialog(rootPane, "Odaberite stavku");
+            return;
+        }
+
+        try {
+            obrada.delete();
+            pocisti();
+            ucitaj();
+        } catch (EdunovaException e) {
+            JOptionPane.showMessageDialog(rootPane, e.getPoruka());
+        }
+    }//GEN-LAST:event_btnObrisiActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnObrisi;
+    private javax.swing.JButton btnPromjeni;
     private com.github.lgooddatepicker.components.DatePicker drDatumRodjenja;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
