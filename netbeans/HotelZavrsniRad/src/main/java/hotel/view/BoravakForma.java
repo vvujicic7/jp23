@@ -216,6 +216,8 @@ public class BoravakForma extends javax.swing.JFrame {
         
         var g= obrada.getEntitet();
         
+        txtNaziv.setText(g.getNaziv());
+        
         if(g.getDatum_dolaska()!=null) {
             ddDatumDolaska.setDate(g.getDatum_dolaska().toInstant()
         .atZone(ZoneId.systemDefault()).toLocalDate());
@@ -328,7 +330,7 @@ public class BoravakForma extends javax.swing.JFrame {
 
     private void postaviVrijednostiNaEntitet() {
         var g = obrada.getEntitet();
-       
+       g.setNaziv(txtNaziv.getText());
        g.setUsluga((Usluga) cmbUsluge.getSelectedItem());
        g.setDjelatnik((Djelatnik) cmbDjelatnici.getSelectedItem());
        g.setGost((Gost) cmbGosti.getSelectedItem());
@@ -349,19 +351,13 @@ public class BoravakForma extends javax.swing.JFrame {
     private void ucitajEntitete() {
         DefaultListModel<Boravak> m = new DefaultListModel<>();
 
-        //m.addAll(obrada.getPodaci());
-        System.out.println("Gosti u boravcima");
-        obrada.getPodaci().forEach(xxxx -> {
-            m.addElement(xxxx);
-            System.out.println(
-                    xxxx.getGost().getIme()+ ": " + 
-                    xxxx.getGost().hashCode());
-        });
+        
+
+        m.addAll(obrada.getPodaci());
 
         lstBoravci.setModel(m);
     }
-    }
-
+}
 
     
     
