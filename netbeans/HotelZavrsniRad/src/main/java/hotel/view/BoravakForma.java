@@ -13,9 +13,12 @@ import hotel.model.Boravak;
 import hotel.model.Djelatnik;
 import hotel.model.Gost;
 import hotel.model.Usluga;
+import hotel.util.EdunovaException;
 import java.time.ZoneId;
+import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -64,6 +67,7 @@ public class BoravakForma extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         slBrojNocenja = new javax.swing.JSlider();
         lblNocenja = new javax.swing.JLabel();
+        btnDodaj = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -95,6 +99,13 @@ public class BoravakForma extends javax.swing.JFrame {
         });
 
         lblNocenja.setText("Nocenja");
+
+        btnDodaj.setText("Dodaj");
+        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -144,7 +155,10 @@ public class BoravakForma extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(slBrojNocenja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(83, 83, 83))))
+                        .addGap(83, 83, 83))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnDodaj)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,7 +193,8 @@ public class BoravakForma extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmbDjelatnici, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDodaj))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -232,9 +247,23 @@ public class BoravakForma extends javax.swing.JFrame {
         lblNocenja.setText(String.valueOf(slBrojNocenja.getValue()));
     }//GEN-LAST:event_slBrojNocenjaStateChanged
 
+    private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
+        obrada.setEntitet(new Boravak());
+        postaviVrijednostiNaEntitet();
+
+        try {
+            obrada.create();
+            pocisti();
+            ucitajEntitete(); //nije optimizirano. Bolje bi bilo samo taj novi dodati u listu
+        } catch (EdunovaException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnDodajActionPerformed
+
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDodaj;
     private javax.swing.JComboBox<Djelatnik> cmbDjelatnici;
     private javax.swing.JComboBox<Gost> cmbGosti;
     private javax.swing.JComboBox<Usluga> cmbUsluge;
@@ -295,6 +324,41 @@ public class BoravakForma extends javax.swing.JFrame {
 
         cmbDjelatnici.setModel(m);
         cmbDjelatnici.setSelectedIndex(0);
+    }
+
+    private void postaviVrijednostiNaEntitet() {
+        var g = obrada.getEntitet();
+       
+       g.setUsluga((Usluga) cmbUsluge.getSelectedItem());
+       g.setDjelatnik((Djelatnik) cmbDjelatnici.getSelectedItem());
+       g.setGost((Gost) cmbGosti.getSelectedItem());
+       g.setNocenje(slBrojNocenja.getValue());
+       if(ddDatumDolaska.getDate()!=null){
+           g.setDatum_dolaska(new Date());
+                   Date.from(ddDatumDolaska.getDate()
+                           .atStartOfDay()
+                   .atZone(ZoneId.systemDefault()).toInstant());
+           
+       }
+    }
+
+    private void pocisti() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void ucitajEntitete() {
+        DefaultListModel<Boravak> m = new DefaultListModel<>();
+
+        //m.addAll(obrada.getPodaci());
+        System.out.println("Gosti u boravcima");
+        obrada.getPodaci().forEach(xxxx -> {
+            m.addElement(xxxx);
+            System.out.println(
+                    xxxx.getGost().getIme()+ ": " + 
+                    xxxx.getGost().hashCode());
+        });
+
+        lstBoravci.setModel(m);
     }
     }
 

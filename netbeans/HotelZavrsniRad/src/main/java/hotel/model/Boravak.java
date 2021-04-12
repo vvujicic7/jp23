@@ -60,6 +60,10 @@ public class Boravak extends Entitet{
         this.datum_dolaska = datum_dolaska;
     }
 
+    public void setNocenje(int value) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
 
     
