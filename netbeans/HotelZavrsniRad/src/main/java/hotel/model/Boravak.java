@@ -90,7 +90,13 @@ public class Boravak extends Entitet{
     }
 
     
-
+@Override
+    public String toString() {
+        if(getNaziv()==null || getNaziv().trim().isEmpty()){
+            return "[Naziv nije definiran]";
+        }
+        return getNaziv();
+    }
     
     
     }
