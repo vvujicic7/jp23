@@ -47,6 +47,7 @@
         <mapping class="hotel.model.Djelatnik" />
         <mapping class="hotel.model.Gost" />
         <mapping class="hotel.model.HotelskaUsluga" />
+        <mapping class="hotel.model.Soba" />
         
         
        
