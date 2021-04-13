@@ -18,8 +18,9 @@ import org.hibernate.Session;
  */
 public class InitialFixtures {
     
-    public static void start() {
+    public static void main(String[] args){
         Session s = HibernateUtil.getSession();
+        s.beginTransaction();
         
         Faker faker = new Faker();
         List<Gost> gosti = new ArrayList<>();

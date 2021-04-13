@@ -30,6 +30,7 @@ public class BoravakForma extends javax.swing.JFrame {
     
     private ObradaBoravak obrada;
     private ObradaSoba obradaSoba;
+    private ObradaGost obradaGost;
 
     /**
      * Creates new form BoravciForma
