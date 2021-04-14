@@ -7,6 +7,7 @@ package hotel.model;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -32,6 +33,18 @@ public class Usluga extends Entitet {
     
     @OneToMany(mappedBy = "usluga")
     private List<HotelskaUsluga> hotelskeUsluge = new ArrayList<>();
+    
+    private Date datumUsluge;
+
+    
+    public Date getDatumUsluge() {
+        return datumUsluge;
+    }
+
+    public void setDatumUsluge(Date datumUsluge) {
+        this.datumUsluge = datumUsluge;
+    }
+    
     
     public List<HotelskaUsluga> getHotelskeUsluge() {
         return hotelskeUsluge;
@@ -80,6 +93,8 @@ public class Usluga extends Entitet {
         }
         return getNaziv();
     }
+
+    
     
            
     

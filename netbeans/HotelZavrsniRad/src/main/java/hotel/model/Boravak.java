@@ -97,7 +97,8 @@ public class Boravak extends Entitet{
         }
         return getNaziv();
     }
-    
+
+        
     
     }
     
