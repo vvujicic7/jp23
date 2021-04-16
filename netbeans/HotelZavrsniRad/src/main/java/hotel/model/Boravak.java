@@ -31,16 +31,17 @@ public class Boravak extends Entitet{
     private String nocenje;
     private Date datumUsluge;
     @ManyToMany
-    private List<HotelskaUsluga> hotelskaUsluga = new ArrayList<>();
+    private List<Usluga> usluga = new ArrayList<>();
 
-    public List<HotelskaUsluga> getHotelskaUsluga() {
-        return hotelskaUsluga;
+    public List<Usluga> getUsluga() {
+        return usluga;
     }
 
-    public void setHotelskaUsluga(List<HotelskaUsluga> hotelskaUsluga) {
-        this.hotelskaUsluga = hotelskaUsluga;
+    public void setUsluga(List<Usluga> usluga) {
+        this.usluga = usluga;
     }
-            
+
+                
     public Date getDatumUsluge() {
         return datumUsluge;
     }

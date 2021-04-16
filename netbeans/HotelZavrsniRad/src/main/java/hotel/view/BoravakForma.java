@@ -12,9 +12,11 @@ import hotel.controller.ObradaUsluga;
 import hotel.model.Boravak;
 import hotel.model.Djelatnik;
 import hotel.model.Gost;
+import hotel.model.HotelskaUsluga;
 import hotel.model.Usluga;
 import hotel.util.EdunovaException;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -146,6 +148,11 @@ public class BoravakForma extends javax.swing.JFrame {
             }
         });
 
+        lstUslugeUHotelu.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstUslugeUHoteluValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(lstUslugeUHotelu);
 
         lstUslugeNaBoravku.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -391,7 +398,7 @@ public class BoravakForma extends javax.swing.JFrame {
         
         Boravak b = lstUslugeNaBoravku.getSelectedValue();
         
-         if(b.getHotelskaUsluga()!=null){
+         if(b.getUsluga()!=null){
             duDatumUsluge.setDate(b.getDatumUsluge().toInstant()
         .atZone(ZoneId.systemDefault()).toLocalDate());
        }else{
@@ -421,6 +428,13 @@ public class BoravakForma extends javax.swing.JFrame {
               System.out.println(e.getPoruka());
         }
     }//GEN-LAST:event_btnSpremiUsluguActionPerformed
+
+    private void lstUslugeUHoteluValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstUslugeUHoteluValueChanged
+        DefaultListModel<Usluga> m = new DefaultListModel<>();
+    
+        m.addAll(obradaUsluga.getPodaci());
+        lstUslugeUHotelu.setModel(m);  
+    }//GEN-LAST:event_lstUslugeUHoteluValueChanged
 
    
 
@@ -477,8 +491,6 @@ public class BoravakForma extends javax.swing.JFrame {
     }
     
     
-    
-
     private void ucitajGosti() {
         DefaultComboBoxModel<Gost> m =
                  new DefaultComboBoxModel<>();
@@ -504,7 +516,7 @@ public class BoravakForma extends javax.swing.JFrame {
     private void postaviVrijednostiNaEntitet() {
         var g = obrada.getEntitet();
        g.setNaziv(txtNaziv.getText());
-      // g.setHotelskaUsluga(hotelskaUsluga).
+      // g.setUsluga(Usluga).cmbUsluge.getSelectedItem();
        g.setDjelatnik((Djelatnik) cmbDjelatnici.getSelectedItem());
        g.setGost((Gost) cmbGosti.getSelectedItem());
        g.setNocenje(slBrojNocenja.getValue());
@@ -515,6 +527,17 @@ public class BoravakForma extends javax.swing.JFrame {
                    .atZone(ZoneId.systemDefault()).toInstant());
            
        }
+       
+       DefaultListModel<Usluga> m;
+        try {
+           m = (DefaultListModel<Usluga>) lstUslugeNaBoravku.getModel();
+           g.setUsluga(new ArrayList<>());
+           for(int i = 0; i < m.getSize(); i++){
+               g.getUsluga().add(m.get(i));
+           }
+        } catch (Exception e) {
+        }
+       
     }
 
     private void pocisti() {
@@ -531,8 +554,8 @@ public class BoravakForma extends javax.swing.JFrame {
         lstBoravci.setModel(m);
     }
 
-   /* private void ucitajUslugeBoravka() {
-                List<Usluga> usluge = obradaBoravak.getEntitet().getUsluge();
+    private void ucitajUslugeBoravka() {
+        /*        List<Usluga> usluge = obradaBoravak.getEntitet().getUsluge();
                 DefaultListModel<Usluga> m = new DefaultListModel<>(); 
                 m.addAll(usluge);
                 lstUslugeNaBoravku.setModel(m);
@@ -540,7 +563,7 @@ public class BoravakForma extends javax.swing.JFrame {
     }
 
     
-
+}
 
     
     

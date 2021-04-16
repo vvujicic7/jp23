@@ -8,8 +8,11 @@ package hotel.model;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
@@ -32,8 +35,11 @@ public class Usluga extends Entitet {
     private String opis;
     private BigDecimal cijena;
     
-    @OneToMany(mappedBy = "usluga")
-    private List<HotelskaUsluga> hotelskeUsluge = new ArrayList<>();
+    @ManyToMany(mappedBy = "usluga")
+    private Set<Boravak> boravci = new HashSet<>();
+    
+    //@OneToMany(mappedBy = "usluga")
+    //private List<HotelskaUsluga> hotelskeUsluge = new ArrayList<>();
     
     @ManyToOne
     private Boravak boravak;
@@ -58,13 +64,13 @@ public class Usluga extends Entitet {
     }
     
     
-    public List<HotelskaUsluga> getHotelskeUsluge() {
+   /* public List<HotelskaUsluga> getHotelskeUsluge() {
         return hotelskeUsluge;
     }
 
     public void setHotelskeUsluge(List<HotelskaUsluga> hotelskeUsluge) {
         this.hotelskeUsluge = hotelskeUsluge;
-    }
+    }*/
 
     public String getVrsta() {
         return vrsta;
