@@ -5,6 +5,7 @@
  */
 package hotel.controller;
 
+import hotel.model.Boravak;
 import hotel.model.HotelskaUsluga;
 import hotel.model.Usluga;
 import hotel.util.EdunovaException;
@@ -26,11 +27,12 @@ public class ObradaUsluga extends Obrada<Usluga> {
         super(u);
     }
 
+    
     @Override
     public List<Usluga> getPodaci() {
         
-        List<Usluga> lista = session.createQuery("from Usluga").list();
-            session.setCacheMode(CacheMode.IGNORE);
+        List<Usluga> lista = session.createQuery("from Usluga u").list();
+            
                 return lista;
     }
 
@@ -92,6 +94,10 @@ public class ObradaUsluga extends Obrada<Usluga> {
                 || entitet.getOpis().isEmpty()){
             throw new EdunovaException("Opis mora biti unesen");
         }
+    }
+
+    public void setEntitet(Boravak b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -34,7 +35,18 @@ public class Usluga extends Entitet {
     @OneToMany(mappedBy = "usluga")
     private List<HotelskaUsluga> hotelskeUsluge = new ArrayList<>();
     
+    @ManyToOne
+    private Boravak boravak;
+    
     private Date datumUsluge;
+
+    public Boravak getBoravak() {
+        return boravak;
+    }
+
+    public void setBoravak(Boravak boravak) {
+        this.boravak = boravak;
+    }
 
     
     public Date getDatumUsluge() {

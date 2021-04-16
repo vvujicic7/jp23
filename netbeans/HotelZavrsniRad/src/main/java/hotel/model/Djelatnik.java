@@ -26,10 +26,12 @@ public class Djelatnik extends Osoba{
     @OneToMany(mappedBy = "djelatnik")
     private List<HotelskaUsluga> hotelskeusluge = new ArrayList<>();
 
+    @Override
     public List<HotelskaUsluga> getHotelskeusluge() {
         return hotelskeusluge;
     }
 
+    @Override
     public void setHotelskeusluge(List<HotelskaUsluga> hotelskeusluge) {
         this.hotelskeusluge = hotelskeusluge;
     }

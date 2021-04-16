@@ -48,8 +48,7 @@ public class ObradaBoravak extends Obrada<Boravak> {
         
     }
 
-    public void setGost(Gost selectedValue) {
-    }
+    
 
     
 }

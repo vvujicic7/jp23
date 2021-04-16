@@ -6,9 +6,13 @@
 package hotel.model;
 
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -21,13 +25,30 @@ public class Boravak extends Entitet{
     private Gost gost;
     private Date datum_dolaska;
     private Date datum_odlaska;
-    @ManyToOne
-    private Usluga usluga;
     @ManyToOne 
     private Djelatnik djelatnik;
     private String naziv;
     private String nocenje;
+    private Date datumUsluge;
+    @ManyToMany
+    private List<HotelskaUsluga> hotelskaUsluga = new ArrayList<>();
 
+    public List<HotelskaUsluga> getHotelskaUsluga() {
+        return hotelskaUsluga;
+    }
+
+    public void setHotelskaUsluga(List<HotelskaUsluga> hotelskaUsluga) {
+        this.hotelskaUsluga = hotelskaUsluga;
+    }
+            
+    public Date getDatumUsluge() {
+        return datumUsluge;
+    }
+
+    public void setDatumUsluge(Date datumUsluge) {
+        this.datumUsluge = datumUsluge;
+    }
+   
     public String getNocenje() {
         return nocenje;
     }
@@ -35,7 +56,6 @@ public class Boravak extends Entitet{
     public void setNocenje(String nocenje) {
         this.nocenje = nocenje;
     }
-
     
     public String getNaziv() {
         return naziv;
@@ -52,15 +72,7 @@ public class Boravak extends Entitet{
     public void setDjelatnik(Djelatnik djelatnik) {
         this.djelatnik = djelatnik;
     }
-
-    public Usluga getUsluga() {
-        return usluga;
-    }
-
-    public void setUsluga(Usluga usluga) {
-        this.usluga = usluga;
-    }
-   
+       
     public Gost getGost() {
         return gost;
     }
@@ -97,6 +109,8 @@ public class Boravak extends Entitet{
         }
         return getNaziv();
     }
+
+    
 
         
     
