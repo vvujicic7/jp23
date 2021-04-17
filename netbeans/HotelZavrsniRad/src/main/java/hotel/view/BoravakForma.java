@@ -15,6 +15,7 @@ import hotel.model.Gost;
 import hotel.model.HotelskaUsluga;
 import hotel.model.Usluga;
 import hotel.util.EdunovaException;
+import hotel.util.HibernateUtil;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
@@ -90,6 +91,11 @@ public class BoravakForma extends javax.swing.JFrame {
         btnObrisiUslugu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         lstBoravci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -150,18 +156,8 @@ public class BoravakForma extends javax.swing.JFrame {
             }
         });
 
-        lstUslugeUHotelu.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                lstUslugeUHoteluValueChanged(evt);
-            }
-        });
         jScrollPane2.setViewportView(lstUslugeUHotelu);
 
-        lstUslugeNaBoravku.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                lstUslugeNaBoravkuValueChanged(evt);
-            }
-        });
         jScrollPane3.setViewportView(lstUslugeNaBoravku);
 
         btnSpremiUslugu.setText("Spremi Uslugu");
@@ -419,26 +415,6 @@ public class BoravakForma extends javax.swing.JFrame {
         new GostForma(this).setVisible(true);
     }//GEN-LAST:event_btnTraziGostaActionPerformed
 
-    private void lstUslugeNaBoravkuValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstUslugeNaBoravkuValueChanged
-        if (evt.getValueIsAdjusting()) {
-            return;
-        }
-
-        if (lstUslugeNaBoravku.getSelectedValue() == null) {
-            return;
-        }
-        
-        Usluga u = lstUslugeNaBoravku.getSelectedValue();
-        
-         if(u.getBoravak()!=null){
-            duDatumUsluge.setDate(u.getDatumUsluge().toInstant()
-        .atZone(ZoneId.systemDefault()).toLocalDate());
-       }else{
-           duDatumUsluge.setDate(null);
-       }
-                
-    }//GEN-LAST:event_lstUslugeNaBoravkuValueChanged
-
     private void btnSpremiUsluguActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpremiUsluguActionPerformed
         if (lstUslugeNaBoravku.getSelectedValue() == null) {
             return;
@@ -461,13 +437,6 @@ public class BoravakForma extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSpremiUsluguActionPerformed
 
-    private void lstUslugeUHoteluValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstUslugeUHoteluValueChanged
-        DefaultListModel<Usluga> m = new DefaultListModel<>();
-    
-        m.addAll(obradaUsluga.getPodaci());
-        lstUslugeUHotelu.setModel(m);  
-    }//GEN-LAST:event_lstUslugeUHoteluValueChanged
-
     private void btnDodajUsluguActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajUsluguActionPerformed
         DefaultListModel<Usluga> m;
         try {
@@ -476,8 +445,8 @@ public class BoravakForma extends javax.swing.JFrame {
         } catch (Exception e) {
             m = new DefaultListModel<>();
             lstUslugeNaBoravku.setModel(m);
-    }//GEN-LAST:event_btnDodajUsluguActionPerformed
-        boolean postoji;
+        } 
+            boolean postoji;
         
         for(Usluga u : lstUslugeUHotelu.getSelectedValuesList()){
             postoji = false;
@@ -493,7 +462,9 @@ public class BoravakForma extends javax.swing.JFrame {
             
         }
         lstUslugeNaBoravku.repaint();
-    }
+        
+    }//GEN-LAST:event_btnDodajUsluguActionPerformed
+        
     private void btnObrisiUsluguActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiUsluguActionPerformed
         DefaultListModel<Usluga> m;
         try {
@@ -513,6 +484,12 @@ public class BoravakForma extends javax.swing.JFrame {
             } 
         }
     }//GEN-LAST:event_btnObrisiUsluguActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        HibernateUtil.getSession().clear();
+        ucitaj();
+        
+    }//GEN-LAST:event_formWindowActivated
         
    
 
@@ -564,7 +541,7 @@ public class BoravakForma extends javax.swing.JFrame {
                  new DefaultComboBoxModel<>();
          
        m.addAll(new ObradaUsluga().getPodaci()); 
-        
+        lstUslugeUHotelu.setModel(m);
 
         cmbUsluge.setModel(m);
         cmbUsluge.setSelectedIndex(0);

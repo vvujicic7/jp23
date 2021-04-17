@@ -45,13 +45,16 @@ public class Usluga extends Entitet {
     private Boravak boravak;
     
     private Date datumUsluge;
-    
+
     public Set<Boravak> getBoravci() {
         return boravci;
     }
+
     public void setBoravci(Set<Boravak> boravci) {
         this.boravci = boravci;
     }
+    
+    
 
     public Boravak getBoravak() {
         return boravak;
