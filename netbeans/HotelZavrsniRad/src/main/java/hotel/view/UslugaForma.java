@@ -5,9 +5,12 @@
  */
 package hotel.view;
 
+import hotel.controller.ObradaBoravak;
 import hotel.controller.ObradaUsluga;
+import hotel.model.Boravak;
 import hotel.model.Usluga;
 import hotel.util.EdunovaException;
+import hotel.util.HibernateUtil;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import javax.swing.DefaultListModel;
@@ -20,6 +23,7 @@ import javax.swing.JOptionPane;
 public class UslugaForma extends javax.swing.JFrame {
     
     private ObradaUsluga obrada;
+    private ObradaBoravak obradaBoravak;
 
     /**
      * Creates new form UslugaForma
@@ -27,6 +31,7 @@ public class UslugaForma extends javax.swing.JFrame {
     public UslugaForma() {
         initComponents();
         obrada = new ObradaUsluga();
+        obradaBoravak = new ObradaBoravak();
         setTitle(Aplikacija.Velimir + " Usluge");
         ucitaj();
     }
@@ -55,6 +60,11 @@ public class UslugaForma extends javax.swing.JFrame {
         btnObrisi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         lstUsluge.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lstUsluge.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -229,6 +239,12 @@ public class UslugaForma extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnObrisiActionPerformed
 
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        HibernateUtil.getSession().clear();
+        ucitaj();
+        ucitajBoravke();
+    }//GEN-LAST:event_formWindowActivated
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -283,4 +299,13 @@ public class UslugaForma extends javax.swing.JFrame {
         txtOpis.setText("");
         txtCijena.setText("");
     }
+
+    private void ucitajBoravke() {
+        DefaultListModel<Boravak> m = new DefaultListModel<>();
+
+        m.addAll(obradaBoravak.getPodaci());
+
+        
+    }
+    
 }
