@@ -52,14 +52,8 @@ public class ObradaUsluga extends Obrada<Usluga> {
 
     @Override
     protected void kontrolaDelete() throws EdunovaException {
-        if(!entitet.getHotelskeUsluge().isEmpty()){
-            StringBuilder sb = new StringBuilder();
-            sb.append("Uslugu ne mogu obrisati jer se koristi na HotelskojUsluzi: ");
-            for(HotelskaUsluga h : entitet.getHotelskeUsluge()){
-                sb.append(h.getNaziv());
-                sb.append(", ");
-            }
-            throw new EdunovaException( sb.toString());
+        if(entitet.getBoravci().size() > 0){
+            throw new EdunovaException("Ne možete obrisati uslugu jer se koristi");
         }
     }
 
