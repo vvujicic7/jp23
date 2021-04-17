@@ -87,6 +87,7 @@ public class BoravakForma extends javax.swing.JFrame {
         duDatumUsluge = new com.github.lgooddatepicker.components.DatePicker();
         btnSpremiUslugu = new javax.swing.JButton();
         btnDodajUslugu = new javax.swing.JButton();
+        btnObrisiUslugu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -177,6 +178,13 @@ public class BoravakForma extends javax.swing.JFrame {
             }
         });
 
+        btnObrisiUslugu.setText(">>");
+        btnObrisiUslugu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiUsluguActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -226,8 +234,13 @@ public class BoravakForma extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)
-                                .addComponent(btnDodajUslugu))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(32, 32, 32)
+                                        .addComponent(btnDodajUslugu))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnObrisiUslugu))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnDodaj)
                                 .addGap(18, 18, 18)
@@ -294,7 +307,9 @@ public class BoravakForma extends javax.swing.JFrame {
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(144, 144, 144)
+                                .addGap(59, 59, 59)
+                                .addComponent(btnObrisiUslugu)
+                                .addGap(62, 62, 62)
                                 .addComponent(btnDodajUslugu)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -479,12 +494,33 @@ public class BoravakForma extends javax.swing.JFrame {
         }
         lstUslugeNaBoravku.repaint();
     }
+    private void btnObrisiUsluguActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiUsluguActionPerformed
+        DefaultListModel<Usluga> m;
+        try {
+           m = (DefaultListModel<Usluga>) lstUslugeNaBoravku.getModel();
+           m.get(0).toString();
+        } catch (Exception e) {
+            return;
+        }
+        
+        for(Usluga u : lstUslugeNaBoravku.getSelectedValuesList()){
+            
+            for(int i = 0; i < m.size(); i++){
+                if(u.getId().equals(m.get(i).getId())){
+                    m.removeElementAt(i);
+                    break;
+                }
+            } 
+        }
+    }//GEN-LAST:event_btnObrisiUsluguActionPerformed
+        
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnDodajUslugu;
     private javax.swing.JButton btnObrisi;
+    private javax.swing.JButton btnObrisiUslugu;
     private javax.swing.JButton btnPromjeni;
     private javax.swing.JButton btnSpremiUslugu;
     private javax.swing.JButton btnTraziGosta;
