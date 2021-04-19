@@ -87,15 +87,15 @@
                                       <Component id="jScrollPane3" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="203" max="-2" attributes="0"/>
-                                      <Component id="btnBrisanje" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
                                       <Component id="lblMjesto" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="btnTraziMjesto" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="btnJsonExport" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="btnBrisanje" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnWord" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnJsonExport" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
@@ -158,15 +158,14 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblMjesto" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="btnTraziMjesto" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnJsonExport" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                               <Component id="txtUvjet" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="lblPolaznika" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
+                                      <Component id="lblPolaznika" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="cmbPredavaci" min="-2" max="-2" attributes="0"/>
@@ -174,11 +173,14 @@
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btnBrisanje" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="btnJsonExport" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="41" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnWord" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnTrazi" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -186,8 +188,8 @@
                           <Group type="102" attributes="0">
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane3" pref="171" max="32767" attributes="0"/>
-                                  <Component id="jScrollPane2" pref="171" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane3" pref="165" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane2" pref="165" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -372,7 +374,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnPromjena">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pomjena"/>
+        <Property name="text" type="java.lang.String" value="Promjena"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPromjenaActionPerformed"/>
@@ -415,6 +417,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnJsonExportActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnWord">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Word"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnWordActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

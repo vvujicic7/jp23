@@ -5,9 +5,16 @@
  */
 package edunova.jp23.view;
 
+import edunova.jp23.controller.ObradaGrupa;
+import edunova.jp23.model.Grupa;
+import java.awt.BorderLayout;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -23,6 +30,23 @@ public class Izbornik extends javax.swing.JFrame {
         setTitle(Aplikacija.NASLOV_APP + " " + 
                 Aplikacija.operater.getImePrezime());
         new Vrijeme().start();
+    }
+    
+    private void pripremiGraf() {
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        for(Grupa g : new ObradaGrupa().getPodaci()){
+            dataset.setValue(g.getNaziv(), g.getPolaznici().size());
+        }
+        
+        JFreeChart chart = ChartFactory.createPieChart(
+                "Broj polaznika po grupama",
+                dataset, true, true,false);
+        
+        ChartPanel cp = new ChartPanel(chart);
+        
+        pnlGraf.setLayout(new BorderLayout());
+        pnlGraf.add(cp,BorderLayout.CENTER);
+        pnlGraf.validate();
     }
 
     private class Vrijeme extends Thread {
@@ -56,6 +80,7 @@ public class Izbornik extends javax.swing.JFrame {
 
         jToolBar1 = new javax.swing.JToolBar();
         lblVrijeme = new javax.swing.JLabel();
+        pnlGraf = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmProgrami = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -72,6 +97,17 @@ public class Izbornik extends javax.swing.JFrame {
 
         lblVrijeme.setText("vrijeme");
         jToolBar1.add(lblVrijeme);
+
+        javax.swing.GroupLayout pnlGrafLayout = new javax.swing.GroupLayout(pnlGraf);
+        pnlGraf.setLayout(pnlGrafLayout);
+        pnlGrafLayout.setHorizontalGroup(
+            pnlGrafLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        pnlGrafLayout.setVerticalGroup(
+            pnlGrafLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 247, Short.MAX_VALUE)
+        );
 
         jmProgrami.setText("Programi");
         jmProgrami.addActionListener(new java.awt.event.ActionListener() {
@@ -132,11 +168,13 @@ public class Izbornik extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(pnlGraf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 253, Short.MAX_VALUE)
+                .addComponent(pnlGraf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -182,5 +220,6 @@ public class Izbornik extends javax.swing.JFrame {
     private javax.swing.JMenu jmOnama;
     private javax.swing.JMenu jmProgrami;
     private javax.swing.JLabel lblVrijeme;
+    private javax.swing.JPanel pnlGraf;
     // End of variables declaration//GEN-END:variables
 }
