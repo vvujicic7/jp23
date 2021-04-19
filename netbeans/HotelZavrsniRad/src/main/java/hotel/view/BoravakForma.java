@@ -103,7 +103,7 @@ public class BoravakForma extends javax.swing.JFrame {
 
         jLabel2.setText("Datum odlaska");
 
-        jLabel4.setText("Naziv");
+        jLabel4.setText("Naziv boravka");
 
         jLabel5.setText("Gost");
 
@@ -117,7 +117,7 @@ public class BoravakForma extends javax.swing.JFrame {
             }
         });
 
-        lblNocenja.setText("Nocenja");
+        lblNocenja.setText("Noćenja");
 
         btnDodaj.setText("Dodaj");
         btnDodaj.addActionListener(new java.awt.event.ActionListener() {
@@ -126,7 +126,7 @@ public class BoravakForma extends javax.swing.JFrame {
             }
         });
 
-        btnPromjeni.setText("Promjeni");
+        btnPromjeni.setText("Promijeni");
         btnPromjeni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPromjeniActionPerformed(evt);
