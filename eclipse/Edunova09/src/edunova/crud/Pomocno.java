@@ -1,5 +1,6 @@
 package edunova.crud;
 
+import java.util.Date;
 import java.util.Scanner;
 
 public class Pomocno {
@@ -50,4 +51,10 @@ public class Pomocno {
 		}
 	}
 
+	public static Date ucitajDatum(String poruka) {
+		Date datum = null;
+		datum = new Date(1500);
+		System.out.println(datum);
+		return datum;
+	}
 }

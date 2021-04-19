@@ -1,9 +1,14 @@
 package edunova.crud;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Smjer {
 	
 	private int sifra;
 	private String naziv;
+	private List<Grupa> grupe=new ArrayList<Grupa>();
+	
 	public int getSifra() {
 		return sifra;
 	}
@@ -15,6 +20,12 @@ public class Smjer {
 	}
 	public void setNaziv(String naziv) {
 		this.naziv = naziv;
+	}
+	public List<Grupa> getGrupe() {
+		return grupe;
+	}
+	public void setGrupe(List<Grupa> grupe) {
+		this.grupe = grupe;
 	}
 	
 	

@@ -13,7 +13,7 @@ public class KreirajDjelatnika {
 
     public static void main(String[] args) {
         
-        Session s = HibernateUtil.getSession();
+       /* Session s = HibernateUtil.getSession();
         s.beginTransaction();
         
        Djelatnik djelatnik = new Djelatnik();
@@ -41,8 +41,10 @@ public class KreirajDjelatnika {
             od.create();
         } catch (EdunovaException e) {
             System.out.println(e.getMessage());
-        }*/
+        }
        s.getTransaction().commit();
+*/
+       
     }
 
 }

@@ -91,11 +91,6 @@ public class BoravakForma extends javax.swing.JFrame {
         btnObrisiUslugu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
-        });
 
         lstBoravci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -484,12 +479,6 @@ public class BoravakForma extends javax.swing.JFrame {
             } 
         }
     }//GEN-LAST:event_btnObrisiUsluguActionPerformed
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        HibernateUtil.getSession().clear();
-        ucitaj();
-        
-    }//GEN-LAST:event_formWindowActivated
         
    
 
@@ -573,7 +562,7 @@ public class BoravakForma extends javax.swing.JFrame {
     private void postaviVrijednostiNaEntitet() {
         var g = obrada.getEntitet();
        g.setNaziv(txtNaziv.getText());
-      // g.setUsluga(Usluga).cmbUsluge.getSelectedItem();
+       //g.setUsluga(Usluga).cmbUsluge.getSelectedItem();
        g.setDjelatnik((Djelatnik) cmbDjelatnici.getSelectedItem());
        g.setGost((Gost) cmbGosti.getSelectedItem());
        g.setNocenje(slBrojNocenja.getValue());
